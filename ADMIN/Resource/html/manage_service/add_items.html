@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Thêm Sản Phẩm</title>
+	<link rel="stylesheet" href="../../css/manage_service/add_items.css">
+	<link rel="icon" href="../../img/Logo/logo_tt.png">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+	<!-- icons -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+	<!-- Fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inder&display=swap" rel="stylesheet">
+	<!-- AOS Libary -->
+	<link href="../../../../Vendors/aos-master/dist/aos.css" rel="stylesheet">
+	<script src="../../../../Vendors/aos-master/dist/aos.js"></script>
+
+	<!-- jquery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+	<style>
+		/* set up */
+		* {
+			padding: 0px;
+			margin: 0px;
+			box-sizing: border-box;
+		}
+
+		/* Body */
+		body {
+			font-family: "Inder", sans-serif;
+			font-weight: 400;
+			font-style: normal;
+			color: #37517e !important;
+			min-height: 100vh;
+			position: relative;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="row">
+		<div class="col-lg-2">
+			<div class="sidebar">
+				<div class="avata">
+					<img src="../../img/avata/con_meo.jpg" alt="avata">
+					<p class="welcomback">Chào Mừng Trở Lại <strong>Huyền Trân</strong></p>
+				</div>
+				<div class="menu">
+					<ul>
+						<li><a href="../../../index.html"><button>Tổng Quan</button></a></li>
+						<li><a href="../manage_booking/field_booking_management.html"><button>Quản Lý Đặt Sân</button></a></li>
+						<li><a id="index" href="manage_service.html"><button id="index">Quản Lý Dịch Vụ Đi Kèm</button></a></li>
+						<li><a href="../manage_inventory/inventory_drinks_management.html"><button>Quản Lý Kho</button></a></li>
+						<li><a href="../manage_membership/membership_management.html"><button>Quản Lý Thẻ Thành Viên</button></a></li>
+						<li><a href="../manage_money/money_management.html"><button>Quản Lý Thu Chi</button></a></li>
+						<li><a href="../client_list/client_list.html"><button>Danh Sách Khách Hàng</button></a></li>
+					</ul>
+				</div>
+				<div class="logo">
+					<div class="row">
+						<div class="col-lg-8">
+							<a href="../../../index.html">
+								<img src="../../img/Logo/logo_tt.png" alt="logo">
+							</a>
+						</div>
+						<div class="col-lg-4">
+							<div class="some-function">
+								<div class="alert-icon"><i class="fa-regular fa-bell"></i></div>
+								<div class="setting-icon"><i class="fa-solid fa-gear"></i></div>
+								<div class="log-out-icon"><a href="../../../../index.html"><i
+											class="fa-solid fa-right-from-bracket"></i></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-10 overview">
+			<div class="row title" data-aos="fade-up">
+				<h2> <a href="manage_service.html">Quản Lý Dịch Vụ Đi Kèm</a> / <a href="add_items.html">Thêm Mặt Hàng</a></h2>
+			</div>
+			<div class="add_item_function container-part" data-aos="fade-up"  data-aos-delay="100">
+				<div class="row ">
+					<div class="title-function">
+						<h3>Tạo Mới Mặt Hàng</h3>
+					</div>
+				</div>
+				<div class="row">
+					<div class="inputs">
+						<div class="row">
+							<div class="col-lg-3">
+								<div class="items-code input">
+									<p>Mã Mặt Hàng</p>
+									<input type="text">
+								</div>
+							</div>
+							<div class="col-lg-3">
+								<div class="items-name input">
+									<p>Tên Mặt Hàng</p>
+									<input type="text">
+								</div>
+							</div>
+							<div class="col-lg-3">
+								<div class="items-quantity input">
+									<p>Số Lượng</p>
+									<input type="number" value="1">
+								</div>
+							</div>
+							<div class="col-lg-3">
+								<div class="items-status input">
+									<p>Tình Trạng</p>
+									<select name="status" id="items-status">
+										<option value="- Chọn tình trạng -" selected>- Chọn tình trạng -</option>
+										<option value="Còn hàng">Còn hàng</option>
+										<option value="Hết hàng">Hết hàng</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-3">
+								<div class="items-type input">
+									<p>Loại Mặt Hàng</p>
+									<select name="type" id="items-type">
+										<option value="- Chọn loại mặt hàng -" selected>- Chọn loại mặt hàng -</option>
+										<option value="Đồ ăn">Đồ ăn</option>
+										<option value="Thức uống">Thức uống</option>
+										<option value="Dụng cụ">Dụng cụ</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-lg-3">
+								<div class="distributor input">
+									<p>Nhà Phân Phối</p>
+									<select name="distributor" id="distributor">
+										<option value="- Chọn nhà phân phối -" selected>- Chọn nhà phân phối -</option>
+										<option value="VINH THANH DAT FOOD CORPORATION">VINH THANH DAT FOOD CORPORATION</option>
+										<option value="CÔNG TY CỔ PHẦN ACECOOK VIỆT NAM">CÔNG TY CỔ PHẦN ACECOOK VIỆT NAM</option>
+										<option value="CÔNG TY CÔ PHẦN THỰC PHẨM SAFOCO">CÔNG TY CÔ PHẦN THỰC PHẨM SAFOCO</option>
+										<option value="CÔNG TY CỔ PHẦN ĐÂU TƯ THƯƠNG MẠI VÀ XÂY DỰNG HẢI PHONG">CÔNG TY CỔ PHẦN ĐÂU TƯ THƯƠNG MẠI VÀ XÂY DỰNG HẢI PHONG</option>
+										<option value="CÔNG TY CỔ PHẦN XUẤT NHẬP KHẨU HOA BIỂN">CÔNG TY CỔ PHẦN XUẤT NHẬP KHẨU HOA BIỂN</option>
+										<option value="CÔNG TY TNHH TM - DV LAM TÂN">CÔNG TY TNHH TM - DV LAM TÂN</option>
+										<option value="CÔNG TY TNHH TM THỰC PHẨM TƯƠI SỐNG HÀ HIỀN">CÔNG TY TNHH TM THỰC PHẨM TƯƠI SỐNG HÀ HIỀN</option>
+										<option value="CỬA HÀNG AOBONGDA.NET">CỬA HÀNG AOBONGDA.NET</option>
+										<option value="CỬA HÀNG SODEX SPORT">CỬA HÀNG SODEX SPORT</option>
+										<option value="CÔNG TY THỂ THAO THIÊN LONG VIỆT NAM">CÔNG TY THỂ THAO THIÊN LONG VIỆT NAM</option>
+										<option value="CỬA HÀNG CHÍ HÀO SPORT">CỬA HÀNG CHÍ HÀO SPORT	</option>
+										<option value="ĐẠI LÝ BIA - NƯỚC NGỌT KHƯƠNG DUY">ĐẠI LÝ BIA - NƯỚC NGỌT KHƯƠNG DUY</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-lg-3">
+								<div class="items-price-sells input">
+									<p>Giá Bán</p>
+									<input type="text">
+								</div>
+							</div>
+							<div class="col-lg-3">
+								<div class="items-price-buys input">
+									<p>Giá Vốn</p>
+									<input type="text">
+								</div>
+							</div>
+							<div class="col-lg-3">
+								<div class="row">
+									<div class="upload-file input">
+										<p>Ảnh mặt hàng</p>
+										<label for="file" class="custom-btn-upload"><i class="fa-solid fa-cloud-arrow-up"></i> Chọn ảnh</label>
+										<input type="file" id="file" accept="img/png, img/jpg" onchange="chooseFIle(this)">
+										<img src="" id="img" alt="" width="100px" height="100px">
+									</div>
+								</div>
+								<div class="row" style="margin-top: 100px !important;">
+									<div class="submit-btn input">
+										<button class="save"><i class="fa-solid fa-floppy-disk"></i> Lưu</button>
+										<button class="cancel"><i class="fa-solid fa-rectangle-xmark"></i> Hủy</button>
+									</div>
+								</div>
+
+							</div>
+							<div class="col-lg-8">
+								<div class="description input">
+									<p>Mô tả sản phẩm</p>
+									<textarea name="describe" id="describe"></textarea>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+<script>
+	AOS.init();
+</script>
+
+
+<script src="../../js/add_items.js"></script>
+
+
+</html>

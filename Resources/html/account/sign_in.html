@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Nhập</title>
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- AOS Libary -->
+    <link href="../../../Vendors/aos-master/dist/aos.css" rel="stylesheet">
+    <script src="../../../Vendors/aos-master/dist/aos.js"></script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inder&display=swap" rel="stylesheet">
+
+    <!-- icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- sign_in css -->
+    <link rel="stylesheet" href="/Resources/css/account/sign_in_style.css">
+
+    <link rel="icon" href="../../img/Logo/logo_tt.png" type="image/png" sizes="48x48">
+
+</head>
+
+<body id="sign_in" class="sign_in_page" data-aos="zoom-in-up">
+    <div class="container form_sign_in">
+        <div class="title">
+            <h2 id="title">Đăng Nhập</h2>
+        </div>
+        <div class="sign_in_method">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="google method">
+                        <a href=""><i class="fa-brands fa-google"></i>Đăng Nhập Google</a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="facebook method">
+                        <a href=""><i class="fa-brands fa-facebook"></i>Đăng Nhập Facebook</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="horizontal_ruler">
+            <div class="row">
+                <div class="col-lg-4">
+                    <hr id="hr1">
+                </div>
+                <div class="col-lg-4 hr_text">
+                    <p>Hoặc Tài Khoản</p>
+                </div>
+                <div class="col-lg-4">
+                    <hr id="hr2">
+                </div>
+            </div>
+        </div>
+        <div class="input_sign_in">
+            <div class="form-group">
+                <input class="Username input" id="Username" type="text" required>
+                <label for="">Email hoặc số điện thoại</label>    
+            </div>
+            <div class="form-group">
+                <input class="password input" id="password" type="password" required>
+                <label for="">Mật khẩu</label>    
+            </div>
+        </div>
+        <div class="btn_sign_in">
+            <a href="../../../DoAnCuoiKy - user/index.html">
+                <button class="btn">Đăng Nhập</button>
+            </a>
+        </div>
+        <div class="another_link">
+            <div class="forgot_password">
+                <a href="">Quên mật khẩu?</a>
+            </div>
+            <div class="sign_up">
+                <a href="signup.html">Đăng ký ngay</a>
+            </div>
+        </div>  
+    </div>
+
+
+</body>
+<script>
+    AOS.init();
+</script>
+<script src="../../js/local_storage.js"></script>
+</html>
+

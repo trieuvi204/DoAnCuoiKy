@@ -1,0 +1,295 @@
+.field_list_page{
+    background-color: #F5F6F8;
+    font-family: "Inder", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* Image */
+img{
+    border-radius: 20px;
+}
+
+/*REUSEABLE*/
+.title h2{
+    text-align: center;
+    color: #37517E;
+    font-size: 35px;
+    width: 80%;
+    height: 39px;
+    font-weight: 700;
+    margin: 30px auto;
+
+}
+
+
+.title-text{
+    text-align: center;
+    font-size: 24px;
+    margin-top: 30px;
+}
+
+.logo  a img{
+    display: block;
+    margin: 0 auto;
+    width: 200px;
+}
+
+/*header*/
+
+.header {
+    background-color: rgba(55, 81, 126, 0.95);
+    padding: 15px 0;
+    transition: all 0.5s;
+}
+
+
+
+.title{
+    padding-top: 50px;
+}
+
+/*--------------------------------------------------------------
+# Navigation Menu
+--------------------------------------------------------------*/
+/* Desktop Navigation */
+
+
+.header{
+    padding-bottom: 20px;
+}
+.header .container{
+    margin-top: 20px;
+}
+.navmenu{
+    margin: 0 auto;
+}
+.navmenu ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    align-items: center;
+}
+
+.navmenu li {
+    position: relative;
+}
+
+.navmenu a,
+.navmenu a:focus {
+    color: #ffffff;
+    display: block;
+    font-size: 15px;
+    font-weight: 400;
+    font-size: 21px;
+    white-space: nowrap;
+}
+
+.navmenu a span{
+    display: block;
+    width: 150px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+
+
+.navmenu li:hover>a,
+.navmenu .active,
+.navmenu .active:focus {
+    color: #47b2e4;
+    text-decoration: none;
+    
+}
+
+.navmenu .dropdown ul {
+    margin: 0;
+    background: #ffffff;
+    display: block;
+    position: absolute;
+    visibility: hidden;
+    left: 14px;
+    top: 130%;
+    opacity: 0;
+    transition: 0.3s;
+    z-index: 99;
+    box-shadow: 0px 0px 30px rgba(68, 68, 68, 0.15);
+}
+
+.navmenu .dropdown ul li {
+    min-width: 70px;
+    color: #37517E;
+    text-decoration: none;
+
+}
+
+
+
+.navmenu .dropdown ul a {
+    padding: 10px 20px;
+    font-size: 18px;
+    display: flex;
+    text-transform: none;
+    color: #37517E;
+}
+
+.navmenu .dropdown ul a i {
+    font-size: 12px;
+}
+
+.navmenu .dropdown ul a:hover,
+.navmenu .dropdown ul .active:hover,
+.navmenu .dropdown ul li:hover>a {
+    background-color: #47b2e4;
+    color: #fff;
+}
+
+.navmenu .dropdown:hover>ul {
+    opacity: 1;
+    top: 100%;
+    visibility: visible;
+}
+
+
+#navmenu ul li ul li ul.dropdown-2 {
+    left: 101%;
+    top: 0;
+    visibility:hidden;
+}
+
+#navmenu ul li ul li:hover > ul.dropdown-2 {
+    visibility:visible;
+
+}
+
+
+
+.header .btn-getstarted:hover{
+    text-decoration: none;
+}
+
+.header .btn-getstarted span,
+.header .btn-getstarted span:focus {
+    color: #ffffff;
+    background: #47b2e4;
+    display: block;
+    text-align: center;
+    font-size: 22px;
+    border-radius: 50px;
+    padding: 5px 10px;
+
+}
+
+.header .btn-getstarted span:hover{
+    background-color: #37517e;
+    color: #47b2e4;
+}
+/* cardlist */
+
+.card{
+    width: 100%;
+    height: auto;
+    padding: 10px 10px 30px 10px;
+    margin: 30px auto;
+    background-color: #ffffff;
+    border-radius: 10px;
+    color: #37517e;
+    box-shadow: 0px 0px 20px  rgba(68, 68, 68, 0.1);
+}
+
+.card img{
+    width: 90%;
+    height: 180px;
+    margin: 20px auto;
+}
+
+.card-body{
+    margin: 0px 20px;
+}
+.card-body .row{
+    margin: 0px;
+}
+
+.card-body .col-lg-12{
+    padding: 0px;
+}
+.card-title{
+    color: #47b2e4;
+}
+
+.card-title .field_name{
+    float: left;
+}
+
+.card-title .col-lg-6{
+    padding: 0px;
+}
+
+.card-title .price{
+    float: right;
+}
+
+/* time */
+.freetime .text_freetime{
+    padding: 0px;
+    text-align: left;
+}
+
+.freetime .col-lg-4{
+    padding: 0px;
+}
+
+.freetime .time_slots{
+    width: 100%;
+    height: 60px;
+    
+}
+
+
+
+
+.freetime p{
+    font-size: 16px;
+}
+
+.freetime .time_slot p{
+    background-color: #47b2e4;
+    display: block;
+    float: left;
+    margin: 3px 20px;
+    width: 55px;
+    color: #ffffff;
+    border-radius: 5px;
+
+}
+
+.freetime .row{
+    margin: 0px;
+}
+/* service */
+
+.service p{
+    float: left;
+    font-size: 17px;
+}
+.service .row{
+    margin: 0px;
+}
+
+/* btn */
+
+
+.btn a{
+    background-color: #37517e;
+    color: #ffffff;
+    padding: 8px;
+    border-radius: 10px;
+    height: 100%;
+}
+
+.btn a:hover{
+    background-color: #ffffff;
+    color: #47b2e4;
+    border: 1px solid #47b2e4;
+    text-decoration: none;
+}

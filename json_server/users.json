@@ -1,0 +1,39 @@
+{
+  "user": [
+    {
+      "id": "1",
+      "name": "Cao Đình Triệu Vĩ",
+      "phoneNumber": "0352720975",
+      "email": "caodinhtrieuvi2004@gmail.com",
+      "password": "Trieuvi@123"
+    },
+    {
+      "id": 2,
+      "name": "Trần Hoàng Huyền Trân",
+      "phoneNumber": "0935211163",
+      "email": "Htran43044@gmail.com",
+      "password": "Htran@123"
+    },
+    {
+      "id": "050b",
+      "name": "long",
+      "phoneNumber": "09123454656",
+      "email": "long123@gmail.com",
+      "password": "long@123"
+    },
+    {
+      "id": "d390",
+      "name": "Dư Quốc Vinh",
+      "phoneNumber": "01234761278468",
+      "email": "dqv123@gmail.com",
+      "password": "vinh@123"
+    },
+    {
+      "id": "916c",
+      "name": "vĩ",
+      "phoneNumber": "0352720975",
+      "email": "vi123@gmail.com",
+      "password": "vi@123"
+    }
+  ]
+}

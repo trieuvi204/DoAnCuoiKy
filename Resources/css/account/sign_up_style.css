@@ -1,0 +1,139 @@
+/* Body */
+.sign_in_page{
+    font-family: "Inder", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    background-color: #F5F6F8;
+
+}
+
+/* Reuseable */
+.title h2{
+    text-align: center;
+    color: #37517E;
+    font-size: 40px;
+    width: 80%;
+    height: 39px;
+    font-weight: 700;
+    margin: 30px auto;
+
+}
+.form_sign_up{
+    margin: 50px auto;
+    box-shadow: 0px 0px 20px  rgba(68, 68, 68, 0.1);
+    padding: 20px;
+    width: 700px;
+
+
+}
+
+/* sign in method */
+
+
+.method{
+    margin: 20px auto;
+    width: 100%;
+}
+
+.method a{
+    background-color: #37517E;
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 20px;
+    padding: 20px;
+    border: 1px solid #37517E;
+    text-decoration: none;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+
+}
+.method a i{
+    margin-right: 15px;
+    margin-top: 5px;
+    font-size: 20px;
+}
+
+.method a:hover,
+.method a:active{
+    background-color: #ffffff;
+    color: #47b2e4;
+    text-decoration: none;
+}
+/* horizontal_ruler */
+.horizontal_ruler{
+    margin-top: 50px;
+}
+
+.horizontal_ruler hr{
+    color: #37517E;
+    border-top: 3px solid ;
+}
+
+.hr_text p{
+    font-size: 20px;
+    text-align: center;
+    color: #37517E;
+    font-weight: 700;
+}
+
+/* form */
+.input{
+    border-radius: 10px;
+}
+
+.Username{
+    display: block;
+    width: 100%;
+    height: 40px;
+    margin: 20px auto;
+}
+
+
+.inf{
+    width: 90%;
+    height: 35px;
+    margin: 15px;
+}
+.btn{
+    display: block;
+    background-color: #37517E;
+    color: #ffffff;
+    width: 100%;
+    border: 2px solid #37517E;
+    font-size: 24px;
+    font-weight: 700;
+    border-radius: 10px;
+    margin: 0 auto;
+}
+
+.btn:hover,
+.btn:active{
+    color: #47b2e4;
+    background-color: #ffffff;
+}
+
+/* checkbox */
+.form-check{
+    color: #37517E;
+}
+
+
+.form-check-input{
+    color: #37517E;
+}
+
+/* anotherlink */
+.link_to_sign_in  a{
+    display: block;
+    width: 300px;
+    font-size: 20px;
+    margin: 30px auto;
+    color: #37517E;
+}
+
+.link_to_sign_in  a:hover,
+.link_to_sign_in  a:active{
+    text-decoration: none;
+    color: #47b2e4;
+}

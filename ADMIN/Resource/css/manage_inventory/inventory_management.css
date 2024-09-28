@@ -1,0 +1,379 @@
+/* set up */
+.row{
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+a{
+    color: #37517E !important;
+}
+
+a:hover{
+    text-decoration: none !important;
+}
+
+/* set up */
+
+/* reuseable */
+.title-part{
+	display: block;
+	width: 100%;
+	border-bottom: 2px solid #47B2E4;
+}
+
+.container-part{
+	background-color: #fff;
+	box-shadow: 0px 0px 20px  rgba(68, 68, 68, 0.1);
+	margin: 10px !important;
+	width: 100%;
+	height: 100%;   
+	border-radius: 5px;
+}
+
+.main-part{
+	padding: 20px;
+}
+h3{
+    font-size: 16px !important;
+	margin: 0px !important;
+}
+
+
+/* reuseable */
+.sidebar{
+    background-color: #37517E;
+    width: 100%;
+		height: 100vh;
+		margin-left: 0px !important;
+		position: sticky;
+		top: 0;
+		overflow: hidden;
+}
+
+.col-lg-1, .col-lg-10,
+.col-lg-11, .col-lg-12, 
+.col-lg-2, .col-lg-3, 
+.col-lg-4, .col-lg-5, 
+.col-lg-6, .col-lg-7, 
+.col-lg-8, .col-lg-9{
+	padding: 0px !important;
+}
+.avata{
+	width: 90%;
+	margin: 0px auto;
+	border-bottom: 1px solid #47B2E4;
+}
+
+.avata img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto;
+		padding: 15px;
+}
+
+.avata .welcomback{
+	color: #fff;
+	text-align: center;
+}
+
+/* menu */
+.menu ul{
+	margin-top: 20px;
+}
+
+.menu ul li #index{
+background-color: #fff;
+}
+
+a#index{
+	color: #37517E !important;
+    font-size: 18px;
+}
+
+.menu ul li button{
+	padding: 8px 12px;
+	width: 100%;
+	background-color: #37517E;
+	list-style-type: none;
+	border: 1px solid #37517E;
+	border-radius: 10px;
+	text-align: left;
+}
+
+
+
+.menu ul li button:hover{
+	background-color: #fff;
+}
+
+
+.menu ul li a{
+ 	color: #fff !important;
+	font-size: 16px;
+	text-align: left;
+}
+
+.menu ul li a:hover{
+	color: #37517E !important;
+	text-decoration: none;
+
+}
+
+/* menu */
+
+/* logo */
+.logo{
+	width: 90%;
+	border-top: 1px solid #47B2E4;
+	margin: 0 auto;
+}
+
+.logo img{
+	width: 100%;
+	margin-top: 30px;
+}
+
+/* some-function */
+.some-function{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-around;
+
+}
+
+.some-function i{
+	color: #fff;
+	padding: 15px 10px;
+	font-size: 24px;
+}
+
+/* some-function */
+
+/* logo */
+
+/* overview */
+.overview{
+	max-height: 100vh !important;
+	overflow: scroll !important;
+}
+.title{
+    width: 98%;
+	background-color: #fff;
+	box-shadow: 0px 0px 20px  rgba(68, 68, 68, 0.1);
+	margin: 10px !important;
+	border-left: 10px solid #47B2E4 !important;
+    height: 50px;
+
+}
+
+.title h2{
+	margin: 15px 30px;
+	font-size: 18px;
+
+}
+
+
+/* taskbar-1 */
+
+.btn-option i{
+    margin-right: 10px;
+}
+
+.import_items_function{
+    width: 98%;
+    
+}
+
+.taskbar-1{
+    padding: 20px; 
+    font-size: 16px; 
+}
+
+.taskbar-1 button{
+    margin: 10px 10px 0px 10px;
+    border-radius: 5px;
+}
+
+.index{
+    padding: 20px 20px 10px 20px !important;
+
+}
+
+.taskbar-1 .import-items{
+    background-color: #B3F5B3;
+    border: 1px solid #B3F5B3;
+}
+
+.taskbar-1 .export-items{
+    
+    padding: 8px 20px;
+    background-color:#F7F7BB;
+    border: 1px solid #F7F7BB;
+}
+/* taskbar-2 */
+.taskbar-2{
+    border-top: 1px solid #37517E;
+    
+}
+
+.btn-option button{
+    margin: 10px 10px 0px 10px;
+    border-radius: 5px;
+    font-size: 16px ; 
+    padding: 7px 20px;
+
+    
+}
+
+.drinks{
+    background-color: #B3F5B3;
+    border: 1px solid #B3F5B3;
+}
+
+.foods{
+    background-color: #F7F7BB;
+    border: 1px solid #F7F7BB;
+}
+
+.tools{
+    background-color: #D2D2F0;
+    border: 1px solid #D2D2F0;
+}
+
+
+.search{
+    margin-top: 30px;
+}
+
+/* autobox */
+.autobox{
+    position: absolute;
+    top: 100%;
+    width: 92%;
+    background-color: rgba(221,221,221,0.5);
+    overflow-y: auto;
+    z-index: 99;
+    
+}
+
+.autobox li{
+    list-style-type: none;
+    padding: 6px 0px 6px 36px;
+    cursor: pointer;
+    color: #37517E;
+    font-size: 18px;
+    display: none;
+
+}
+
+.autobox li:hover{
+    color: #47B2E4;
+}
+
+.autobox.active li{
+    display: block;
+}
+
+/* autobox */
+
+
+
+.taskbar-2 .btn-outline-success{
+    margin-top: 30px ;
+}
+
+.submit{
+    background-color: #B3F5B3;
+}
+
+.buys{
+    background-color: #F7F7BB;
+}
+
+.delete{
+    background-color: #D2D2F0;
+}
+
+/* drinks-items-list */
+
+.items-list-container{
+    border: 1px solid #B3F5B3;
+    border-radius: 10px;
+}
+.btn-option{
+    margin-bottom: 0px !important;
+}
+.col-lg-4{
+    margin: 0px;
+}
+
+.drinks-items-list{
+    border: 1px solid #B3F5B3;
+    height: 100%;
+}
+
+.item{
+    width: 90%;
+    margin: 20px;
+    border: 1px solid #37517E;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.item input{
+    width: 100%;
+    text-align: center;
+    text-indent: 10px;
+}
+
+.item .img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.item img{
+    width: 70%;
+    height: 110px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+}
+
+.item .title-drinks-items{
+    color: #47B2E4;
+    padding: 10px 10px 10px 0px;
+    font-size: 20px !important;
+}
+
+.item .price{
+    color: #47B2E4;
+}
+
+.item .quantity-drinks-item{
+    margin-top: 20px;
+}
+
+.item .quantity-drinks-item .quantity{
+    margin-bottom: 20px;
+}  
+
+.item button{
+    padding: 10px 15px;
+    background-color: #47B2E4;
+    border: 1px solid #47B2E4;
+    color: #fff;
+    margin-top: 20px;
+}
+
+#submit-btn{
+    margin: 30px 10px 0px 10px;
+    border-radius: 5px;
+    padding: 6px 20px;
+}
+
+/* taskbar-2 */
+/* taskbar-1 */
