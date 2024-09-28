@@ -16,8 +16,8 @@ const username = document.getElementById('Username').value;
 const password = document.getElementById('password').value;
 
 const user = {
-    username: username,
-    password: password
+    email_kh: username,
+    pass_kh: password
 }
 
 // local storage

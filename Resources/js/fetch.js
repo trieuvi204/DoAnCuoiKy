@@ -39,18 +39,20 @@ start();
     function handleCreateUser() {
       var createBtn = document.querySelector('#create');
       createBtn.onclick = function() {
+        var id = document.querySelector('input[name="id"]').value;
         var name = document.querySelector('input[name="username"]').value;
         var phoneNumber = document.querySelector('input[name= "phoneNumber"]').value;
         var email = document.querySelector('input[name= "email"]').value;
         var password = document.querySelector('input[name= "password"]').value;
 
         var formDataUser = {
-          name: name,
-          phoneNumber: phoneNumber,
-          email: email,
-          password: password
+          ma_kh: id,          
+          pass_kh: password,
+          ten_kh: name,     
+          sdt_kh: phoneNumber, 
+          email_kh: email 
         }
-
+        console.log(formDataUser)
         createUserData(formDataUser)
 
       }
