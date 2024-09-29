@@ -33,7 +33,6 @@ start();
       .then(function(respone) {
         respone.json;
       })
-      .then(alert('Bạn đã đăng ký thành công!! Hãy quay lại trang đăng nhập'));
   }
 
     function handleCreateUser() {

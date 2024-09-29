@@ -33,37 +33,10 @@
         <div class="title">
             <h2 id="title">Đăng Nhập</h2>
         </div>
-        <div class="sign_in_method">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="google method">
-                        <a href=""><i class="fa-brands fa-google"></i>Đăng Nhập Google</a>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="facebook method">
-                        <a href=""><i class="fa-brands fa-facebook"></i>Đăng Nhập Facebook</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="horizontal_ruler">
-            <div class="row">
-                <div class="col-lg-4">
-                    <hr id="hr1">
-                </div>
-                <div class="col-lg-4 hr_text">
-                    <p>Hoặc Tài Khoản</p>
-                </div>
-                <div class="col-lg-4">
-                    <hr id="hr2">
-                </div>
-            </div>
-        </div>
         <div class="input_sign_in">
             <div class="form-group">
-                <input class="Username input" id="Username" type="text" required>
-                <label for="">Email hoặc số điện thoại</label>    
+                <input class="Username input" id="email" type="email" required>
+                <label for="email">Email </label>    
             </div>
             <div class="form-group">
                 <input class="password input" id="password" type="password" required>
@@ -71,9 +44,7 @@
             </div>
         </div>
         <div class="btn_sign_in">
-            <a href="../../../DoAnCuoiKy - user/index.html">
-                <button class="btn">Đăng Nhập</button>
-            </a>
+                <input type="button" class="btn" value="Đăng Nhập">
         </div>
         <div class="another_link">
             <div class="forgot_password">
@@ -91,5 +62,7 @@
     AOS.init();
 </script>
 <script src="../../js/local_storage.js"></script>
+
+<script src="../../js/sign_in_fetch.js"></script>
 </html>
 
