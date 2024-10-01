@@ -34,93 +34,45 @@
         <div class="title">
             <h2 id="title">Đăng Ký</h2>
         </div>
-        <div class="sign_up_method">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="google method">
-                        <a href=""><i class="fa-brands fa-google"></i>Đăng Ký Google</a>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="facebook method">
-                        <a href=""><i class="fa-brands fa-facebook"></i>Đăng Ký Facebook</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="horizontal_ruler">
-            <div class="row">
-                <div class="col-lg-4">
-                    <hr id="hr1">
-                </div>
-                <div class="col-lg-4 hr_text">
-                    <p>Hoặc Tài Khoản</p>
-                </div>
-                <div class="col-lg-4">
-                    <hr id="hr2">
+
+        <div class="input_sign_up">
+            <div class="row ">
+                <div class="col-lg-12">
+                    <input class="Username input" id="username" name="username" placeholder="Họ và tên" required>
                 </div>
             </div>
         </div>
         <div class="input_sign_up">
-            <div class="row ">
-                <div class="col-lg-12">
-                    <input class="Id input" id="Id" name="id" placeholder="ID" required>
-                </div>
-            </div>
-            <div class="row ">
-                <div class="col-lg-12">
-                    <input class="Username input" id="Username" name="username" placeholder="Họ và tên" required>
-                </div>
-            </div>
             <div class="row row-cols-2">
                 <div class="row">
                     <div class="col-lg-6 ">
                         <div class="inf_left">
-                            <input class="phone input inf" name="phoneNumber" type="tel" placeholder="Số điện thoại*" required>
+                            <input class="phone input inf" id="sdt" name="phoneNumber" type="tel" placeholder="Số điện thoại*" required>
                         </div>
                     </div>
                     <div class="col-lg-6 ">
                         <div class="inf_right">
-                            <input class="Email input inf" name="email" type="email" placeholder="Email*" required>
+                            <input class="Email input inf" id="email" name="email" type="email" placeholder="Email*" required>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-6 ">
                         <div class="inf_left">
-                            <input class="password input inf" name="password" type="password" placeholder="Mật Khẩu*" required>
+                            <input class="password input inf" id="password" name="password" type="password" placeholder="Mật Khẩu*" required>
                         </div>
                     </div>
                     <div class="col-lg-6 ">
                         <div class="inf_right">
-                            <input class="retype_passwd input inf" type="password" placeholder="Xác nhận mật khẩu*" required>
+                            <input class="retype_passwd input inf" id="cf_password" type="password" placeholder="Xác nhận mật khẩu*" required>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="active_account">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                            <label class="form-check-label" for="defaultCheck1">
-                                Kích hoạt tài khoản qua Email
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" >
-                            <label class="form-check-label" for="defaultCheck2">
-                              Kích hoạt tài khoản qua Zalo
-                            </label>
-                          </div>
-                    </div>
-                </div>
-            </div>
+
         </div>
         <div class="btn_sign_up">
-            <button class="btn" id="create">Đăng Ký</button>
+            <input type="button" value="Đăng Ký" class="btn" id="create">
         </div>
         <div class="link_to_sign_in">
             <a href="sign_in.html">Bạn đã có tài khoản?<strong> Đăng nhập</strong></a>
@@ -134,6 +86,45 @@
 <script>
     AOS.init();
 </script>
+
+<script>
+    document.querySelector("#create").addEventListener("click", function(event) {
+    // let ID = document.getElementById("ID");
+    let username = document.getElementById("username");
+    let sdt = document.getElementById("sdt");
+    let Email = document.getElementById("email");
+    let password = document.getElementById("password");
+    let cf_password = document.getElementById("cf_password");
+    
+    let emailInput = Email.value;
+    let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    let passwordInput = password.value;
+    let cf_passwordInput = cf_password.value;
+    
+    if (!emailPattern.test(emailInput)) {
+        alert("Vui lòng nhập đúng định dạng email.");
+    }
+    else if(passwordInput != cf_passwordInput){
+        alert("Xác nhận mật khẩu thất bại!!!!");
+    }
+    else if (!username.value || !Email.value || !sdt.value || !password ) {
+        alert("Vui lòng đầy đủ thông tin.");
+    }else{
+        alert('Bạn đã đăng ký thành công!! Hãy quay lại trang đăng nhập');
+        loadFetchScript();
+        window.location.reload();
+    }
+    
+    function loadFetchScript() {
+        var script = document.createElement("script");
+        script.src = "../../js/fetch.js";
+        document.body.appendChild(script);
+    }
+});
+</script>
 <script src="../../js/fetch.js"></script>
+
+
 
 </html>

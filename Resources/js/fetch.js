@@ -25,7 +25,7 @@ start();
       },
 
       body: JSON.stringify(data)
-    };
+    };  
 
     console.log(data);
 
@@ -33,20 +33,19 @@ start();
       .then(function(respone) {
         respone.json;
       })
-      .then(alert('Bạn đã đăng ký thành công!! Hãy quay lại trang đăng nhập'));
   }
 
     function handleCreateUser() {
       var createBtn = document.querySelector('#create');
       createBtn.onclick = function() {
-        var id = document.querySelector('input[name="id"]').value;
+        // var id = document.querySelector('input[name="id"]').value;
         var name = document.querySelector('input[name="username"]').value;
         var phoneNumber = document.querySelector('input[name= "phoneNumber"]').value;
         var email = document.querySelector('input[name= "email"]').value;
         var password = document.querySelector('input[name= "password"]').value;
 
         var formDataUser = {
-          ma_kh: id,          
+          // ma_kh: id,          
           pass_kh: password,
           ten_kh: name,     
           sdt_kh: phoneNumber, 
