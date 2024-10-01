@@ -4,7 +4,7 @@ function start() {
   // getUsersData(function(usersData) {
   //   console.log(usersData);
   // })
-  handleCreateUser()
+  handleCreateUser();
 }
 
 start();
@@ -44,10 +44,10 @@ start();
         var password = document.querySelector('input[name= "password"]').value;
 
         var formDataUser = {
-          name: name,
-          phoneNumber: phoneNumber,
-          email: email,
-          password: password
+          pass_kh: password,
+          ten_kh: name,
+          sdt_kh: phoneNumber,
+          email_kh: email
         }
 
         createUserData(formDataUser)
