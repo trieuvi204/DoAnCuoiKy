@@ -1,4 +1,4 @@
-var usersDataApi = 'http://localhost:8000/users/mudule/v1/users/register/';
+var DataApi = 'http://localhost:8000/staffs/mudule/v1/staffs/register/';
 
 function start() {
 
@@ -8,7 +8,7 @@ function start() {
 start();
 
 
-  function createUserData(data) {
+  function CreateStaffData(data) {
     var option = {
       method: 'POST',
       headers: {
@@ -18,16 +18,16 @@ start();
       body: JSON.stringify(data)
     };
 
-    fetch(usersDataApi, option)
+    fetch(DataApi, option)
       .then(function(respone) {
         respone.json;
       })
   }
 
     function handleCreateStaff() {
-      var createBtn = document.querySelector('#create');
+      var createBtn = document.querySelector('.btn_sign_in button');
       createBtn.onclick = function() {
-        var name = document.querySelector('input[name="username"]').value;
+        var name = document.querySelector('input[name="name"]').value;
         var phoneNumber = document.querySelector('input[name= "sdt"]').value;
         var email = document.querySelector('input[name= "email"]').value;
         var password = document.querySelector('input[name= "matkhau"]').value;
@@ -39,12 +39,12 @@ start();
 					ten_nv: name,
           pass_nv: password,
           sdt_nv: phoneNumber,
-					diachi_nv: diachi,
-          email_kh: email,
-					chucvu_nv: chucvu
+					dia_chi: diachi,
+          email_nv: email,
+					chuc_vu: chucvu
         }
-
-        createUserData(formDataUser)
+        console.log(formDataUser)
+        CreateStaffData(formDataUser)
 
       }
     }

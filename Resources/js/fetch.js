@@ -1,21 +1,11 @@
 var usersDataApi = 'http://localhost:8000/users/mudule/v1/users/register/';
 
 function start() {
-  // getUsersData(function(usersData) {
-  //   console.log(usersData);
-  // })
   handleCreateUser();
 }
 
 start();
 
-// function getUsersData(callback) {
-//   fetch (usersDataApi)
-//     .then(function(respone) {
-//       return respone.json();
-//     })
-//     .then(callback);
-// }
 
   function createUserData(data) {
     var option = {
