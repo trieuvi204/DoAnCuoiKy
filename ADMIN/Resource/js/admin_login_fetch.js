@@ -33,7 +33,7 @@ function handleAdminLogin(){
       // }
 
       var formDataUser = {
-        id_ad = id,
+        id_ad : id,
         pass_kh: password
       }
 
@@ -52,4 +52,4 @@ fetch(usersDataApi)
   .then(callback);
 }
 
-function checkLogin(usersData, id, password) {
+// function checkLogin(usersData, id, password) {
