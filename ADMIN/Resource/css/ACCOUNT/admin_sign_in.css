@@ -52,6 +52,10 @@
         border: 1px solid #37517e;
         border-radius: 4px;
     }
+    .email{
+        width: 95% ;
+        margin-left: 12px !important;
+    }
 
     input::placeholder{
         color: #37517e;

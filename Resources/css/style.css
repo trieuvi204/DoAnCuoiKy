@@ -152,6 +152,12 @@ img{
     visibility:hidden;
 }
 
+#navmenu ul li ul li ul.sign_up_dropdown{
+    left: 101%;
+    top: -100%;
+    visibility:hidden; 
+}
+
 #navmenu ul li ul li:hover > ul.dropdown-2 {
     visibility:visible;
 

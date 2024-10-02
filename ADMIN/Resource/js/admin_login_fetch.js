@@ -35,6 +35,7 @@ function getUsersData(callback) {
     .then(callback);
 }
 
+
 function checkLogin(usersData, id, password) {
     // Tìm kiếm người dùng theo email
     var user = usersData.find(user => user.id == id);
