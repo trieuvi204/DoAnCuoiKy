@@ -79,12 +79,15 @@
                         <p class="remember-passwd"><input type="checkbox" > Nhớ Mật Khẩu</p>
                     </div>
                     
-                    <div class="row btn_sign_in">
+                    <div class="row btn_sign_up">
                         <button>ĐĂNG KÝ</button>
                     </div>
                     <div class="row">
-                        <div class="forgot-passwd">
+                        <div class="forgot-passwd col-4 footer-link">
                             <a href="#">Quên Mật Khẩu</a>
+                        </div>
+                        <div class="turnback_index col-3 footer-link">
+                            <a href="../../../index.html">Quay Lại</a>
                         </div>
                     </div>
                 </form>
@@ -99,7 +102,7 @@
 
 
 <script>
-    document.querySelector('.btn_sign_in button').addEventListener('click', function(event) {
+    document.querySelector('.btn_sign_up button').addEventListener('click', function(event) {
     event.preventDefault();
 
     // Lấy giá trị từ các input
@@ -159,11 +162,9 @@
     }  
 
     // Nếu tất cả các ràng buộc đều hợp lệ, tiến hành gửi form
-    // if (isValid) {
-    //     alert("Đăng ký thành công!");
-    //     // Bạn có thể thêm mã để gửi form hoặc thực hiện hành động khác tại đây
-    //     // window.location.href = 'admin_sign_in.html'
-    // }
+    if (isValid) {
+        alert("Đăng ký thành công!");
+    }
 });
 
 </script>

@@ -25,7 +25,7 @@ start();
   }
 
     function handleCreateStaff() {
-      var createBtn = document.querySelector('.btn_sign_in button');
+      var createBtn = document.querySelector('.btn_sign_up button');
       createBtn.onclick = function() {
         var name = document.querySelector('input[name="name"]').value;
         var phoneNumber = document.querySelector('input[name= "sdt"]').value;
@@ -35,7 +35,7 @@ start();
         var chucvu = document.querySelector('input[name= "chucvu"]').value;
 
 
-        var formDataUser = {
+        var formDataStaff = {
 					ten_nv: name,
           pass_nv: password,
           sdt_nv: phoneNumber,
@@ -43,8 +43,8 @@ start();
           email_nv: email,
 					chuc_vu: chucvu
         }
-        console.log(formDataUser)
-        CreateStaffData(formDataUser)
+        console.log(formDataStaff)
+        CreateStaffData(formDataStaff)
 
       }
     }

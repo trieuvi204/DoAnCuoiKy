@@ -92,7 +92,12 @@
         color: #47B2E4;
     }
 
-    .forgot-passwd a{
+
+    .footer-link{
+        padding-top: 20px !important;
+    }
+
+    .footer-link a{
         text-decoration: none;
         color: #47B2E4!;
     }
