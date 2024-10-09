@@ -20,7 +20,11 @@ start();
 
     fetch(DataApi, option)
       .then(function(respone) {
-        respone.json;
+       return respone.json();
+      })
+      .then(function(respone){
+        alert("Mã Nhân Viên : " + respone.ma_nv)
+        
       })
   }
 

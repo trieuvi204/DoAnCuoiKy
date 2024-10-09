@@ -4,8 +4,8 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Quản Lý Kho</title>
-	<link rel="stylesheet" href="../../css/manage_inventory/export_items.css">
+	<title>Danh Sách Nhà Phân Phối</title>
+	<link rel="stylesheet" href="../../css/manage_inventory/inventory_management.css">
 	<link rel="icon" href="../../img/Logo/logo_tt.png">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -83,59 +83,28 @@
 			</div>
 		</div>
 		<div class="col-lg-10 overview">
-			<div class="row title" data-aos="fade-up">
-				<h2> <a href="inventory_drinks_management.html">Quản Lý Kho</a> / <a href="export_items.html">Xuất Hàng</a></h2>
+			<div class="row title" data-aos="fade-up"  >
+				<h2>Quản Lý Kho / Danh sách nhà phân phối</h2>
 			</div>
-			<div class="import_items_function container-part" data-aos="fade-up"  data-aos-delay="100">
-				<div class="taskbar-1 ">
+			<div class="import_items_function container-part">
+				<div class="taskbar-1" data-aos="fade-up"  data-aos-delay="100">
 					<div class="btn-option">
-						<button class="import-items "><i class="fa-solid fa-box"></i><a href="inventory_drinks_management.html">Nhập
-								Hàng</a></button>
-						<button class="export-items index"><i class="fa-solid fa-box-open"></i><a href="export_items.html">Xuất
-								Hàng</a></button>
+						<button class="import-items"><i class="fa-solid fa-box"></i><a
+								href="inventory_drinks_management.html">Nhập Hàng</a></button>
+						<button class="export-items index"><i class="fa-solid fa-box-open"></i><a href="">Danh Sách Nhà Phân Phối</a></button>
+						<div class="row">
+							<div class="col-12 funcBtn">
+								<button class="add "><i class="fa-solid fa-user-plus"></i><a href="addDistributor.html">Thêm Nhà Phân Phối</a></button>
+								<button class="delete "><i class="fa-solid fa-trash"></i><a href="">Xóa Nhà Phân Phối</a></button>
+								<button class="update "><i class="fa-solid fa-wrench"></i><a href="">Sửa Nhà Phân Phối</a></button>
+
+							</div>
+						</div>
 					</div>
 					<div class="row">
-						<div class="col-lg-12 items-list-container">
-							<div class="items-list">
-								<div class="search-container">
-									<div class="col-lg-6"></div>
-									<div class="col-lg-6">
-										<form class="d-flex" role="search">
-											<div class="col-lg-7">
-												<input class="form-control me-2 search" type="search" id="search" placeholder="Tìm Tên Mặt Hàng" aria-label="Search">
-												<div class="autobox">
-													<li>Aquarius</li>
-													<li>Coca</li>
-													<li>Nước suối	/li>
-													<li>Revive</li>
-													<li>Revive chanh muối	</li>
-													<li>Sprite</li>
-													<li>Teppy</li>
-													<li>Sting Dâu</li>
-													<li>Nutri Cam</li>
-													<li>Nutri Cookies</li>
-													<li>Redbull</li>
-													<li>Sting Vàng</li>
-													<li>Trà Xanh Không Độ</li>
-													<li>Mì Trứng</li>
-													<li>Cơm Rang</li>
-													<li>Mì Xào Bò</li>
-													<li>Nuôi Xào Bò</li>
-													<li>Lays</li>
-													<li>Lays Kem Chua Hàng</li>
-													<li>Lays Bò Wagyu</li>
-												</div>
-											</div>
-											<div class="col-lg-5">
-												<input type="button" onclick="selectResult()" class="btn btn-outline-success submit" type="submit" id="submit-btn" value="Tìm" >
-												<input type="button" class="btn btn-outline-success delete" onclick="deleteValue() " value="Xóa">
-											</div>
-										</form>
-									</div>
-								</div>
-									<table class="table-list-items">
-									</table>
-								</div>
+						<div class="list-items container-part" data-aos="fade-up" data-aos-delay="200">
+							<table class="table-list-items">
+							</table>
 						</div>
 					</div>
 				</div>
@@ -148,7 +117,11 @@
 	AOS.init();
 </script>
 
-<script src="../../js/export_item.js"></script>
+<script src="../../js/distributorList.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
 
 
 </html>

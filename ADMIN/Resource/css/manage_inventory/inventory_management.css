@@ -377,3 +377,73 @@ a#index{
 
 /* taskbar-2 */
 /* taskbar-1 */
+
+/* list-item */
+/* table */
+table{
+	width: 100%;
+	border: 1px solid #B5E0F4;
+	border-radius: 10px;
+    margin: 0 auto;
+		font-size: 16px;
+}
+
+table tr td{
+	padding: 8px 10px;
+	border: 1px solid #B5E0F4;
+	text-align: center;
+}
+
+table tbody:first-child{
+	background-color: #B5E0F4;
+	color: #37517E;
+	font-weight: 500;
+}
+
+
+/* table */
+
+.list-items{
+    width: 98%;
+    margin: 0 auto;
+    margin-top: 0px;
+}
+
+td img{
+	width: 100px;
+}
+
+td i{
+	font-size: 24px;
+	margin: 10px;
+	color: #37517E	;
+	padding: 5px;
+	border-radius: 5px;
+
+}
+
+.funcBtn{
+    border-top: 1px solid #37517E;
+}
+.funcBtn button{
+    border: 1px solid grey;
+}
+
+.add{
+    background-color: #B3F5B3;
+}
+
+.delete{
+	background-color: #FFB3B3;
+}
+
+.update{
+
+	background-color: #FFE4B3;
+}
+
+td{
+	font-size: 16px;
+	color: #37517E;
+}
+/* list-item */

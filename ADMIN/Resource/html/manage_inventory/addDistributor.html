@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thêm Nhà Phân Phối</title>
+  <link rel="stylesheet" href="../../css/manage_inventory/addDisttributor.css">
+  <link rel="icon" href="../../img/Logo/logo_tt.png">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <!-- icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inder&display=swap" rel="stylesheet">
+  <!-- AOS Libary -->
+  <link href="../../../../Vendors/aos-master/dist/aos.css" rel="stylesheet">
+  <script src="../../../../Vendors/aos-master/dist/aos.js"></script>
+
+  <!-- jquery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+  <style>
+    /* set up */
+    * {
+      padding: 0px;
+      margin: 0px;
+      box-sizing: border-box;
+    }
+
+    /* Body */
+    body {
+      font-family: "Inder", sans-serif;
+      font-weight: 400;
+      font-style: normal;
+      color: #37517e !important;
+      min-height: 100vh;
+      position: relative;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="row">
+    <div class="col-lg-2">
+      <div class="sidebar">
+        <div class="avata">
+          <img src="../../img/avata/con_meo.jpg" alt="avata">
+          <p class="welcomback">Chào Mừng Trở Lại <strong>Huyền Trân</strong></p>
+        </div>
+        <div class="menu">
+          <ul>
+            <li><a href="../../../index.html"><button>Tổng Quan</button></a></li>
+            <li><a href="../manage_booking/field_booking_management.html"><button>Quản Lý Đặt Sân</button></a></li>
+            <li><a href="manage_service.html"><button>Quản Lý Dịch Vụ Đi Kèm</button></a></li>
+            <li><a id="index" href="../manage_inventory/inventory_drinks_management.html"><button id="index">Quản Lý
+                  Kho</button></a></li>
+            <li><a href="../manage_membership/membership_management.html"><button>Quản Lý Thẻ Thành Viên</button></a>
+            </li>
+            <li><a href="../manage_money/money_management.html"><button>Quản Lý Thu Chi</button></a></li>
+            <li><a href="../client_list/client_list.html"><button>Danh Sách Khách Hàng</button></a></li>
+          </ul>
+        </div>
+        <div class="logo">
+          <div class="row">
+            <div class="col-lg-8">
+              <a href="../../../index.html">
+                <img src="../../img/Logo/logo_tt.png" alt="logo">
+              </a>
+            </div>
+            <div class="col-lg-4">
+              <div class="some-function">
+                <div class="alert-icon"><i class="fa-regular fa-bell"></i></div>
+                <div class="setting-icon"><i class="fa-solid fa-gear"></i></div>
+                <div class="log-out-icon"><a href="../../../../index.html"><i
+                      class="fa-solid fa-right-from-bracket"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-10 overview">
+      <div class="row title" data-aos="fade-up">
+        <h2> <a href="distributorList.html">Danh Sách Nhà Phân Phối</a> / <a href="addDistributor.html">Thêm Nhà Phân
+            Phối</a></h2>
+      </div>
+      <div class="add_item_function container-part" data-aos="fade-up" data-aos-delay="100">
+        <div class="row ">
+          <div class="title-function">
+            <h3>Tạo Mới Nhà Phân Phối</h3>
+          </div>
+        </div>
+        <div class="row">
+          <div class="inputs">
+            <div class="row">
+              <div class="col-lg-4">
+                <div class="staffs-name input">
+                  <p>Mã Nhân Viên</p>
+                  <input type="text">
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="distributors-name input">
+                  <p>Tên Nhà Phân Phối</p>
+                  <input type="text">
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="distributors-Email input">
+                  <p>Email</p>
+                  <input type="email">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-4">
+                <div class="distributors-Address input">
+                  <p>Địa Chỉ</p>
+                  <input type="text">
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="distributors-PhoneNum input">
+                  <p>Số Điện Thoại</p>
+                  <input type="text">
+                </div>
+              </div>
+
+            </div>
+            <div class="row button">
+              <button class="addBtn btn">Thêm Nhà Phân Phối</button>
+              <a href="distributorList.html"><button class="exitBtn btn">Quay Lại</button></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</body>
+
+<script>
+  AOS.init();
+</script>
+
+
+<script>
+  const usersDataApi = 'http://localhost:8000/distributors/create/'; // Thay đổi URL API nếu cần
+
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelector('.addBtn').addEventListener('click', function (event) {
+      event.preventDefault(); // Ngăn form nạp lại trang
+
+      // Lấy giá trị các trường nhập liệu
+      let tenNPP = document.querySelector('#tenNPP').value.trim();
+      let maNV = document.querySelector('#maNV').value.trim();
+      let diaChi = document.querySelector('#diaChi').value.trim();
+      let soDienThoai = document.querySelector('#soDienThoai').value.trim();
+      let email = document.querySelector('#email').value.trim();
+
+      // Kiểm tra ràng buộc các trường
+      if (!tenNPP || !maNV || !diaChi || !soDienThoai || !email) {
+        alert("Vui lòng điền đầy đủ thông tin các trường.");
+        return;
+      }
+
+      // Kiểm tra số điện thoại (phải có 10 số)
+      let phoneRegex = /^[0-9]{10}$/;
+      if (!phoneRegex.test(soDienThoai)) {
+        alert("Số điện thoại phải là 10 chữ số.");
+        return;
+      }
+
+      // Kiểm tra định dạng email
+      let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        alert("Vui lòng nhập đúng định dạng email.");
+        return;
+      }
+
+      // Tạo đối tượng dữ liệu
+      var formDataDistributor = {
+        MA_NV: maNV,
+        TEN_NPP: tenNPP,
+        DC_NPP: diaChi,
+        SDT_NPP: soDienThoai,
+        EMAIL_NPP: email
+      };
+
+      // Gửi dữ liệu đến API
+      createDistributor(formDataDistributor);
+    });
+  });
+
+  function createDistributor(data) {
+    var option = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    };
+
+    fetch(usersDataApi, option)
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        console.log('Success:', data);
+        alert("Thêm nhà phân phối thành công!");
+      })
+      .catch(function (error) {
+        console.error('Error:', error);
+        alert("Đã xảy ra lỗi. Vui lòng thử lại.");
+      });
+  }
+
+
+</script>
+
+
+
+</html>
