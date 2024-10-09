@@ -16,9 +16,31 @@ function handleUserLogin() {
     let email = document.getElementById("email").value; // Lấy giá trị từ input email
     let password = document.getElementById("password").value; // Lấy giá trị từ input password
 
+    // Ràng buộc: Kiểm tra xem email và mật khẩu có trống không
+    if (!email || !password) {
+      alert("Vui lòng nhập đầy đủ email và mật khẩu."); // Hiển thị thông báo nếu thiếu thông tin
+      return; // Ngừng thực hiện nếu không có thông tin
+    }
+
+    // Ràng buộc: Kiểm tra định dạng email
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Biểu thức chính quy cho định dạng email
+    if (!emailPattern.test(email)) {
+      alert("Vui lòng nhập địa chỉ email hợp lệ."); // Hiển thị thông báo nếu email không hợp lệ
+      return; // Ngừng thực hiện nếu email không hợp lệ
+    }
+
+    // Ràng buộc: Kiểm tra mật khẩu
+    const passwordMinLength = 8; // Độ dài tối thiểu
+
+    if (password.length < passwordMinLength) {
+      alert("Mật khẩu phải có ít nhất " + passwordMinLength + " ký tự."); // Kiểm tra độ dài
+      return; // Ngừng thực hiện nếu mật khẩu quá ngắn
+    }
+
     // Băm mật khẩu với SHA-256
     let hashedPassword = sha256(password);
     console.log("🚀 ~ handleCreateUser ~ hashedPassword:", hashedPassword)
+
     // Tạo object chứa thông tin đăng nhập
     var formDataUser = {
       email_kh: email,
@@ -28,6 +50,7 @@ function handleUserLogin() {
     // Gọi hàm để gửi yêu cầu đăng nhập
     loginUser(formDataUser);
   };
+
 }
 
 function loginUser(formDataUser) {
