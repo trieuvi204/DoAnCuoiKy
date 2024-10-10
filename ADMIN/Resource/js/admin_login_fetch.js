@@ -35,7 +35,7 @@ function handleUserLogin() {
     console.log("🚀 ~ handleUserLogin ~ hashedPassword:", hashedPassword)
     // Tạo object chứa thông tin đăng nhập
     var formDataUser = {
-      id_nv: id,
+      ma_nv: id,
       pass_nv: hashedPassword
     };
 

@@ -103,19 +103,19 @@
               <div class="col-lg-4">
                 <div class="staffs-name input">
                   <p>Mã Nhân Viên</p>
-                  <input type="text">
+                  <input type="text" id="maNV">
                 </div>
               </div>
               <div class="col-lg-4">
                 <div class="distributors-name input">
                   <p>Tên Nhà Phân Phối</p>
-                  <input type="text">
+                  <input type="text" id="tenNPP">
                 </div>
               </div>
               <div class="col-lg-4">
                 <div class="distributors-Email input">
                   <p>Email</p>
-                  <input type="email">
+                  <input type="email" id="email_npp">
                 </div>
               </div>
             </div>
@@ -123,13 +123,13 @@
               <div class="col-lg-4">
                 <div class="distributors-Address input">
                   <p>Địa Chỉ</p>
-                  <input type="text">
+                  <input type="text" id="diaChi">
                 </div>
               </div>
               <div class="col-lg-4">
                 <div class="distributors-PhoneNum input">
                   <p>Số Điện Thoại</p>
-                  <input type="text">
+                  <input type="text" id="soDienThoai">
                 </div>
               </div>
 
@@ -152,7 +152,7 @@
 
 
 <script>
-  const usersDataApi = 'http://localhost:8000/distributors/create/'; // Thay đổi URL API nếu cần
+  const usersDataApi = 'http://localhost:8000/distributors/mudule/v1/distributor/register/'; // Thay đổi URL API nếu cần
 
   document.addEventListener('DOMContentLoaded', function () {
     document.querySelector('.addBtn').addEventListener('click', function (event) {
@@ -163,7 +163,7 @@
       let maNV = document.querySelector('#maNV').value.trim();
       let diaChi = document.querySelector('#diaChi').value.trim();
       let soDienThoai = document.querySelector('#soDienThoai').value.trim();
-      let email = document.querySelector('#email').value.trim();
+      let email = document.querySelector('#email_npp').value.trim();
 
       // Kiểm tra ràng buộc các trường
       if (!tenNPP || !maNV || !diaChi || !soDienThoai || !email) {
@@ -187,11 +187,11 @@
 
       // Tạo đối tượng dữ liệu
       var formDataDistributor = {
-        MA_NV: maNV,
-        TEN_NPP: tenNPP,
-        DC_NPP: diaChi,
-        SDT_NPP: soDienThoai,
-        EMAIL_NPP: email
+        ma_nv: maNV,
+        ten_npp: tenNPP,
+        dc_npp: diaChi,
+        sdt_npp: soDienThoai,
+        email_npp: email
       };
 
       // Gửi dữ liệu đến API

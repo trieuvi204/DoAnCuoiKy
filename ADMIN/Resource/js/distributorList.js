@@ -1,4 +1,4 @@
-var distributorsDataApi = 'http://localhost:8000/distributors/mudule/v1/distributors/'; // Đường dẫn đến API nhà phân phối
+var distributorsDataApi = 'http://localhost:8000/distributors/mudule/v1/distributor/'; // Đường dẫn đến API nhà phân phối
 var arrItemsList = []; // Danh sách nhà phân phối
 
 // Hàm khởi động
