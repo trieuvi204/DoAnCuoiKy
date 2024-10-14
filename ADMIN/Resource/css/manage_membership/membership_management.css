@@ -275,6 +275,7 @@ table tbody:first-child{
     width: 98%;
     margin: 0 auto;
     margin-top: 0px;
+		height: 75vh;
 }
 
 td img{
