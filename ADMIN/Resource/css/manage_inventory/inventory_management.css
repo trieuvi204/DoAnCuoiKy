@@ -407,6 +407,7 @@ table tbody:first-child{
     width: 98%;
     margin: 0 auto;
     margin-top: 0px;
+    height: 60vh;
 }
 
 td img{
@@ -445,5 +446,9 @@ td i{
 td{
 	font-size: 16px;
 	color: #37517E;
+}
+
+th{
+    text-align: center !important;
 }
 /* list-item */

@@ -293,6 +293,9 @@ td .update{
 	background-color: #FFE4B3;
 }
 
+th{
+	text-align:  center !important;
+}
 td{
 	font-size: 16px;
 	color: #37517E;

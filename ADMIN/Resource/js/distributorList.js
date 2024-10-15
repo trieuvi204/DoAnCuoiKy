@@ -1,19 +1,69 @@
-var distributorsDataApi = 'http://localhost:8000/distributors/mudule/v1/distributor/all'; // Đường dẫn đến API nhà phân phối
-var arrItemsList = []; // Danh sách nhà phân phối
+var distributorsDataApi = 'http://localhost:8000/distributors/mudule/v1/distributor/all';
+var arrItemsList = [];
 
 // Hàm khởi động
 function start() {
-    fetchDistributors(); // Gọi hàm để lấy dữ liệu nhà phân phối
+    fetchDistributors();
 }
 
 start();
 
+// Hàm tìm nghịch đảo modulo
+function findMultInverse(a, m) {
+    for (let i = 1; i < m; i++) {
+        if ((a * i) % m === 1) {
+            return i;
+        }
+    }
+    return null; // Trả về null nếu không tìm thấy nghịch đảo
+}
+
+// Hàm giải mã tên nhà phân phối
+function decryptMultiplicativeCaesar(ciphertext, k) {
+    const modulus = 256; // Chọn 256 để tương ứng với các ký tự ASCII
+    const k_inverse = findMultInverse(k, modulus); // Tìm nghịch đảo của k
+
+    if (k_inverse === null) {
+        throw new Error("Nghịch đảo không tồn tại cho khóa này.");
+    }
+
+    let decryptedText = '';
+    for (let i = 0; i < ciphertext.length; i++) {
+        const charCode = ciphertext.charCodeAt(i);
+        const decryptedCharCode = (charCode * k_inverse) % modulus; // Giải mã
+        decryptedText += String.fromCharCode(decryptedCharCode);
+    }
+    return decryptedText;
+}
+
+// Hàm giải mã Caesar với phép nhân
+function decryptExtCaesarMult(ciphertext, k) {
+    const modulus = 95; // Số ký tự có thể in được từ ASCII 32 đến 126
+    const k_inverse = findMultInverse(k, modulus); // Tìm nghịch đảo của k theo modulus
+
+    // Hàm giải mã từng ký tự
+    function divideChar(c, key) {
+        const ascii_val = c.charCodeAt(0);
+        if (ascii_val >= 32 && ascii_val <= 126) {
+            const new_val = ((ascii_val - 32) * key) % modulus + 32;
+            return String.fromCharCode(new_val);
+        }
+        return c; // Nếu không thuộc khoảng ký tự cần giải mã, trả về ký tự gốc
+    }
+
+    let decryptedText = '';
+    for (let i = 0; i < ciphertext.length; i++) {
+        decryptedText += divideChar(ciphertext[i], k_inverse);
+    }
+    return decryptedText;
+}
+
 // Hàm lấy dữ liệu nhà phân phối từ API
 function fetchDistributors() {
     var option = {
-        method: 'GET', // Sử dụng phương thức GET để lấy dữ liệu
+        method: 'GET',
         headers: {
-            'Content-Type': 'application/json' // Đảm bảo sử dụng Content-Type đúng
+            'Content-Type': 'application/json'
         }
     };
 
@@ -22,16 +72,24 @@ function fetchDistributors() {
             if (!response.ok) {
                 throw new Error('Network response was not ok ' + response.statusText);
             }
-            return response.json(); // Chuyển đổi phản hồi thành JSON
+            return response.json();
         })
         .then(function (data) {
-            console.log('Dữ liệu nhà phân phối:', data);
-            arrItemsList = data; // Gán dữ liệu vào arrItemsList
-            displayItemsList(); // Hiển thị danh sách nhà phân phối
+            arrItemsList = data.map(function(item) {
+                return {
+                    ...item,
+                    ten_npp: decryptMultiplicativeCaesar(item.ten_npp, 7), // Giải mã tên NPP
+                    dc_npp: decryptExtCaesarMult(item.dc_npp, 7),         // Giải mã địa chỉ
+                    sdt_npp: decryptExtCaesarMult(item.sdt_npp, 7),       // Giải mã số điện thoại
+                    email_npp: decryptExtCaesarMult(item.email_npp, 7)    // Giải mã email
+                };
+            });
+            console.log("🚀 ~ arrItemsList=data.map ~ arrItemsList:", arrItemsList);
+            displayItemsList();
         })
         .catch(function (error) {
             console.error('Lỗi:', error);
-            alert("Đã xảy ra lỗi khi lấy dữ liệu nhà phân phối."); // Thông báo lỗi
+            alert("Đã xảy ra lỗi khi lấy dữ liệu nhà phân phối.");
         });
 }
 
