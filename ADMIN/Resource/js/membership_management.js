@@ -1,5 +1,5 @@
 // arr
-var distributorsDataApi = 'http://localhost:8000/staffs/mudule/v1/staff/';
+var distributorsDataApi = 'http://localhost:8000/staffs/mudule/v1/staffs/all';
 var arrItemsList = [];
 
 // Hàm khởi động
@@ -51,12 +51,12 @@ function displayItemsList() {
 			</tr>
 			`;
 	for (var i = 0; i < arrItemsList.length; i++) {
-		staffCode = arrItemsList[i].staffCode;
-		staffName = arrItemsList[i].staffName;
-		staffPhoneNum = arrItemsList[i].staffPhoneNum;
-		staffEmail = arrItemsList[i].staffEmail;
-		staffAddress = arrItemsList[i].staffAddress;
-		staffPosition = arrItemsList[i].staffPosition;
+		staffCode = arrItemsList[i].ma_nv;
+		staffName = arrItemsList[i].ten_nv;
+		staffPhoneNum = arrItemsList[i].sdt_nv;
+		staffEmail = arrItemsList[i].email_nv;
+		staffAddress = arrItemsList[i].dia_chi;
+		staffPosition = arrItemsList[i].chuc_vu;
 
 		items.innerHTML +=
 			`

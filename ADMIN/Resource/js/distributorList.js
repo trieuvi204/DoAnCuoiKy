@@ -1,4 +1,4 @@
-var distributorsDataApi = 'http://localhost:8000/distributors/mudule/v1/distributor/'; // Đường dẫn đến API nhà phân phối
+var distributorsDataApi = 'http://localhost:8000/distributors/mudule/v1/distributor/all'; // Đường dẫn đến API nhà phân phối
 var arrItemsList = []; // Danh sách nhà phân phối
 
 // Hàm khởi động
@@ -50,12 +50,12 @@ function displayItemsList() {
     `;
 
     for (var i = 0; i < arrItemsList.length; i++) {
-        var MA_NPP = arrItemsList[i].MA_NPP;
-        var MA_NV = arrItemsList[i].MA_NV;
-        var TEN_NPP = arrItemsList[i].TEN_NPP;
-        var DC_NPP = arrItemsList[i].DC_NPP;
-        var SDT_NPP = arrItemsList[i].SDT_NPP;
-        var EMAIL_NPP = arrItemsList[i].EMAIL_NPP;
+        var MA_NPP = arrItemsList[i].ma_npp;
+        var MA_NV = arrItemsList[i].ma_nv;
+        var TEN_NPP = arrItemsList[i].ten_npp;
+        var DC_NPP = arrItemsList[i].dc_npp;
+        var SDT_NPP = arrItemsList[i].sdt_npp;
+        var EMAIL_NPP = arrItemsList[i].email_npp;
 
         items.innerHTML += `
         <tr>
