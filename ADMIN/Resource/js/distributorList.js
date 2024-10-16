@@ -78,7 +78,7 @@ function fetchDistributors() {
             arrItemsList = data.map(function(item) {
                 return {
                     ...item,
-                    ten_npp: decryptMultiplicativeCaesar(item.ten_npp, 7), // Giải mã tên NPP
+                    ten_npp: decryptExtCaesarMult(item.ten_npp, 7), // Giải mã tên NPP
                     dc_npp: decryptExtCaesarMult(item.dc_npp, 7),         // Giải mã địa chỉ
                     sdt_npp: decryptExtCaesarMult(item.sdt_npp, 7),       // Giải mã số điện thoại
                     email_npp: decryptExtCaesarMult(item.email_npp, 7)    // Giải mã email
