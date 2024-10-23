@@ -58,6 +58,35 @@ function decryptExtCaesarMult(ciphertext, k) {
     return decryptedText;
 }
 
+// Hàm giải mã DES
+function decryptDES(encryptedHex, key) {
+    // Chuyển đổi chuỗi hex thành byte array
+    var encryptedBytes = CryptoJS.enc.Hex.parse(encryptedHex);
+
+    // Chuyển khóa sang dạng byte array
+    var keyBytes = CryptoJS.enc.Utf8.parse(key);
+
+    // IV - sử dụng cùng giá trị với mã C# của bạn
+    var iv = CryptoJS.enc.Hex.parse('0000000000000000'); // Đặt IV thành 0x0 cho mỗi byte
+
+    // Giải mã DES với chế độ CBC và padding PKCS7
+    var decrypted = CryptoJS.DES.decrypt(
+        {
+            ciphertext: encryptedBytes
+        },
+        keyBytes,
+        {
+            mode: CryptoJS.mode.CBC,
+            padding: CryptoJS.pad.Pkcs7,
+            iv: iv
+        }
+    );
+
+    // Chuyển đổi kết quả giải mã sang chuỗi UTF-8
+    return decrypted.toString(CryptoJS.enc.Utf8);
+}
+
+
 // Hàm lấy dữ liệu nhà phân phối từ API
 function fetchDistributors() {
     var option = {
@@ -79,12 +108,11 @@ function fetchDistributors() {
                 return {
                     ...item,
                     ten_npp: decryptExtCaesarMult(item.ten_npp, 7), // Giải mã tên NPP
-                    dc_npp: decryptExtCaesarMult(item.dc_npp, 7),         // Giải mã địa chỉ
+                    dc_npp: decryptDES(item.dc_npp, 'Thats my Kung Fu'),         // Giải mã địa chỉ
                     sdt_npp: decryptExtCaesarMult(item.sdt_npp, 7),       // Giải mã số điện thoại
                     email_npp: decryptExtCaesarMult(item.email_npp, 7)    // Giải mã email
                 };
             });
-            console.log("🚀 ~ arrItemsList=data.map ~ arrItemsList:", arrItemsList);
             displayItemsList();
         })
         .catch(function (error) {
@@ -111,7 +139,7 @@ function displayItemsList() {
         var MA_NPP = arrItemsList[i].ma_npp;
         var MA_NV = arrItemsList[i].ma_nv;
         var TEN_NPP = arrItemsList[i].ten_npp;
-        var DC_NPP = arrItemsList[i].dc_npp;
+        var DC_NPP =  arrItemsList[i].dc_npp;
         var SDT_NPP = arrItemsList[i].sdt_npp;
         var EMAIL_NPP = arrItemsList[i].email_npp;
 

@@ -56,6 +56,35 @@ function decryptCaesarMult(enc, k) {
 	return decrypted;
 }
 
+// Hàm giải mã DES
+function decryptDES(encryptedHex, key) {
+	// Chuyển đổi chuỗi hex thành byte array
+	var encryptedBytes = CryptoJS.enc.Hex.parse(encryptedHex);
+
+	// Chuyển khóa sang dạng byte array
+	var keyBytes = CryptoJS.enc.Utf8.parse(key);
+
+	// IV - sử dụng cùng giá trị với mã C# của bạn
+	var iv = CryptoJS.enc.Hex.parse('0000000000000000'); // Đặt IV thành 0x0 cho mỗi byte
+
+	// Giải mã DES với chế độ CBC và padding PKCS7
+	var decrypted = CryptoJS.DES.decrypt(
+			{
+					ciphertext: encryptedBytes
+			},
+			keyBytes,
+			{
+					mode: CryptoJS.mode.CBC,
+					padding: CryptoJS.pad.Pkcs7,
+					iv: iv
+			}
+	);
+
+	// Chuyển đổi kết quả giải mã sang chuỗi UTF-8
+	return decrypted.toString(CryptoJS.enc.Utf8);
+}
+
+
 // Hàm lấy dữ liệu nhân viên
 function fetchStaffs() {
 	var option = {
@@ -105,7 +134,7 @@ function displayItemsList() {
 		let staffName = arrItemsList[i].ten_nv;
 		let staffPhoneNum = arrItemsList[i].sdt_nv;
 		let staffEmail = decryptCaesarMult(arrItemsList[i].email_nv, decryptionKey); // Giải mã email
-		let staffAddress = arrItemsList[i].dia_chi;
+		let staffAddress =  decryptDES(arrItemsList[i].dia_chi,'Thats my Kung Fu');
 		let staffPosition = arrItemsList[i].chuc_vu;
 
 		items.innerHTML +=

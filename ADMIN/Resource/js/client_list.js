@@ -40,6 +40,39 @@ function decryptExtCaesarMult(ciphertext, k) {
   }
   return decryptedText;
 }
+
+// Hàm giải mã DES
+function decryptDES(encryptedHex, key) {
+    // Chuyển đổi chuỗi hex thành byte array
+    var encryptedBytes = CryptoJS.enc.Hex.parse(encryptedHex);
+
+    // Chuyển khóa sang dạng byte array
+    var keyBytes = CryptoJS.enc.Utf8.parse(key);
+
+    // IV - sử dụng cùng giá trị với mã C# của bạn
+    var iv = CryptoJS.enc.Hex.parse('0000000000000000'); // Đặt IV thành 0x0 cho mỗi byte
+
+    // Giải mã DES với chế độ CBC và padding PKCS7
+    var decrypted = CryptoJS.DES.decrypt(
+        {
+            ciphertext: encryptedBytes
+        },
+        keyBytes,
+        {
+            mode: CryptoJS.mode.CBC,
+            padding: CryptoJS.pad.Pkcs7,
+            iv: iv
+        }
+    );
+
+    // Chuyển đổi kết quả giải mã sang chuỗi UTF-8
+    return decrypted.toString(CryptoJS.enc.Utf8);
+}
+
+
+
+
+
 // Hàm lấy dữ liệu người dùng từ API
 function fetchUsers() {
     var option = {
@@ -60,7 +93,7 @@ function fetchUsers() {
             arrItemsList = data.map(function(item) {
                 return {
                     userCode: item.ma_kh,
-                    userName: item.ten_kh,
+                    userName: decryptDES(item.ten_kh,'Thats my Kung Fu'),
                     userPhoneNumb: item.sdt_kh,
                     email: decryptExtCaesarMult(item.email_kh, 7),
                     functions: '<i class="fa-solid fa-trash-can delete"></i> <i class="fa-solid fa-pen-to-square update"></i>'
