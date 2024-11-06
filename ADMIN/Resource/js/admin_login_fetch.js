@@ -1,4 +1,4 @@
-var usersDataApi = 'http://localhost:8000/staffs/mudule/v1/staffs/login/';
+var usersDataApi = 'http://localhost:8000/staffs/module/v1/staffs/login/';
 
 function start() {
   handleUserLogin(); // Gọi hàm để xử lý sự kiện đăng nhập
@@ -32,7 +32,6 @@ function handleUserLogin() {
 
     // Băm mật khẩu với SHA-256
     let hashedPassword = sha256(password);
-    console.log("🚀 ~ handleUserLogin ~ hashedPassword:", hashedPassword)
     // Tạo object chứa thông tin đăng nhập
     var formDataUser = {
       ma_nv: id,

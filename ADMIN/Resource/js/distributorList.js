@@ -1,4 +1,4 @@
-var distributorsDataApi = 'http://localhost:8000/distributors/mudule/v1/distributor/all';
+var distributorsDataApi = 'http://localhost:8000/distributors/module/v1/distributor/all';
 var arrItemsList = [];
 
 // Hàm khởi động
@@ -107,10 +107,11 @@ function fetchDistributors() {
             arrItemsList = data.map(function(item) {
                 return {
                     ...item,
-                    ten_npp: decryptExtCaesarMult(item.ten_npp, 7), // Giải mã tên NPP
+                    ten_npp: item.ten_npp,
                     dc_npp: decryptDES(item.dc_npp, 'Thats my Kung Fu'),         // Giải mã địa chỉ
                     sdt_npp: decryptExtCaesarMult(item.sdt_npp, 7),       // Giải mã số điện thoại
-                    email_npp: decryptExtCaesarMult(item.email_npp, 7)    // Giải mã email
+                    email_npp: decryptExtCaesarMult(item.email_npp, 7) ,   // Giải mã email
+                    functions: '<i class="fa-solid fa-trash-can delete"></i> <i class="fa-solid fa-pen-to-square update"></i>'
                 };
             });
             displayItemsList();
@@ -132,6 +133,8 @@ function displayItemsList() {
       <th>Địa Chỉ</th>
       <th>Số Điện Thoại</th>
       <th>Email</th>
+			<td>Chức Năng</td>
+
     </tr>
     `;
 
@@ -141,7 +144,9 @@ function displayItemsList() {
         var TEN_NPP = arrItemsList[i].ten_npp;
         var DC_NPP =  arrItemsList[i].dc_npp;
         var SDT_NPP = arrItemsList[i].sdt_npp;
-        var EMAIL_NPP = arrItemsList[i].email_npp;
+        var EMAIL_NPP = arrItemsList[i].email_npp;        
+        var functions = arrItemsList[i].functions;
+
 
         items.innerHTML += `
         <tr>
@@ -151,6 +156,8 @@ function displayItemsList() {
           <td>${DC_NPP}</td>
           <td>${SDT_NPP}</td>
           <td>${EMAIL_NPP}</td>
+					<td>${functions}</td>
+
         </tr>
         `;
     }

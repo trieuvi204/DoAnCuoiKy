@@ -10,8 +10,8 @@
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 	<!-- AOS Libary -->
-	<link href="../../../Vendors/aos-master/dist/aos.css" rel="stylesheet">
-	<script src="../../../Vendors/aos-master/dist/aos.js"></script>
+	<link href="../../../../Vendors/aos-master/dist/aos.css" rel="stylesheet">
+	<script src="../../../../Vendors/aos-master/dist/aos.js"></script>
 
 	<!-- Fonts -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,7 +22,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 	<!-- sign_up css -->
-	<link rel="stylesheet" href="../../css/account/sign_up_style.css">
+	<link rel="stylesheet" href="../../../../Resources/css/account/sign_up_style.css">
 
 	<link rel="icon" href="Resources/img/Logo/logo_tt.png" type="image/png" sizes="48x48">
 
@@ -77,8 +77,8 @@
 		<div class="btn_sign_up">
 			<input type="button" value="Đăng Ký" class="btn" id="create">
 		</div>
-		<div class="link_to_sign_in">
-			<a href="sign_in.html">Bạn đã có tài khoản?<strong> Đăng nhập</strong></a>
+		<div class="link_to_sign_in stepback">
+			<a href="./client_list.html"><strong> Quay Lại</strong></a>
 		</div>
 
 
@@ -105,20 +105,20 @@
 		let passwordInput = password.value;
 		let cf_passwordInput = cf_password.value;
 
-		if (passwordInput != cf_passwordInput) {
+		if (!username.value || !Email.value || !sdt.value || !password) {
+			alert("Vui lòng đầy đủ thông tin.");
+		}
+		
+		else if (!emailPattern.test(emailInput)) {
+			alert("Vui lòng nhập đúng định dạng email.");
+		} 
+		else  if (passwordInput != cf_passwordInput) {
 			alert("Xác nhận mật khẩu thất bại!!!!");
-		} else {
-			alert('Bạn đã đăng ký thành công!! Hãy quay lại trang đăng nhập');
-			loadFetchScript();
 		}
-		function loadFetchScript() {
-			var script = document.createElement("script");
-			script.src = "../../js/fetch.js";
-			document.body.appendChild(script);
-		}
+
 	});
 </script>
-<script src="../../js/fetch.js"></script>
+<script src="../../../../Resources/js/fetch.js"></script>
 
 
 

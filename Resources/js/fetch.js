@@ -1,4 +1,4 @@
-var usersDataApi = 'http://localhost:8000/users/mudule/v1/users/register/';
+var usersDataApi = 'http://localhost:8000/users/module/v1/users/register/';
 
 function start() {
     handleCreateUser();
@@ -15,14 +15,10 @@ function createUserData(data) {
         body: JSON.stringify(data)
     };
 
-    console.log(data);
 
     fetch(usersDataApi, option)
         .then(function (response) {
             return response.json(); // Sửa lỗi: cần gọi hàm json()
-        })
-        .then(function (data) {
-            console.log('Success:', data);
         })
         .catch(function (error) {
             console.error('Error:', error);
@@ -66,7 +62,6 @@ function handleCreateUser() {
 
         // Băm mật khẩu với SHA-256
         let hashedPassword = sha256(password);
-        console.log("🚀 ~ handleCreateUser ~ hashedPassword:", hashedPassword)
 
         var formDataUser = {
             pass_kh: hashedPassword,

@@ -1,5 +1,5 @@
 // arr
-var distributorsDataApi = 'http://localhost:8000/staffs/mudule/v1/staffs/all';
+var distributorsDataApi = 'http://localhost:8000/staffs/module/v1/staffs/all';
 var arrItemsList = [];
 
 // Hàm khởi động
@@ -102,10 +102,19 @@ function fetchStaffs() {
 			return response.json(); // Chuyển đổi phản hồi thành JSON
 		})
 		.then(function (data) {
-			console.log('Dữ liệu nhân viên:', data);
-			arrItemsList = data;
+			arrItemsList = data.map(function(item) {
+					return {
+							ma_nv: item.ma_nv,
+							ten_nv: item.ten_nv,
+							sdt_nv: item.sdt_nv,
+							email_nv: item.email_nv, 
+							dia_chi: item.dia_chi,
+							chuc_vu: item.chuc_vu,
+							functions: '<i class="fa-solid fa-trash-can delete"></i> <i class="fa-solid fa-pen-to-square update"></i>'
+					};
+			});
 			displayItemsList();
-		})
+	})
 		.catch(function (error) {
 			console.error('Lỗi:', error);
 			alert("Đã xảy ra lỗi khi lấy dữ liệu nhân viên."); // Thông báo lỗi
@@ -124,6 +133,8 @@ function displayItemsList() {
 					<td>Email</td>
 					<td>Địa Chỉ</td>
 					<td>Chức Vụ</td>
+					<td>Chức Năng</td>
+
 			</tr>
 			`;
 
@@ -136,6 +147,8 @@ function displayItemsList() {
 		let staffEmail = decryptCaesarMult(arrItemsList[i].email_nv, decryptionKey); // Giải mã email
 		let staffAddress =  decryptDES(arrItemsList[i].dia_chi,'Thats my Kung Fu');
 		let staffPosition = arrItemsList[i].chuc_vu;
+		var functions = arrItemsList[i].functions;
+
 
 		items.innerHTML +=
 			`	<tr>
@@ -145,6 +158,8 @@ function displayItemsList() {
 					<td>${staffEmail}</td>
 					<td>${staffAddress}</td>
 					<td>${staffPosition}</td>
+					<td>${functions}</td>
+
 				</tr>
 			`;
 	}

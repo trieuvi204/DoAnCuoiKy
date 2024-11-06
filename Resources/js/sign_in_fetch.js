@@ -1,4 +1,4 @@
-var usersDataApi = 'http://localhost:8000/users/mudule/v1/users/login/';
+var usersDataApi = 'http://localhost:8000/users/module/v1/users/login/';
 
 function start() {
   handleUserLogin(); // Gọi hàm để xử lý sự kiện đăng nhập

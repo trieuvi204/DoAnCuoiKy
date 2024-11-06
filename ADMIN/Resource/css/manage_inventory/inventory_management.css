@@ -435,7 +435,12 @@ td i{
 }
 
 .delete{
-	background-color: #FFB3B3;
+    background-color: #FFB3B3;
+    border: 2px solid #D8D6D6;
+}
+
+.delete:hover{
+    background-color: #fff;
 }
 
 .update{

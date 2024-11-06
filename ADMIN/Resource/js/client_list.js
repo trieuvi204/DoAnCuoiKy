@@ -1,4 +1,4 @@
-var usersDataApi = 'http://localhost:8000/users/mudule/v1/users/all';
+var usersDataApi = 'http://localhost:8000/users/module/v1/users/all';
 var arrItemsList = [];
 
 // Hàm khởi động
@@ -93,8 +93,8 @@ function fetchUsers() {
             arrItemsList = data.map(function(item) {
                 return {
                     userCode: item.ma_kh,
-                    userName: decryptDES(item.ten_kh,'Thats my Kung Fu'),
-                    userPhoneNumb: item.sdt_kh,
+                    userName: item.ten_kh,
+                    userPhoneNumb: decryptDES(item.sdt_kh,"Thats my Kung Fu"),
                     email: decryptExtCaesarMult(item.email_kh, 7),
                     functions: '<i class="fa-solid fa-trash-can delete"></i> <i class="fa-solid fa-pen-to-square update"></i>'
                 };

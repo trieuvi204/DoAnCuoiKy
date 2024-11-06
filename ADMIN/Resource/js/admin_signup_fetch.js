@@ -1,4 +1,4 @@
-var DataApi = 'http://localhost:8000/staffs/mudule/v1/staffs/register/';
+var DataApi = 'http://localhost:8000/staffs/module/v1/staffs/register/';
 
 function start() {
   handleCreateStaff();
@@ -99,7 +99,6 @@ function handleCreateStaff() {
         chuc_vu: chucvu
       };
 
-      console.log(formDataStaff);
       CreateStaffData(formDataStaff);
       alert("Đăng ký thành công!");
     }
