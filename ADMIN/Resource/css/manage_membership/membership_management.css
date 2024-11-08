@@ -275,7 +275,7 @@ table tbody:first-child{
     width: 98%;
     margin: 0 auto;
     margin-top: 0px;
-		height: 75vh;
+		height: 110vh;
 }
 
 td img{
@@ -298,10 +298,21 @@ td .delete{
 td .update{
 
 	background-color: #FFE4B3;
+	border: 2px solid #D8D6D6;
+
 }
 
+td .update:hover{
+	background-color: #fff;
+	
+}
 td{
 	font-size: 16px;
 	color: #37517E;
 }
 /* list-item */
+
+#chucvu{
+	width: 100%;
+	padding: 8px;
+}

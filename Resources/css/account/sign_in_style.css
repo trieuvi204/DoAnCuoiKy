@@ -128,7 +128,7 @@ label{
 /* another link */
 .another_link{
     font-size: 20px;
-    padding: 50px 29px;
+    padding: 20px 10px;
 }
 
 .another_link a:hover{
@@ -146,8 +146,9 @@ label{
 .sign_up{
     display: inline;
     float: right;
+    color: #47b2e4;
 }
 
-.sign_up{
-    color: #47b2e4;
+.stepback a{
+    color: #37517E;
 }

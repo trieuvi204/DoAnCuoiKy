@@ -212,9 +212,12 @@
       .then(function (response) {
         return response.json();
       })
-      .then(function (data) {
-        console.log('Success:', data);
-        alert("Thêm nhà phân phối thành công!");
+      .then(function(response) {
+        if(response.ma_npp)
+        {
+          alert("Đăng ký thành công!");
+          window.location.reload();
+        }
       })
       .catch(function (error) {
         console.error('Error:', error);

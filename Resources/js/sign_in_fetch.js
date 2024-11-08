@@ -39,7 +39,6 @@ function handleUserLogin() {
 
     // Băm mật khẩu với SHA-256
     let hashedPassword = sha256(password);
-    console.log("🚀 ~ handleCreateUser ~ hashedPassword:", hashedPassword)
 
     // Tạo object chứa thông tin đăng nhập
     var formDataUser = {

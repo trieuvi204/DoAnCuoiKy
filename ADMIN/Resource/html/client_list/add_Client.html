@@ -66,7 +66,7 @@
 					</div>
 					<div class="col-lg-6 ">
 						<div class="inf_right">
-							<input class="retype_passwd input inf" id="cf_password" type="password" placeholder="Xác nhận mật khẩu*"
+							<input class="retype_passwd input inf" id="cf_password" name="cf_password" type="password" placeholder="Xác nhận mật khẩu*"
 								required>
 						</div>
 					</div>
@@ -90,34 +90,6 @@
 	AOS.init();
 </script>
 
-<script>
-	document.querySelector("#create").addEventListener("click", function (event) {
-		// let ID = document.getElementById("ID");
-		let username = document.getElementById("username");
-		let sdt = document.getElementById("sdt");
-		let Email = document.getElementById("email");
-		let password = document.getElementById("password");
-		let cf_password = document.getElementById("cf_password");
-
-		let emailInput = Email.value;
-		let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-		let passwordInput = password.value;
-		let cf_passwordInput = cf_password.value;
-
-		if (!username.value || !Email.value || !sdt.value || !password) {
-			alert("Vui lòng đầy đủ thông tin.");
-		}
-		
-		else if (!emailPattern.test(emailInput)) {
-			alert("Vui lòng nhập đúng định dạng email.");
-		} 
-		else  if (passwordInput != cf_passwordInput) {
-			alert("Xác nhận mật khẩu thất bại!!!!");
-		}
-
-	});
-</script>
 <script src="../../../../Resources/js/fetch.js"></script>
 
 

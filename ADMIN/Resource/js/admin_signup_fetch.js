@@ -20,7 +20,11 @@ function CreateStaffData(data) {
       return response.json();
     })
     .then(function(response) {
-      alert("Mã Nhân Viên : " + response.ma_nv);
+      if(response.ma_nv)
+      {
+        alert("Đăng Ký Thành Công!!\nMã Nhân Viên : " + response.ma_nv);
+        window.location.reload();
+      }
     });
 }
 
@@ -100,7 +104,6 @@ function handleCreateStaff() {
       };
 
       CreateStaffData(formDataStaff);
-      alert("Đăng ký thành công!");
     }
   }
 }

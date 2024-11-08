@@ -116,10 +116,13 @@
 /* anotherlink */
 .link_to_sign_in  a{
     display: block;
-    width: 300px;
     font-size: 20px;
     margin: 30px auto;
     color: #37517E;
+}
+
+.sign_in_link{
+    width: 300px;
 }
 
 .link_to_sign_in  a:hover,

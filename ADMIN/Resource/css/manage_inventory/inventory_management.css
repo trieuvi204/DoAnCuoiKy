@@ -443,9 +443,16 @@ td i{
     background-color: #fff;
 }
 
-.update{
+td .update{
 
 	background-color: #FFE4B3;
+	border: 2px solid #D8D6D6;
+
+}
+
+td .update:hover{
+	background-color: #fff;
+	
 }
 
 td{

@@ -256,6 +256,9 @@ table tr td{
 	text-align: center;
 }
 
+table tbody:first-child th{
+	padding: 10px;
+}
 table tbody:first-child{
 	background-color: #B5E0F4;
 	color: #37517E;
@@ -269,6 +272,7 @@ table tbody:first-child{
     width: 98%;
     margin: 0 auto;
     margin-top: 0px;
+	height: 100vh;	
 }
 
 td img{
@@ -291,6 +295,13 @@ td .delete{
 td .update{
 
 	background-color: #FFE4B3;
+	border: 2px solid #D8D6D6;
+
+}
+
+td .update:hover{
+	background-color: #fff;
+	
 }
 
 th{

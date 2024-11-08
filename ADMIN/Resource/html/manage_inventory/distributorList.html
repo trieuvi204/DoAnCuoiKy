@@ -7,7 +7,9 @@
 	<title>Danh Sách Nhà Phân Phối</title>
 	<link rel="stylesheet" href="../../css/manage_inventory/inventory_management.css">
 	<link rel="icon" href="../../img/Logo/logo_tt.png">
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 	<!-- icons -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css" rel="stylesheet">
@@ -58,7 +60,7 @@
 					<ul>
 						<li><a href="../../../index.html"><button>Tổng Quan</button></a></li>
 						<li><a href="../manage_booking/field_booking_management.html"><button>Quản Lý Đặt Sân</button></a></li>
-						<li><a href="../manage_service/manage_service.html"><button >Quản Lý Dịch Vụ Đi Kèm</button></a></li>
+						<li><a href="../manage_service/manage_service.html"><button>Quản Lý Dịch Vụ Đi Kèm</button></a></li>
 						<li><a id="index" href="inventory_drinks_management.html"><button id="index">Quản Lý Kho</button></a></li>
 						<li><a href="../manage_membership/membership_management.html"><button>Quản Lý Nhân Viên</button></a></li>
 						<li><a href="../manage_money/money_management.html"><button>Quản Lý Thu Chi</button></a></li>
@@ -86,18 +88,56 @@
 			</div>
 		</div>
 		<div class="col-lg-10 overview">
-			<div class="row title" data-aos="fade-up"  >
+			<!-- Modal -->
+			<div id="editModal" class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+				aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLongTitle">Edit Distributor</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<form class="form-user">
+								<div class="form-group">
+									<label>Tên Nhà Phân Phối</label>
+									<input type="text" class="form-control" name="fullname" placeholder="Nhập tên nhà phân phối">
+								</div>
+								<div class="form-group">
+									<label>Địa Chỉ</label>
+									<input type="text" class="form-control" name="address" placeholder="Nhập địa chỉ">
+								</div>
+								<div class="form-group">
+									<label>Số Điện Thoại</label>
+									<input type="text" class="form-control" name="phone" placeholder="Nhập Số Điện Thoại">
+								</div>
+								<div class="form-group">
+									<label>Email</label>
+									<input type="email" class="form-control" name="email" placeholder="Nhập email">
+								</div>
+								<button type="submit" class="btn btn-primary">Save</button>
+							</form>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<div class="row title" data-aos="fade-up">
 				<h2>Quản Lý Kho / Danh sách nhà phân phối</h2>
 			</div>
 			<div class="import_items_function container-part">
-				<div class="taskbar-1" data-aos="fade-up"  data-aos-delay="100">
+				<div class="taskbar-1" data-aos="fade-up" data-aos-delay="100">
 					<div class="btn-option">
-						<button class="import-items"><i class="fa-solid fa-box"></i><a
-								href="inventory_drinks_management.html">Nhập Hàng</a></button>
-						<button class="export-items index"><i class="fa-solid fa-box-open"></i><a href="">Danh Sách Nhà Phân Phối</a></button>
+						<button class="import-items"><i class="fa-solid fa-box"></i><a href="inventory_drinks_management.html">Nhập
+								Hàng</a></button>
+						<button class="export-items index"><i class="fa-solid fa-box-open"></i><a href="">Danh Sách Nhà Phân
+								Phối</a></button>
 						<div class="row">
 							<div class="col-12 funcBtn">
-								<button class="add "><i class="fa-solid fa-user-plus"></i><a href="addDistributor.html">Thêm Nhà Phân Phối</a></button>
+								<button class="add "><i class="fa-solid fa-user-plus"></i><a href="addDistributor.html">Thêm Nhà Phân
+										Phối</a></button>
 								<button class="delete "><i class="fa-solid fa-trash"></i><a href="">Xóa Nhà Phân Phối</a></button>
 								<button class="update "><i class="fa-solid fa-wrench"></i><a href="">Sửa Nhà Phân Phối</a></button>
 
