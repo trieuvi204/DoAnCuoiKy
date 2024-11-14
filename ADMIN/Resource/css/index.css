@@ -49,11 +49,8 @@
 			margin-top: 20px;
 		}
 
-		.menu ul li #index{
-		background-color: #fff;
-		}
-
-		a#index{
+		.menu ul li a button.index{
+			background-color: #fff;
 			color: #37517E;
 		}
 

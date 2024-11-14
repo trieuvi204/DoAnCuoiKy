@@ -48,19 +48,20 @@
 			<div class="sidebar">
 				<div class="avata">
 					<img src="../../img/avata/con_meo.jpg" alt="avata">
-					<p class="welcomback">Chào Mừng Trở Lại <strong>Huyền Trân</strong></p>
+					<p class="welcomback">Chào Mừng Trở Lại <strong id="userName"></strong></p>
 				</div>
-				<div class="menu">
-					<ul>
-						<li><a href="../../../index.html"><button>Tổng Quan</button></a></li>
-						<li><a href="../manage_booking/field_booking_management.html"><button>Quản Lý Đặt Sân</button></a></li>
-						<li><a href="../manage_service/manage_service.html"><button >Quản Lý Dịch Vụ Đi Kèm</button></a></li>
-						<li><a href="../manage_inventory/inventory_drinks_management.html"><button>Quản Lý Kho</button></a></li>
-						<li><a href="../manage_membership/membership_management.html"><button>Quản Lý Nhân Viên</button></a></li>
-						<li><a id="index" href="money_management.html"><button  id="index">Quản Lý Thu Chi</button></a></li>
-						<li><a href="../client_list/client_list.html"><button>Danh Sách Khách Hàng</button></a></li>
-					</ul>
-				</div>
+        <div class="menu">
+          <ul>
+            <li><a href="../../../index.html"><button id="dashbroad">Tổng Quan</button></a></li>
+            <li><a href="../manage_booking/field_booking_management.html"><button id="manage_booking">Quản Lý Đặt Sân</button></a></li>
+            <li><a href="../manage_service/manage_service.html"><button id="manage_service">Quản Lý Dịch Vụ Đi Kèm</button></a></li>
+            <li><a href="../manage_inventory/inventory_drinks_management.html"><button id= "manage_inventory">Quản Lý Kho</button></a></li>
+            <li><a href="../manage_membership/membership_management.html"><button id="manage_membership">Quản Lý Nhân Viên</button></a>
+            </li>
+            <li><a href="../manage_money/money_management.html"><button class="index" id="manage_money">Quản Lý Thu Chi</button></a></li>
+            <li><a href="../client_list/client_list.html"><button id="manage_client_list">Danh Sách Khách Hàng</button></a></li>
+          </ul>
+        </div>
 				<div class="logo">
 					<div class="row">
 						<div class="col-lg-8">
@@ -132,6 +133,7 @@
 <script>
 	AOS.init();
 </script>
+<script src="../../js/rolePermissions.js"></script>
 
 <script src="../../js/sales_report.js"></script>
 </html>

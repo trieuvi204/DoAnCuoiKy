@@ -264,3 +264,8 @@ button a:hover{
 }
 
 /* shedule */
+
+.menu ul li a button.index{
+	background-color: #fff;
+	color: #37517E;
+}

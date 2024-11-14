@@ -98,25 +98,30 @@ function fetchDistributors() {
 	};
 
 	fetch(distributorsDataApi, option)
-		.then(function (response) {
+	.then(function (response) {
 			// Kiểm tra xem response có thành công (status 200) không
 			if (!response.ok) {
-				return response.json().then(errorData => {
-					// Trả về lỗi chi tiết nếu có
-					throw new Error(errorData.detail || 'Lỗi khi tải dữ liệu từ máy chủ');
-				});
+					return response.json().then(errorData => {
+							// Trả về lỗi chi tiết nếu có
+							throw new Error(errorData.detail || 'Lỗi khi tải dữ liệu từ máy chủ');
+					});
 			}
 			return response.json(); // Lấy dữ liệu JSON từ response nếu thành công
-		})
-		.then(data => {
+	})
+	.then(data => {
 			data.forEach(user => {
-				displayItemsList(user)
+					displayItemsList(user);
 			});
-		})
-		.catch(function (error) {
-			// Hiển thị lỗi cho người dùng
-			alert("Error: " + error.message); // Hiển thị thông báo lỗi chi tiết
-		});
+	})
+	.catch(function (error) {
+			// Hiển thị lỗi cho người dùng với SweetAlert
+			Swal.fire({
+					icon: 'error',
+					title: 'Đã xảy ra lỗi',
+					text: 'Lỗi: ' + error.message, // Hiển thị chi tiết lỗi
+			});
+	});
+
 }
 
 // Hàm hiển thị danh sách người dùng
@@ -149,32 +154,57 @@ const displayItemsList = (user) => {
 	`;
 	items.insertAdjacentHTML('beforeend', output);
 
-	// Kiểm tra sự tồn tại của phần tử .btn_del
-	const btnDel = document.querySelector(`[data-id='${user.ma_npp}'] .btn_del`);
-	if (btnDel) {
-		btnDel.addEventListener('click', (e) => {
+// Kiểm tra sự tồn tại của phần tử .btn_del
+const btnDel = document.querySelector(`[data-id='${user.ma_npp}'] .btn_del`);
+if (btnDel) {
+	btnDel.addEventListener('click', (e) => {
 			// Hiển thị thông báo xác nhận
-			const isConfirmed = window.confirm(`Bạn có chắc chắn muốn xóa khách hàng ${user.ten_npp} không?`);
+			Swal.fire({
+					title: `Bạn có chắc chắn muốn xóa khách hàng ${user.ten_npp} không?`,
+					icon: 'warning',
+					showCancelButton: true,
+					confirmButtonText: 'Có',
+					cancelButtonText: 'Không',
+			}).then((result) => {
+					if (result.isConfirmed) {
+							fetch(`${url}/delete/${user.ma_npp}`, {
+									method: 'DELETE'
+							})
+							.then(res => {
+									if (!res.ok) {
+											return res.json().then(errorData => {
+													// Trả về lỗi chi tiết nếu có
+													throw new Error(errorData.detail || 'Lỗi khi xóa dữ liệu từ máy chủ');
+											});
+									}
+									return res.json();
+							})
+							.then(() => {
+									Swal.fire({
+											icon: 'success',
+											text: 'Xóa Thành Công',
+									}).then(() => {
+											location.reload(); // Làm mới trang sau khi xóa thành công
+									});
+							})
+							.catch((error) => {
+									// Hiển thị lỗi cho người dùng
+									Swal.fire({
+											icon: 'error',
+											title: 'Có lỗi xảy ra',
+											text: `Lỗi: ${error.message}`,
+									});
+							});
+					} else {
+							console.log('Xóa bị hủy');
+					}
+			});
+	});
+}
+else {
+    console.error('Không tìm thấy nút xóa');
+}
 
-			if (isConfirmed) {
-				fetch(`${url}/delete/${user.ma_npp}`, {
-					method: 'DELETE'
-				})
-					.then(res => res.json())
-					.then(() => {
-						alert('Xóa Thành Công');
-						location.reload();  // Làm mới trang sau khi xóa thành công
-					})
-					.catch((error) => {
-						console.error('Có lỗi xảy ra:', error);
-					});
-			} else {
-				console.log('Xóa bị hủy');
-			}
-		});
-	} else {
-		console.error('Không tìm thấy nút xóa');
-	}
 
 	// // Kiểm tra sự tồn tại của phần tử .btn_edit
 	const btnEdit = document.querySelector(`[data-id='${user.ma_npp}'] .btn_edit`);
@@ -206,63 +236,87 @@ editModalForm.addEventListener('submit', (e) => {
 	const email = editModalForm.email.value.trim();
 	const address = editModalForm.address.value.trim();
 
-	// Kiểm tra tên không để trống
-	if (fullname === '') {
-		alert('Tên không được để trống');
-		return;
-	}
+// Kiểm tra tên không để trống
+if (fullname === '') {
+	Swal.fire({
+			icon: 'error',
+			title: 'Lỗi',
+			text: 'Tên không được để trống',
+	});
+	return;
+}
 
-	// Kiểm tra số điện thoại hợp lệ (10 chữ số)
-	if (phone === '' || !/^\d{10}$/.test(phone)) {
-		alert('Số điện thoại không hợp lệ (phải là 10 chữ số)');
-		return;
-	}
+// Kiểm tra số điện thoại hợp lệ (10 chữ số)
+if (phone === '' || !/^\d{10}$/.test(phone)) {
+	Swal.fire({
+			icon: 'error',
+			title: 'Lỗi',
+			text: 'Số điện thoại không hợp lệ (phải là 10 chữ số)',
+	});
+	return;
+}
 
-	// Kiểm tra định dạng email hợp lệ
-	const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-	if (email === '' || !emailPattern.test(email)) {
-		alert('Email không hợp lệ');
-		return;
-	}
+// Kiểm tra định dạng email hợp lệ
+const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+if (email === '' || !emailPattern.test(email)) {
+	Swal.fire({
+			icon: 'error',
+			title: 'Lỗi',
+			text: 'Email không hợp lệ',
+	});
+	return;
+}
 
-	// Kiểm tra địa chỉ không để trống
-	if (address === '') {
-		alert('Địa chỉ không được để trống');
-		return;
-	}
+// Kiểm tra địa chỉ không để trống
+if (address === '') {
+	Swal.fire({
+			icon: 'error',
+			title: 'Lỗi',
+			text: 'Địa chỉ không được để trống',
+	});
+	return;
+}
 
-
-	// Gửi yêu cầu PUT để cập nhật thông tin
-	fetch(`${url}/edit/${id}`, {
-		method: 'PUT',
-		headers: {
+// Gửi yêu cầu PUT để cập nhật thông tin
+fetch(`${url}/edit/${id}`, {
+	method: 'PUT',
+	headers: {
 			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify({
+	},
+	body: JSON.stringify({
 			ten_npp: fullname,
 			sdt_npp: phone,
 			email_npp: email,
 			dc_npp: address,
-		})
 	})
-	.then(function (response) {
-		// Kiểm tra xem response có thành công (status 200) không
-		if (!response.ok) {
+})
+.then((response) => {
+	// Kiểm tra xem response có thành công (status 200) không
+	if (!response.ok) {
 			return response.json().then(errorData => {
-				// Trả về lỗi chi tiết nếu có
-				throw new Error(errorData.detail || 'Lỗi khi tải dữ liệu từ máy chủ');
+					// Trả về lỗi chi tiết nếu có
+					throw new Error(errorData.detail || 'Lỗi khi tải dữ liệu từ máy chủ');
 			});
-		}
-		return response.json(); // Lấy dữ liệu JSON từ response nếu thành công
-	})
-	.then((response) => {
-		alert('Sửa thông tin nhà phân phối thành công');
-		location.reload();  // Làm mới trang sau khi cập nhật thành công
-	})
-	.catch(function (error) {
-		// Hiển thị lỗi cho người dùng
-		alert("Lỗi: " + error.message); // Hiển thị thông báo lỗi chi tiết
+	}
+
+	// Nếu cập nhật thành công, hiển thị thông báo và làm mới trang
+	Swal.fire({
+			icon: 'success',
+			title: 'Sửa thông tin thành công!',
+			text: 'Thông tin nhà phân phối đã được cập nhật.',
+	}).then(() => {
+			location.reload(); // Làm mới trang sau khi người dùng nhấn "OK"
 	});
+})
+.catch((error) => {
+	// Hiển thị lỗi cho người dùng
+	Swal.fire({
+			icon: 'error',
+			title: 'Đã xảy ra lỗi',
+			text: 'Lỗi: ' + error.message, // Hiển thị thông báo lỗi chi tiết
+	});
+});
+
 
 	// Xóa dữ liệu sau khi gửi yêu cầu
 	editModalForm.fullname.value = '';
@@ -270,5 +324,6 @@ editModalForm.addEventListener('submit', (e) => {
 	editModalForm.email.value = '';
 	editModalForm.address.value = '';
 });
+
 
 

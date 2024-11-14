@@ -22,6 +22,9 @@
 	<!-- AOS Libary -->
 	<link href="../Vendors/aos-master/dist/aos.css" rel="stylesheet">
 	<script src="../Vendors/aos-master/dist/aos.js"></script>
+
+	<!-- sweet alert -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<style>
 		/* set up */
 		* {
@@ -39,6 +42,15 @@
 			min-height: 100vh;
 			position: relative;
 		}
+
+		/* Thay đổi chiều cao của hộp thoại */
+		.custom-popup {
+			/* Điều chỉnh chiều cao */
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-size: 20px;
+		}
 	</style>
 
 </head>
@@ -49,22 +61,26 @@
 			<div class="sidebar">
 				<div class="avata">
 					<img src="Resource/img/avata/con_meo.jpg" alt="avata">
-					<p class="welcomback">Chào Mừng Trở Lại <strong>Huyền Trân</strong></p>
+					<p class="welcomback">Chào Mừng Trở Lại <strong id="userName"></strong></p>
 				</div>
 				<div class="menu">
 					<ul>
-						<li><a id="index" href=""><button id="index">Tổng Quan</button></a></li>
-						<li><a href="Resource/html/manage_booking/field_booking_management.html"><button>Quản Lý Đặt
-									Sân</button></a></li>
-						<li><a href="Resource/html/manage_service/manage_service.html"><button>Quản Lý Dịch Vụ Đi Kèm</button></a>
-						</li>
-						<li><a href="Resource/html/manage_inventory/inventory_drinks_management.html"><button>Quản Lý
-									Kho</button></a></li>
-						<li><a href="Resource/html/manage_membership/membership_management.html"><button>Quản Lý Nhân Viên</button></a></li>
-						<li><a href="Resource/html/manage_money/money_management.html"><button>Quản Lý Thu Chi</button></a></li>
-						<li><a href="Resource/html/client_list/client_list.html"><button>Danh Sách Khách Hàng</button></a></li>
+						<li><a href=""><button class="index" id="dashbroad">Tổng Quan</button></a></li>
+						<li><a href="Resource/html/manage_booking/field_booking_management.html"><button id="manage_booking">Quản Lý
+									Đặt Sân</button></a></li>
+						<li><a href="Resource/html/manage_service/manage_service.html"><button id="manage_service">Quản Lý Dịch Vụ
+									Đi Kèm</button></a></li>
+						<li><a href="Resource/html/manage_inventory/inventory_drinks_management.html"><button
+									id="manage_inventory">Quản Lý Kho</button></a></li>
+						<li><a href="Resource/html/manage_membership/membership_management.html"><button id="manage_membership">Quản
+									Lý Nhân Viên</button></a></li>
+						<li><a href="Resource/html/manage_money/money_management.html"><button id="manage_money">Quản Lý Thu
+									Chi</button></a></li>
+						<li><a href="Resource/html/client_list/client_list.html"><button id="manage_client_list">Danh Sách Khách
+									Hàng</button></a></li>
 					</ul>
 				</div>
+
 				<div class="logo">
 					<div class="row">
 						<div class="col-lg-8">
@@ -76,7 +92,8 @@
 							<div class="some-function">
 								<div class="alert-icon"><i class="fa-regular fa-bell"></i></div>
 								<div class="setting-icon"><i class="fa-solid fa-gear"></i></div>
-								<div class="log-out-icon"><a href="../index.html"><i class="fa-solid fa-right-from-bracket"></i></a>
+								<div id="log_out" class="log-out-icon"><a href="../index.html"><i
+											class="fa-solid fa-right-from-bracket"></i></a>
 								</div>
 							</div>
 						</div>
@@ -198,7 +215,34 @@
 <script>
 	AOS.init();
 </script>
+<script>
+	// Lắng nghe sự kiện click vào link đăng xuất
+	document.getElementById('log_out').addEventListener('click', function (event) {
+		event.preventDefault(); // Ngừng chuyển hướng mặc định
 
+		Swal.fire({
+    icon: 'info',
+    title: 'Thông báo',
+    text: 'Bạn có muốn đăng xuất.',
+    showCancelButton: true, // Hiển thị nút Hủy
+    confirmButtonText: 'Đăng xuất', // Văn bản nút Xác nhận
+    cancelButtonText: 'Hủy', // Văn bản nút Hủy
+    customClass: {
+        popup: 'custom-popup' // Lớp CSS tùy chỉnh cho popup
+    }
+}).then((result) => {
+    if (result.isConfirmed) {
+        // Nếu người dùng chọn đăng xuất, thực hiện hành động đăng xuất
+        window.location.href = '../index.html';
+    } else if (result.dismiss === Swal.DismissReason.cancel) {
+        // Nếu người dùng chọn hủy, không làm gì
+        console.log('Đã hủy đăng xuất');
+    }
+});
+
+	});
+</script>
+<script src="Resource/js/rolePermissions.js"></script>
 <script src="Resource/js/index.js"></script>
 
 </html>

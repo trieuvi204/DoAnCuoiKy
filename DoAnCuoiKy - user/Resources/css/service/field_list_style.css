@@ -265,8 +265,8 @@ img{
     color: #47b2e4;
 }
 
-.card-title .field_name{
-    float: left;
+.card-title .field_name {
+    text-align: center;
 }
 
 .card-title .col-lg-6{

@@ -21,6 +21,11 @@
 	<link href="Vendors/aos-master/dist/aos.css" rel="stylesheet">
 	<script src="Vendors/aos-master/dist/aos.js"></script>
 	<link rel="icon" href="Resources/img/Logo/logo_tt.png" type="image/png" sizes="48x48">
+
+	<!-- sweet alert -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
 	<style>
 		/* set up */
 		* {
@@ -60,9 +65,9 @@
 												<li class="col-lg-2"><a href="index.html#about"><span>Về Chúng Tôi</span></a></li>
 												<li class="dropdown col-lg-2"><a href="index.html#service"><span>Dịch Vụ</span></a>
 													<ul>
-														<li><a href="Resources/html/service/field_list.html">Đặt Sân</a></li>
-														<li><a href="Resources/html/service/rent_pitch.html">Thuê Áo Pitch</a></li>
-														<li><a href="Resources/html/service/food.html">Đồ Ăn \ Thức Uống</a></li>
+														<li ><button class="services">Đặt Sân </button></li>
+														<li ><button class="services">Thuê Áo Pitch</button></li>
+														<li ><button class="services">Đồ Ăn \ Thức Uống</button></li>
 													</ul>
 												</li>
 												<li class="col-lg-2"><a href="index.html#contact"><span>Liên Hệ</span></a></li>
@@ -117,10 +122,10 @@
 						<div class="col-lg-6 ">
 							<div class="home-img">
 								<div class="list-img">
-									<img class="slide-img" src="Resources/img/field_list/san3.jpg" alt="san3">
-									<img class="slide-img" src="Resources/img/field_list/san2.jpg" alt="san2">
-									<img class="slide-img" src="Resources/img/field_list/san4.jpg" alt="san4">
-									<img class="slide-img" src="Resources/img/field_list/san1.jpg" alt="san1">
+									<img class="slide-img" src="Resources/img/field_list/MS003.jpg" alt="san3">
+									<img class="slide-img" src="Resources/img/field_list/MS002.jpg" alt="san2">
+									<img class="slide-img" src="Resources/img/field_list/MS004.jpg" alt="san4">
+									<img class="slide-img" src="Resources/img/field_list/MS001.jpg" alt="san1">
 								</div>
 								<div class="btns">
 									<div class="btn-left btn"><i class="fa-solid fa-arrow-left"></i></div>
@@ -466,5 +471,31 @@
 <script src="Resources/js/zalo.js"></script>
 <!-- slideShow -->
 <script src="Resources/js/slide_show_img.js"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const serviceButtons = document.querySelectorAll('button.services');
+
+    // Thêm sự kiện click cho tất cả các nút có class 'services'
+    serviceButtons.forEach(function(button) {
+      button.addEventListener('click', function(event) {
+        event.preventDefault(); // Ngăn chặn hành động mặc định
+
+        // Hiển thị thông báo bằng SweetAlert
+        Swal.fire({
+          icon: 'info',
+          title: 'Thông báo',
+          text: 'Vui lòng đăng nhập để tiếp tục sử dụng dịch vụ.',
+          confirmButtonText: 'OK'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            // Chuyển hướng sau khi nhấn OK
+            window.location.href = 'Resources/html/account/sign_in.html';
+          }
+        });
+      });
+    });
+  });
+</script>
 
 </html>

@@ -17,18 +17,26 @@ function handleUserLogin() {
     let id = document.getElementById("id").value; // Lấy giá trị từ input email
     let password = document.getElementById("password").value; // Lấy giá trị từ input password
     // Ràng buộc: Kiểm tra xem email và mật khẩu có trống không
-    if (!id || !password) {
-      alert("Vui lòng nhập đầy đủ mã nhân viên và mật khẩu."); // Hiển thị thông báo nếu thiếu thông tin
-      return; // Ngừng thực hiện nếu không có thông tin
-    }
+    // if (!id || !password) {
+    //   Swal.fire({
+    //     icon: 'warning',
+    //     title: 'Lỗi!',
+    //     text: 'Vui lòng nhập đầy đủ mã nhân viên và mật khẩu.',
+    //   }); // Hiển thị thông báo nếu thiếu thông tin
+    //   return; // Ngừng thực hiện nếu không có thông tin
+    // }
 
-    // Ràng buộc: Kiểm tra mật khẩu
-    const passwordMinLength = 8; // Độ dài tối thiểu
+    // // Ràng buộc: Kiểm tra mật khẩu
+    // const passwordMinLength = 8; // Độ dài tối thiểu
 
-    if (password.length < passwordMinLength) {
-      alert("Mật khẩu phải có ít nhất " + passwordMinLength + " ký tự."); // Kiểm tra độ dài
-      return; // Ngừng thực hiện nếu mật khẩu quá ngắn
-    }
+    // if (password.length < passwordMinLength) {
+    //   Swal.fire({
+    //     icon: 'warning',
+    //     title: 'Lỗi!',
+    //     text: 'Mật khẩu phải có ít nhất ' + passwordMinLength + ' ký tự.',
+    //   }); // Kiểm tra độ dài
+    //   return; // Ngừng thực hiện nếu mật khẩu quá ngắn
+    // }
 
     // Băm mật khẩu với SHA-256
     let hashedPassword = sha256(password);
@@ -53,24 +61,43 @@ function loginUser(formDataUser) {
     body: JSON.stringify(formDataUser) // Chuyển đổi dữ liệu sang định dạng JSON
   })
     .then(function (response) {
-      if (response.ok) {
-        return response.json(); // Chuyển đổi phản hồi JSON nếu đăng nhập thành công
-      } else {
-        throw new Error('Đăng nhập thất bại'); // Thông báo lỗi nếu phản hồi không thành công
+      // Kiểm tra xem response có thành công (status 200) không
+      if (!response.ok) {
+        return response.json().then(errorData => {
+          // Trả về lỗi chi tiết nếu có
+          throw new Error(errorData.detail || 'Lỗi khi tải dữ liệu từ máy chủ');
+        });
       }
+      return response.json();
     })
     .then(function (data) {
-      // Xử lý dữ liệu sau khi đăng nhập thành công
-      alert('Đăng nhập thành công');
-      window.location.href = 'http://127.0.0.1:5502/ADMIN/index.html'; // Điều hướng đến trang người dùng
+      if (data && data.chuc_vu) {
+        sessionStorage.setItem("chuc_vu", data.chuc_vu);
+        sessionStorage.setItem("ten_nv", data.ten_nv);
+        sessionStorage.setItem("ma_nv", data.ma_nv);
+        Swal.fire({
+          icon: 'success',
+          title: 'Đăng nhập thành công!',
+          text: 'Chào mừng bạn đến với hệ thống!',
+        }).then(() => {
+          window.location.href = 'http://127.0.0.1:5502/ADMIN/index.html'; // Điều hướng đến trang người dùng
+        });
+      }
     })
     .catch(function (error) {
       // Xử lý lỗi
-      alert(error.message);
-      window.location.reload(); // Tải lại trang nếu đăng nhập thất bại
+      console.error(error.message);
+      Swal.fire({
+        icon: 'error',
+        title: 'Lỗi!',
+        text: error.message,
+      }).then(() => {
+        // Tải lại trang sau khi người dùng nhấn OK
+        window.location.reload();
+      });
     });
+    
 }
-
 
 function sha256(ascii) {
   function rightRotate(value, amount) {

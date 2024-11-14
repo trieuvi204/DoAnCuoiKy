@@ -113,7 +113,10 @@ function fetchStaffs() {
 		})
 		.catch(function (error) {
 			// Hiển thị lỗi cho người dùng
-			alert("Error: " + error.message); // Hiển thị thông báo lỗi chi tiết
+			Swal.fire({
+				icon: "error",
+				text: "Error: " + error.message,
+			});
 		});
 }
 
@@ -152,24 +155,43 @@ const displayItemsList = (user) => {
 	const btnDel = document.querySelector(`[data-id='${user.ma_nv}'] .btn_del`);
 	if (btnDel) {
 		btnDel.addEventListener('click', (e) => {
-			// Hiển thị thông báo xác nhận
-			const isConfirmed = window.confirm(`Bạn có chắc chắn muốn xóa khách hàng ${user.ten_nv} không?`);
-
-			if (isConfirmed) {
-				fetch(`${url}/delete/${user.ma_nv}`, {
-					method: 'DELETE'
-				})
-					.then(res => res.json())
-					.then(() => {
-						alert('Xóa Thành Công');
-						location.reload();  // Làm mới trang sau khi xóa thành công
+			Swal.fire({
+				title: `Bạn có chắc chắn muốn xóa khách hàng ${user.ten_nv} không?`,
+				icon: "warning",
+				showCancelButton: true,
+				confirmButtonText: "Xóa",
+				cancelButtonText: "Hủy",
+			}).then((result) => {
+				if (result.isConfirmed) {
+					// Gửi yêu cầu xóa
+					fetch(`${url}/delete/${user.ma_nv}`, {
+						method: 'DELETE'
 					})
-					.catch((error) => {
-						console.error('Có lỗi xảy ra:', error);
-					});
-			} else {
-				console.log('Xóa bị hủy');
-			}
+						.then(res => res.json())
+						.then(() => {
+							// Hiển thị thông báo xóa thành công
+							Swal.fire({
+								text: "Xóa Thành Công",
+								icon: "success"
+							}).then((result) => {
+								if (result.isConfirmed) {
+									window.location.reload(); // Tải lại trang sau khi nhấn OK
+								}
+							});
+						})
+						.catch((error) => {
+							console.error('Có lỗi xảy ra:', error);
+							// Hiển thị thông báo lỗi nếu có
+							Swal.fire({
+								text: "Có lỗi xảy ra khi xóa khách hàng",
+								icon: "error"
+							});
+						});
+				} else {
+					console.log('Xóa bị hủy');
+				}
+			});
+
 		});
 	} else {
 		console.error('Không tìm thấy nút xóa');
@@ -285,85 +307,110 @@ function sha256(ascii) {
 	return result;
 }
 editModalForm.addEventListener('submit', (e) => {
-	e.preventDefault();
+  e.preventDefault();
 
-	// Kiểm tra các ràng buộc
-	const fullname = editModalForm.fullname.value.trim();
-	const phone = editModalForm.phone.value.trim();
-	const email = editModalForm.email.value.trim();
-	const address = editModalForm.address.value.trim();
-	const position = editModalForm.position.value.trim();
-	const password = editModalForm.password.value.trim();
+  // Kiểm tra các ràng buộc
+  const fullname = editModalForm.fullname.value.trim();
+  const phone = editModalForm.phone.value.trim();
+  const email = editModalForm.email.value.trim();
+  const address = editModalForm.address.value.trim();
+  const position = editModalForm.position.value.trim();
+  const password = editModalForm.password.value.trim();
 
-	// Kiểm tra tên không để trống
-	if (fullname === '') {
-		alert('Tên không được để trống');
-		return;
-	}
+  // Kiểm tra tên không để trống
+  if (fullname === '') {
+    Swal.fire({
+      icon: 'error',
+      text: 'Tên không được để trống',
+    });
+    return;
+  }
 
-	// Kiểm tra số điện thoại hợp lệ (10 chữ số)
-	if (phone === '' || !/^\d{10}$/.test(phone)) {
-		alert('Số điện thoại không hợp lệ (phải là 10 chữ số)');
-		return;
-	}
+  // Kiểm tra số điện thoại hợp lệ (10 chữ số)
+  if (phone === '' || !/^\d{10}$/.test(phone)) {
+    Swal.fire({
+      icon: 'error',
+      text: 'Số điện thoại không hợp lệ (phải là 10 chữ số)',
+    });
+    return;
+  }
 
-	// Kiểm tra định dạng email hợp lệ
-	const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-	if (email === '' || !emailPattern.test(email)) {
-		alert('Email không hợp lệ');
-		return;
-	}
+  // Kiểm tra định dạng email hợp lệ
+  const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  if (email === '' || !emailPattern.test(email)) {
+    Swal.fire({
+      icon: 'error',
+      text: 'Email không hợp lệ',
+    });
+    return;
+  }
 
-	// Kiểm tra địa chỉ không để trống
-	if (address === '') {
-		alert('Địa chỉ không được để trống');
-		return;
-	}
+  // Kiểm tra địa chỉ không để trống
+  if (address === '') {
+    Swal.fire({
+      icon: 'error',
+      text: 'Địa chỉ không được để trống',
+    });
+    return;
+  }
 
-	// Kiểm tra chức vụ không để trống
-	if (position === '') {
-		alert('Chức vụ không được để trống');
-		return;
-	}
+  // Kiểm tra chức vụ không để trống
+  if (position === '') {
+    Swal.fire({
+      icon: 'error',
+      text: 'Chức vụ không được để trống',
+    });
+    return;
+  }
 
-	// Kiểm tra mật khẩu có ít nhất 8 ký tự
-	if (password === '' || password.length < 8) {
-		alert('Mật khẩu phải có ít nhất 8 ký tự');
-		return;
-	}
+  // Kiểm tra mật khẩu có ít nhất 8 ký tự
+  if (password === '' || password.length < 8) {
+    Swal.fire({
+      icon: 'error',
+      text: 'Mật khẩu phải có ít nhất 8 ký tự',
+    });
+    return;
+  }
 
-	// Gửi yêu cầu PUT để cập nhật thông tin
-	fetch(`${url}/edit/${id}`, {
-		method: 'PUT',
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify({
-			ten_nv: fullname,
-			sdt_nv: phone,
-			email_nv: email,
-			dia_chi: address,
-			chuc_vu: position,
-			pass_nv: sha256(password)
-		})
-	})
-		.then(res => res.json())
-		.then((response) => {
-			alert('Sửa thông tin khách hàng thành công');
-			location.reload();  // Làm mới trang sau khi cập nhật thành công
-		})
-		.catch(function (error) {
-			// Hiển thị lỗi cho người dùng
-			alert("Lỗi: " + error.message); // Hiển thị thông báo lỗi chi tiết
-		});
+  // Gửi yêu cầu PUT để cập nhật thông tin
+  fetch(`${url}/edit/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      ten_nv: fullname,
+      sdt_nv: phone,
+      email_nv: email,
+      dia_chi: address,
+      chuc_vu: position,
+      pass_nv: sha256(password),
+    }),
+  })
+    .then((res) => res.json())
+    .then((response) => {
+      Swal.fire({
+        icon: 'success',
+        text: 'Sửa thông tin khách hàng thành công',
+      }).then(() => {
+        location.reload(); // Làm mới trang sau khi cập nhật thành công
+      });
+    })
+    .catch((error) => {
+      Swal.fire({
+        icon: 'error',
+        text: `Lỗi: ${error.message}`,
+      });
+    });
 
-	// Xóa dữ liệu sau khi gửi yêu cầu
-	editModalForm.fullname.value = '';
-	editModalForm.phone.value = '';
-	editModalForm.email.value = '';
-	editModalForm.address.value = '';
-	editModalForm.position.value = '';
-	editModalForm.password.value = '';
+  // Xóa dữ liệu sau khi gửi yêu cầu
+  editModalForm.fullname.value = '';
+  editModalForm.phone.value = '';
+  editModalForm.email.value = '';
+  editModalForm.address.value = '';
+  editModalForm.position.value = '';
+  editModalForm.password.value = '';
 });
+
 
 

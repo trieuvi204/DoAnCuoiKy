@@ -26,19 +26,25 @@ function createUserData(data) {
 					throw new Error(errorData.detail || 'Lỗi khi tải dữ liệu từ máy chủ');
 				});
 			}
-			return response.json(); // Lấy dữ liệu JSON từ response nếu thành công
-		})
-		.then(function (response) {
-			if (response.ma_kh) {  // Kiểm tra nếu có mã khách hàng
-				alert("Đăng ký thành công!");
-				window.location.reload();  // Tải lại trang
-			} else {
-				alert("Đăng ký thất bại. Mã khách hàng không tồn tại.");
+			else {  // Kiểm tra nếu có mã khách hàng
+				Swal.fire({
+					text: "Đăng Ký Thành Công",
+					icon: "success"
+				})
+				.then((result) => {
+					if (result.isConfirmed) {
+						window.location.reload(); // Tải lại trang sau khi nhấn OK
+					}
+				});
 			}
+			return response.json(); // Lấy dữ liệu JSON từ response nếu thành công
 		})
 		.catch(function (error) {
 			// Hiển thị lỗi cho người dùng
-			alert("Error: " + error.message); // Hiển thị thông báo lỗi chi tiết
+			Swal.fire({
+        icon: "error",
+        text: "Registration failed	. Error: " + error.message,
+      });
 		});
 
 
@@ -55,34 +61,49 @@ function handleCreateUser() {
 
 		// Ràng buộc: Kiểm tra xem tên, số điện thoại, email và mật khẩu có trống không
 		if (!name || !phoneNumber || !email || !password) {
-			alert("Vui lòng nhập đầy đủ thông tin."); // Hiển thị thông báo nếu thiếu thông tin
+			Swal.fire({
+        icon: "error",
+        text: "Vui lòng nhập đầy đủ thông tin !!",
+      });// Hiển thị thông báo nếu thiếu thông tin
 			return; // Ngừng thực hiện nếu không có thông tin
 		}
 
 		// Ràng buộc: Kiểm tra định dạng email
 		const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Biểu thức chính quy cho định dạng email
 		if (!emailPattern.test(email)) {
-			alert("Vui lòng nhập địa chỉ email hợp lệ."); // Hiển thị thông báo nếu email không hợp lệ
+			Swal.fire({
+        icon: "error",
+        text: "Địa chỉ email không hợp lệ !!",
+      }); // Hiển thị thông báo nếu email không hợp lệ
 			return; // Ngừng thực hiện nếu email không hợp lệ
 		}
 
 		// Ràng buộc: Kiểm tra định dạng số điện thoại
 		const phonePattern = /^\d{10}$/; // Chỉ cho phép số điện thoại 10 chữ số
 		if (!phonePattern.test(phoneNumber)) {
-			alert("Số điện thoại phải có 10 chữ số."); // Hiển thị thông báo nếu số điện thoại không hợp lệ
+			Swal.fire({
+        icon: "error",
+        text: "Số điện thoại phải có 10 chữ số !!",
+      }); // Hiển thị thông báo nếu số điện thoại không hợp lệ
 			return; // Ngừng thực hiện nếu số điện thoại không hợp lệ
 		}
 
 		// Ràng buộc: Kiểm tra mật khẩu
 		const passwordMinLength = 8; // Độ dài tối thiểu
 		if (password.length < passwordMinLength) {
-			alert("Mật khẩu phải có ít nhất " + passwordMinLength + " ký tự."); // Kiểm tra độ dài
+			Swal.fire({
+        icon: "error",
+        text: "Mật khẩu phải có ít nhất " + passwordMinLength + " ký tự !!.",
+      }); // Kiểm tra độ dài
 			return; // Ngừng thực hiện nếu mật khẩu quá ngắn
 		}
 
 		if(password != cfmPassword)
 		{
-			alert("Xác nhận mật khẩu thất bại");
+			Swal.fire({
+        icon: "error",
+        text: "Xác nhận mật khẩu thấy bại!!",
+      });
 			return;
 		}
 

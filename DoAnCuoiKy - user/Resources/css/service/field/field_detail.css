@@ -536,9 +536,11 @@ a:active{
 }
 
 .form_inf input{
+    width: 100%;
     border-radius: 5px;
     border-color: #F5F6F8;
     margin-bottom: 20px;
+    text-align: center;
 }
 
 .form_inf .text{

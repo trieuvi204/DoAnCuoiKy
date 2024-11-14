@@ -16,16 +16,34 @@ function CreateStaffData(data) {
   };
 
   fetch(DataApi, option)
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(response) {
-      if(response.ma_nv)
-      {
-        alert("Đăng Ký Thành Công!!\nMã Nhân Viên : " + response.ma_nv);
-        window.location.reload();
-      }
+  .then(function (response) {
+    // Kiểm tra xem response có thành công (status 200) không
+    if (!response.ok) {
+      return response.json().then(errorData => {
+        // Trả về lỗi chi tiết nếu có
+        throw new Error(errorData.detail || 'Lỗi khi tải dữ liệu từ máy chủ');
+      });
+    }
+    else {  // Kiểm tra nếu có mã khách hàng
+      Swal.fire({
+        text: "Đăng Ký Thành Công",
+        icon: "success"
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          window.location.reload(); // Tải lại trang sau khi nhấn OK
+        }
+      });
+    }
+    return response.json(); // Lấy dữ liệu JSON từ response nếu thành công
+  })
+  .catch(function (error) {
+    // Hiển thị lỗi cho người dùng
+    Swal.fire({
+      icon: "error",
+      text: "Registration failed	. Error: " + error.message,
     });
+  });
 }
 
 function handleCreateStaff() {
@@ -49,43 +67,64 @@ function handleCreateStaff() {
 
     // Ràng buộc cho tên nhân viên
     if (name === "") {
-      alert("Tên nhân viên không được để trống");
+      Swal.fire({
+        icon: "error",
+        text: "Tên nhân viên không được để trống !!",
+      });
       isValid = false;
     }
 
     // Ràng buộc cho địa chỉ
     else if (diachi === "") {
-      alert("Địa chỉ không được để trống");
+      Swal.fire({
+        icon: "error",
+        text: "Địa chỉ không được để trống !!",
+      });
       isValid = false;
     }
 
     // Ràng buộc cho số điện thoại (kiểm tra độ dài và phải là số)
     else if (!phonePattern.test(sdt)) {
-      alert("Số điện thoại không hợp lệ. Vui lòng nhập 10 hoặc 11 số.");
+      Swal.fire({
+        icon: "error",
+        text: "Số điện thoại không hợp lệ. Vui lòng nhập 10 hoặc 11 số !!",
+      });
       isValid = false;
     }
 
     // Ràng buộc cho chức vụ
     else if (chucvu === "") {
-      alert("Chức vụ không được để trống");
+      Swal.fire({
+        icon: "error",
+        text: "Chức vụ không được để trống !!",
+      });
       isValid = false;
     }
 
     // Ràng buộc cho email (kiểm tra định dạng)
     else if (!emailPattern.test(email)) {
-      alert("Email không hợp lệ");
+      Swal.fire({
+        icon: "error",
+        text: "Email không hợp lệ !!",
+      });
       isValid = false;
     }
 
     // Ràng buộc cho mật khẩu (kiểm tra độ dài)
     else if (password.length < 8) {
-      alert("Mật khẩu phải có ít nhất 8 ký tự");
+      Swal.fire({
+        icon: "error",
+        text: "Mật khẩu phải có ít nhất 8 ký tự !!",
+      });
       isValid = false;
     }
 
     // Kiểm tra xác nhận mật khẩu
     else if (password !== cf_password) {
-      alert("Mật khẩu và mật khẩu xác nhận không khớp");
+      Swal.fire({
+        icon: "error",
+        text: "Xác nhận mật khẩu thất bại !!",
+      });
       isValid = false;
     }
 

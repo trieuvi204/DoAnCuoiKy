@@ -2,482 +2,496 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sân bóng đá Thanh Thiện</title>
-    <link rel="stylesheet" href="Resources/css/style.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <!-- icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Sân bóng đá Thanh Thiện</title>
+	<link rel="stylesheet" href="Resources/css/style.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+	<!-- icons -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inder&display=swap" rel="stylesheet">
-    <!-- AOS Libary -->
-    <link href="Vendors/aos-master/dist/aos.css" rel="stylesheet">
-    <script src="Vendors/aos-master/dist/aos.js"></script>
-    <link rel="icon" href="Resources/img/Logo/logo_tt.png" type="image/png" sizes="48x48">
-    <style>
-        /* set up */
-        * {
-            padding: 0px;
-            margin: 0px;
-            box-sizing: border-box;
-        }
+	<!-- Fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inder&display=swap" rel="stylesheet">
+	<!-- AOS Libary -->
+	<link href="Vendors/aos-master/dist/aos.css" rel="stylesheet">
+	<script src="Vendors/aos-master/dist/aos.js"></script>
+	<link rel="icon" href="Resources/img/Logo/logo_tt.png" type="image/png" sizes="48x48">
 
-        /* Body */
-        .index-page {
-            font-family: "Inder", sans-serif;
-            font-weight: 400;
-            font-style: normal;
-        }
-    </style>
+	    <!-- sweet alert -->
+			<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<style>
+		/* set up */
+		* {
+			padding: 0px;
+			margin: 0px;
+			box-sizing: border-box;
+		}
+
+		/* Body */
+		.index-page {
+			font-family: "Inder", sans-serif;
+			font-weight: 400;
+			font-style: normal;
+		}
+	</style>
 
 </head>
 
 <body id="index" class="index-page">
-    <div class="row row-cols-6">
-        <div class="col-lg-12">
-            <header id="header" class="header d-flex align-items-center fixed-top">
-                <div class="container-fluid container-xl position-relative d-flex align-items-center">
-                    <div class="container">
-                        <div class="row">
-                            <div class="fixed_header">
-                                <div class="logo col-lg-2">
-                                    <a href="index.html" class="logo d-flex align-items-center me-auto ">
-                                        <img src="Resources/img/Logo/logo_tt.png" alt="logo">
-                                    </a>
-                                </div>
-                                <div class="navmenu col-lg-10">
-                                    <div class="row">
-                                        <nav id="navmenu">
-                                            <ul>
-                                                <li class="col-lg-2"><a href="index.html#home"><span>Trang
-                                                            Chủ</span></a></li>
-                                                <li class="col-lg-2"><a href="index.html#about"><span>Về Chúng
-                                                            Tôi</span></a></li>
-                                                <li class="dropdown col-lg-2"><a href="index.html#service"><span>Dịch
-                                                            Vụ</span></a>
-                                                    <ul>
-                                                        <li><a href="Resources/html/service/field_list.html">Đặt Sân</a>
-                                                        </li>
-                                                        <li><a href="Resources/html/service/rent_pitch.html">Thuê Áo
-                                                                Pitch</a></li>
-                                                        <li><a href="Resources/html/service/food.html">Đồ Ăn \ Thức
-                                                                Uống</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li class="col-lg-2"><a href="index.html#contact"><span>Liên
-                                                            Hệ</span></a></li>
-                                                <li class="dropdown col-lg-2"><a href="#"><span>Tài Khoản</span></a>
-                                                    <ul>
-                                                        <li class="dropdown user">
-                                                            <div class="user-container">
-                                                                <div class="user-img">
-                                                                    <img src="Resources/img/avata/con_meo.jpg"
-                                                                        alt="avata">
-                                                                </div>
-                                                                <h3>Nguyễn Văn An</h3>
-                                                                <a class="title" href="Resources/html/manage-account/account.html">Quản lý tài khoản</a>
-                                                                <a class="inf-account" href="Resources/html/manage-account/account.html#basic-inf">Thông tin tài khoản</a>
-                                                                <a class="inf-account" href="Resources/html/manage-account/account.html#list">Danh sách đặt sân</a>
-                                                                <a class="title" href="Resources/html/membership-card/membership-card.html">Thẻ thành viên</a>
-                                                                <button><a href="../index.html">Đăng Xuất</a></button>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li class="col-lg-2">
-                                                    <a class="btn-getstarted" href="index.html#about"><span>Bắt
-                                                            Đầu</span></a>
-                                                </li>
-                                            </ul>
-                                        </nav>
+	<div class="row row-cols-6">
+		<div class="col-lg-12">
+			<header id="header" class="header d-flex align-items-center fixed-top">
+				<div class="container-fluid container-xl position-relative d-flex align-items-center">
+					<div class="container">
+						<div class="row">
+							<div class="fixed_header">
+								<div class="logo col-lg-2">
+									<a href="index.html" class="logo d-flex align-items-center me-auto ">
+										<img src="Resources/img/Logo/logo_tt.png" alt="logo">
+									</a>
+								</div>
+								<div class="navmenu col-lg-10">
+									<div class="row">
+										<nav id="navmenu">
+											<ul>
+												<li class="col-lg-2"><a href="index.html#home"><span>Trang
+															Chủ</span></a></li>
+												<li class="col-lg-2"><a href="index.html#about"><span>Về Chúng
+															Tôi</span></a></li>
+												<li class="dropdown col-lg-2"><a href="index.html#service"><span>Dịch
+															Vụ</span></a>
+													<ul>
+														<li><a href="Resources/html/service/field_list.html">Đặt Sân</a>
+														</li>
+														<li><a href="Resources/html/service/rent_pitch.html">Thuê Áo
+																Pitch</a></li>
+														<li><a href="Resources/html/service/food.html">Đồ Ăn \ Thức
+																Uống</a></li>
+													</ul>
+												</li>
+												<li class="col-lg-2"><a href="index.html#contact"><span>Liên
+															Hệ</span></a></li>
+												<li class="dropdown col-lg-2"><a href="#"><span>Tài Khoản</span></a>
+													<ul>
+														<li class="dropdown user">
+															<div class="user-container">
+																<div class="user-img">
+																	<img src="Resources/img/avata/con_meo.jpg" alt="avata">
+																</div>
+																<h3>Nguyễn Văn An</h3>
+																<a class="title" href="Resources/html/manage-account/account.html">Quản lý tài khoản</a>
+																<a class="inf-account" href="Resources/html/manage-account/account.html#basic-inf">Thông
+																	tin tài khoản</a>
+																<a class="inf-account" href="Resources/html/manage-account/account.html#list">Danh sách
+																	đặt sân</a>
+																<a class="title" href="Resources/html/membership-card/membership-card.html">Thẻ thành
+																	viên</a>
+																<button id="btn_log_out">Đăng Xuất</button>
+															</div>
+														</li>
+													</ul>
+												</li>
+												<li class="col-lg-2">
+													<a class="btn-getstarted" href="index.html#about"><span>Bắt
+															Đầu</span></a>
+												</li>
+											</ul>
+										</nav>
 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 
-                </div>
-            </header>
-        </div>
-        <div class="col-lg-12">
-            <section id="home" class="home section">
+				</div>
+			</header>
+		</div>
+		<div class="col-lg-12">
+			<section id="home" class="home section">
 
-                <div class="container">
-                    <div class="row ">
-                        <div class="col-lg-6 justify-content-center slogan">
-                            <h1>Đặt Sân Nhanh Chóng Cùng Thanh Thiện</h1>
-                            <p>Trang Web Đặt Sân Miễn Phí</p>
-                            <div class="d-flex">
-                                <a href="#about" class="btn-get-started">Bắt Đầu</a>
-                                <a href="https://www.youtube.com/watch?v=guH34ZgwxkU" target="_blank"
-                                    class="glightbox btn-watch-video d-flex align-items-center">
-                                    <i class="glyphicon glyphicon-play-circle"></i>
-                                    <span>Xem Video</span>
-                                </a>
+				<div class="container">
+					<div class="row ">
+						<div class="col-lg-6 justify-content-center slogan">
+							<h1>Đặt Sân Nhanh Chóng Cùng Thanh Thiện</h1>
+							<p>Trang Web Đặt Sân Miễn Phí</p>
+							<div class="d-flex">
+								<a href="#about" class="btn-get-started">Bắt Đầu</a>
+								<a href="https://www.youtube.com/watch?v=guH34ZgwxkU" target="_blank"
+									class="glightbox btn-watch-video d-flex align-items-center">
+									<i class="glyphicon glyphicon-play-circle"></i>
+									<span>Xem Video</span>
+								</a>
 
-                            </div>
-                        </div>
-                        <div class="col-lg-6 ">
-                            <div class="home-img">
-                                <div class="list-img">
-                                    <img class="slide-img" src="Resources/img/field_list/san3.jpg" alt="san3">
-                                    <img class="slide-img" src="Resources/img/field_list/san2.jpg" alt="san2">
-                                    <img class="slide-img" src="Resources/img/field_list/san4.jpg" alt="san4">
-                                    <img class="slide-img" src="Resources/img/field_list/san1.jpg" alt="san1">
-                                </div>
-                                <div class="btns">
-                                    <div class="btn-left btn"><i class="fa-solid fa-arrow-left"></i></div>
-                                    <div class="btn-right btn"><i class="fa-solid fa-arrow-right"></i></div>
-                                </div>
-                                <div class="index-img">
-                                    <div class="index-items index-item-0 active"></div>
-                                    <div class="index-items index-item-1"></div>
-                                    <div class="index-items index-item-2"></div>
-                                    <div class="index-items index-item-3"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+							</div>
+						</div>
+						<div class="col-lg-6 ">
+							<div class="home-img">
+								<div class="list-img">
+									<img class="slide-img" src="Resources/img/field_list/MS003.jpg" alt="san3">
+									<img class="slide-img" src="Resources/img/field_list/MS002.jpg" alt="san2">
+									<img class="slide-img" src="Resources/img/field_list/MS004.jpg" alt="san4">
+									<img class="slide-img" src="Resources/img/field_list/MS001.jpg" alt="san1">
+								</div>
+								<div class="btns">
+									<div class="btn-left btn"><i class="fa-solid fa-arrow-left"></i></div>
+									<div class="btn-right btn"><i class="fa-solid fa-arrow-right"></i></div>
+								</div>
+								<div class="index-img">
+									<div class="index-items index-item-0 active"></div>
+									<div class="index-items index-item-1"></div>
+									<div class="index-items index-item-2"></div>
+									<div class="index-items index-item-3"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 
-            </section>
-        </div>
-        <div class="col-lg-12">
-            <section id="about" class="about_us">
-                <div class="container">
-                    <div class="row row-cols-2">
-                        <div class="col-lg-12">
-                            <div class="title-about_us title">
-                                <h2 id="title" data-aos="fade-up">Về Chúng Tôi</h2>
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="main-text_about_us">
-                                <div class="row">
-                                    <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-                                        <div class="text">
-                                            <p>
-                                                Đến với Thanh Thiện, ngoài các trận đấu sôi động, song song đó sân còn
-                                                cung cấp môi
-                                                trường
-                                                lý
-                                                tưởng cho sự phát triển cho các mầm non thế chất. Để đáp ứng và đảm bảo
-                                                chất lượng,
-                                                Thanh
-                                                Thiện
-                                                có:
-                                            </p>
-                                            <ul>
-                                                <li><i class="bi bi-check2-circle icon-check"></i> Đội ngũ nhân sự
-                                                    chuyên nghiệp
-                                                </li>
-                                                <li><i class="bi bi-check2-circle icon-check"></i> Huấn luyện và tổ chức
-                                                    giải bóng
-                                                    đá chuyên
-                                                    nghiệp và an toàn</li>
-                                                <li><i class="bi bi-check-circle icon-check"></i> Hệ thống sân với diện
-                                                    tích 375m2
-                                                    và diện
-                                                    tích
-                                                    tối đa 1050m2 (42m x 25m)</li>
-                                                <li><i class="bi bi-check2-circle icon-check"></i> Giá sân ưu đãi</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-                                        <img id="main-text_about_us_img" src="Resources/img/about/maintext_aboutus.jpg"
-                                            alt="">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
-            </section>
-        </div>
-        <div class="col-lg-12">
-            <section id="service" class="service">
-                <div class="container">
-                    <div class="title-service title">
-                        <h2 data-aos="fade-up">Dịch Vụ</h2>
-                    </div>
-                    <p class="title-text" data-aos="fade-up" data-aos-delay="50">Khách Hàng Luôn Là Ưu Tiên Hàng Đầu</p>
-                    <div class="container-of-services" data-aos="fade-up" data-aos-delay="100">
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <div class="card" style="width: 30rem; height: 23rem;">
-                                    <a href="Resources/html/service/field_list.html">
-                                        <i class="fa-regular fa-futbol " style="width: 200px;"></i>
-                                        <div class="card-body">
-                                            <h5 class="card-title">Đặt Sân</h5>
-                                            <p class="card-text">Tiện lợi và nhanh chóng,<br> tiết kiệm thời gian.</p>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="card" style="width: 30rem; height: 23rem;">
-                                    <a href="Resources/html/service/rent_pitch.html">
-                                        <i class="fa-solid fa-shirt"></i>
-                                        <div class="card-body">
-                                            <h5 class="card-title">Thuê Áo</h5>
-                                            <p class="card-text">Sẵn sàng đáp ứng nhu cầu khách hàng.</p>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="card" style="width: 30rem; height: 23rem;">
-                                    <a href="Resources/html/service/food.html">
-                                        <i class="fa-solid fa-utensils"></i>
-                                        <div class="card-body">
-                                            <h5 class="card-title" style="margin-top: 0px;">Đồ Ăn/ Thức Uống</h5>
-                                            <p class="card-text">Chăm sóc khách hàng sau khi hoàn thành xong trận đấu.
-                                            </p>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-        <div class="col-lg-12">
-            <section id="contact" class="contact section">
-
-                <div class="title-service title">
-                    <h2 data-aos="fade-up">Liên Hệ</h2>
-                    <p class="title-text" data-aos="fade-up" data-aos-delay="50">Cho Thanh Thiện Thông Tin Của Bạn Để Hỗ
-                        Trợ Vấn
-                        Đề
-                        Của Mình Nhé!</p>
-                </div>
-
-                <div class="container " data-aos="fade-up" data-aos-delay="100">
-
-                    <div class="row gy-4">
-
-                        <div class="col-lg-4">
-
-                            <div class="info-wrap">
-                                <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="200">
-                                    <div>
-                                        <h3><i class="bi bi-geo-alt flex-shrink-0"></i> Địa Chỉ</h3>
-                                        <p>12 Đường D16, Tây Thạnh, Tân Phú, TP.HCM</p>
-                                    </div>
-                                </div>
-
-                                <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
-
-                                    <div>
-                                        <h3><i class="bi bi-telephone flex-shrink-0"></i>Hotline (Zalo)</h3>
-                                        <p>+84 909804696</p>
-                                    </div>
-                                </div>
-
-                                <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
-
-                                    <div>
-                                        <h3><i class="bi bi-envelope flex-shrink-0"></i> Email</h3>
-                                        <p>sanbongthanhthien@gmail.com</p>
-                                    </div>
-                                </div>
-                                <iframe
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.9635044161764!2d106.62437977451766!3d10.814104858498686!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752b48faf541bb%3A0x17aa5680ca3b33f7!2zU8OibiBiw7NuZyBUaGFuaCBUaGnhu4du!5e0!3m2!1svi!2s!4v1714919232979!5m2!1svi!2s"
-                                    width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"
-                                    referrerpolicy="no-referrer-when-downgrade"></iframe>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4">
-                            <form action="forms" method="post" id="form-cmt" class="email-form" data-aos="fade-up"
-                                data-aos-delay="100">
-                                <div class="row gy-4">
-                                    <div class="col-md-6 text" data-aos="fade-up" data-aos-delay="200">
-                                        <label for="name-field" class="pb-2">Họ Tên Của Bạn</label>
-                                        <input type="text" name="name" id="name-field" class="form-control" required="">
-                                    </div>
-
-                                    <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
-                                        <label for="email-field" class="pb-2">Email Của Bạn</label>
-                                        <input type="tel" class="form-control" name="email" id="email-field"
-                                            required="">
-                                    </div>
-
-                                    <div class="col-md-12" data-aos="fade-up" data-aos-delay="400">
-                                        <label for="subject-field" class="pb-2">Vấn Đề Của Bạn</label>
-                                        <input type="text" class="form-control" name="subject" id="subject-field"
-                                            required="">
-                                    </div>
-
-                                    <div class="col-md-12" data-aos="fade-up" data-aos-delay="400">
-                                        <label for="message-field" class="pb-2">Mô Tả Chi Tiết</label>
-                                        <textarea class="form-control" name="message" rows="10" style="height: 200px;"
-                                            id="message-field" required=""></textarea>
-                                    </div>
-
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <button type="submit" id="btn_submit">Gửi Bình Luận</button>
-                                    </div>
-                                </div>
-
-                            </form>
-
-                        </div>
-
-                        <div class="col-lg-4">
-                            <div class="messages">
-
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-            </section>
-        </div>
-        <div class="col-lg-12">
-            <footer id="footer" class="footer">
-                <div class="container-footer ">
-                    <div class="row gy-4">
-                        <div class="col-lg-3 footer-about">
-                            <a href="index.html" class="d-flex align-items-center">
-                                <img id="footer_logo" class="logo" src="Resources/img/Logo/logo_tt.png"
-                                    alt="footer_logo">
-                            </a>
-                            <div class="footer-contact pt-3">
-                                <p>12 Đường D16, Tây Thạnh, Tân Phú, TP. HCM</p>
-                                <p class="mt-3"><strong>Hotline:</strong> <span> +84 909804696</span></p>
-                                <p><strong>Email:</strong> <span>sanbongthanhthien@gmail.com</span></p>
-                            </div>
-                        </div>
-                        <div class="col-lg-9">
-                            <div class="col-lg-8 footer-links">
-                                <div class="col-lg-6">
-                                    <div class="inf_link">
-                                        <h2>Thông Tin</h2>
-                                        <ul>
-                                            <li><i class="bi bi-chevron-right"></i> <a href="#home">Trang Chủ</a></li>
-                                            <li><i class="bi bi-chevron-right"></i> <a href="#about">Về Chúng Tôi</a>
-                                            </li>
-                                            <li><i class="bi bi-chevron-right"></i> <a href="#service">Dịch Vụ</a></li>
-                                            <li><i class="bi bi-chevron-right"></i> <a href="#contact">Liên Hệ</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="service_link">
-                                        <h2>Dịch Vụ</h2>
-                                        <ul>
-                                            <li><i class="bi bi-chevron-right"></i> <a
-                                                    href="Resources/html/service/field_list.html">Đặt
-                                                    Sân</a></li>
-                                            <li><i class="bi bi-chevron-right"></i> <a
-                                                    href="Resources/html/service/rent_pitch.html">Thuê
-                                                    Áo</a></li>
-                                            <li><i class="bi bi-chevron-right"></i> <a
-                                                    href="Resources/html/service/food.html">Đồ Ăn/ Thức
-                                                    Uống</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
+			</section>
+		</div>
+		<div class="col-lg-12">
+			<section id="about" class="about_us">
+				<div class="container">
+					<div class="row row-cols-2">
+						<div class="col-lg-12">
+							<div class="title-about_us title">
+								<h2 id="title" data-aos="fade-up">Về Chúng Tôi</h2>
+							</div>
+						</div>
+						<div class="col-lg-12">
+							<div class="main-text_about_us">
+								<div class="row">
+									<div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+										<div class="text">
+											<p>
+												Đến với Thanh Thiện, ngoài các trận đấu sôi động, song song đó sân còn
+												cung cấp môi
+												trường
+												lý
+												tưởng cho sự phát triển cho các mầm non thế chất. Để đáp ứng và đảm bảo
+												chất lượng,
+												Thanh
+												Thiện
+												có:
+											</p>
+											<ul>
+												<li><i class="bi bi-check2-circle icon-check"></i> Đội ngũ nhân sự
+													chuyên nghiệp
+												</li>
+												<li><i class="bi bi-check2-circle icon-check"></i> Huấn luyện và tổ chức
+													giải bóng
+													đá chuyên
+													nghiệp và an toàn</li>
+												<li><i class="bi bi-check-circle icon-check"></i> Hệ thống sân với diện
+													tích 375m2
+													và diện
+													tích
+													tối đa 1050m2 (42m x 25m)</li>
+												<li><i class="bi bi-check2-circle icon-check"></i> Giá sân ưu đãi</li>
+											</ul>
+										</div>
+									</div>
+									<div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+										<img id="main-text_about_us_img" src="Resources/img/about/maintext_aboutus.jpg" alt="">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 
 
-                            </div>
-                            <div class="col-lg-4 follow_us">
-                                <h2>Theo Dõi Thanh Thiện</h2>
-                                <p>Theo dõi Thanh Thiện để có thể biết được các khuyến mãi của sân một cách nhanh chóng
-                                    nhé!
-                                </p>
-                                <div class="social-links d-flex">
-                                    <a
-                                        href="https://www.facebook.com/pages/S%C3%A2n%20B%C3%B3ng%20%C4%90%C3%A1%20Thanh%20Thi%E1%BB%87n/1897967037088401">
-                                        <i class="bi bi-facebook"></i>
-                                    </a>
+				</div>
+			</section>
+		</div>
+		<div class="col-lg-12">
+			<section id="service" class="service">
+				<div class="container">
+					<div class="title-service title">
+						<h2 data-aos="fade-up">Dịch Vụ</h2>
+					</div>
+					<p class="title-text" data-aos="fade-up" data-aos-delay="50">Khách Hàng Luôn Là Ưu Tiên Hàng Đầu</p>
+					<div class="container-of-services" data-aos="fade-up" data-aos-delay="100">
+						<div class="row">
+							<div class="col-lg-4">
+								<div class="card" style="width: 30rem; height: 23rem;">
+									<a href="Resources/html/service/field_list.html">
+										<i class="fa-regular fa-futbol " style="width: 200px;"></i>
+										<div class="card-body">
+											<h5 class="card-title">Đặt Sân</h5>
+											<p class="card-text">Tiện lợi và nhanh chóng,<br> tiết kiệm thời gian.</p>
+										</div>
+									</a>
+								</div>
+							</div>
+							<div class="col-lg-4">
+								<div class="card" style="width: 30rem; height: 23rem;">
+									<a href="Resources/html/service/rent_pitch.html">
+										<i class="fa-solid fa-shirt"></i>
+										<div class="card-body">
+											<h5 class="card-title">Thuê Áo</h5>
+											<p class="card-text">Sẵn sàng đáp ứng nhu cầu khách hàng.</p>
+										</div>
+									</a>
+								</div>
+							</div>
+							<div class="col-lg-4">
+								<div class="card" style="width: 30rem; height: 23rem;">
+									<a href="Resources/html/service/food.html">
+										<i class="fa-solid fa-utensils"></i>
+										<div class="card-body">
+											<h5 class="card-title" style="margin-top: 0px;">Đồ Ăn/ Thức Uống</h5>
+											<p class="card-text">Chăm sóc khách hàng sau khi hoàn thành xong trận đấu.
+											</p>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+		<div class="col-lg-12">
+			<section id="contact" class="contact section">
 
-                                    <i>
-                                        <div class="svg-container" id="svg-container">
-                                            <svg id="Layer_1" viewBox="0 0 460.1 436.6" width="38px"
-                                                style="background-color: #ffffffff; border-radius: 5px; margin-top: 10px"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <style>
-                                                    .st0 {
-                                                        fill: #fdfefe
-                                                    }
+				<div class="title-service title">
+					<h2 data-aos="fade-up">Liên Hệ</h2>
+					<p class="title-text" data-aos="fade-up" data-aos-delay="50">Cho Thanh Thiện Thông Tin Của Bạn Để Hỗ
+						Trợ Vấn
+						Đề
+						Của Mình Nhé!</p>
+				</div>
 
-                                                    .st1 {
-                                                        fill: #0180c7
-                                                    }
+				<div class="container " data-aos="fade-up" data-aos-delay="100">
 
-                                                    .st2 {
-                                                        fill: #0172b1
-                                                    }
+					<div class="row gy-4">
 
-                                                    .st3 {
-                                                        fill: none;
-                                                        stroke: #0180c7;
-                                                        stroke-width: 2;
-                                                        stroke-miterlimit: 10
-                                                    }
+						<div class="col-lg-4">
 
-                                                    .svg-container {
-                                                        cursor: pointer;
-                                                    }
-                                                </style>
-                                                <title />
-                                                <path class="st0"
-                                                    d="M82.6 380.9c-1.8-.8-3.1-1.7-1-3.5 1.3-1 2.7-1.9 4.1-2.8 13.1-8.5 25.4-17.8 33.5-31.5 6.8-11.4 5.7-18.1-2.8-26.5C69 269.2 48.2 212.5 58.6 145.5 64.5 107.7 81.8 75 107 46.6c15.2-17.2 33.3-31.1 53.1-42.7 1.2-.7 2.9-.9 3.1-2.7-.4-1-1.1-.7-1.7-.7-33.7 0-67.4-.7-101 .2C28.3 1.7.5 26.6.6 62.3c.2 104.3 0 208.6 0 313 0 32.4 24.7 59.5 57 60.7 27.3 1.1 54.6.2 82 .1 2 .1 4 .2 6 .2H290c36 0 72 .2 108 0 33.4 0 60.5-27 60.5-60.3v-.6-58.5c0-1.4.5-2.9-.4-4.4-1.8.1-2.5 1.6-3.5 2.6-19.4 19.5-42.3 35.2-67.4 46.3-61.5 27.1-124.1 29-187.6 7.2-5.5-2-11.5-2.2-17.2-.8-8.4 2.1-16.7 4.6-25 7.1-24.4 7.6-49.3 11-74.8 6zm72.5-168.5c1.7-2.2 2.6-3.5 3.6-4.8 13.1-16.6 26.2-33.2 39.3-49.9 3.8-4.8 7.6-9.7 10-15.5 2.8-6.6-.2-12.8-7-15.2-3-.9-6.2-1.3-9.4-1.1-17.8-.1-35.7-.1-53.5 0-2.5 0-5 .3-7.4.9-5.6 1.4-9 7.1-7.6 12.8 1 3.8 4 6.8 7.8 7.7 2.4.6 4.9.9 7.4.8 10.8.1 21.7 0 32.5.1 1.2 0 2.7-.8 3.6 1-.9 1.2-1.8 2.4-2.7 3.5-15.5 19.6-30.9 39.3-46.4 58.9-3.8 4.9-5.8 10.3-3 16.3s8.5 7.1 14.3 7.5c4.6.3 9.3.1 14 .1 16.2 0 32.3.1 48.5-.1 8.6-.1 13.2-5.3 12.3-13.3-.7-6.3-5-9.6-13-9.7-14.1-.1-28.2 0-43.3 0zm116-52.6c-12.5-10.9-26.3-11.6-39.8-3.6-16.4 9.6-22.4 25.3-20.4 43.5 1.9 17 9.3 30.9 27.1 36.6 11.1 3.6 21.4 2.3 30.5-5.1 2.4-1.9 3.1-1.5 4.8.6 3.3 4.2 9 5.8 14 3.9 5-1.5 8.3-6.1 8.3-11.3.1-20 .2-40 0-60-.1-8-7.6-13.1-15.4-11.5-4.3.9-6.7 3.8-9.1 6.9zm69.3 37.1c-.4 25 20.3 43.9 46.3 41.3 23.9-2.4 39.4-20.3 38.6-45.6-.8-25-19.4-42.1-44.9-41.3-23.9.7-40.8 19.9-40 45.6zm-8.8-19.9c0-15.7.1-31.3 0-47 0-8-5.1-13-12.7-12.9-7.4.1-12.3 5.1-12.4 12.8-.1 4.7 0 9.3 0 14v79.5c0 6.2 3.8 11.6 8.8 12.9 6.9 1.9 14-2.2 15.8-9.1.3-1.2.5-2.4.4-3.7.2-15.5.1-31 .1-46.5z" />
-                                                <path class="st1"
-                                                    d="M139.5 436.2c-27.3 0-54.7.9-82-.1-32.3-1.3-57-28.4-57-60.7 0-104.3.2-208.6 0-313C.5 26.7 28.4 1.8 60.5.9c33.6-.9 67.3-.2 101-.2.6 0 1.4-.3 1.7.7-.2 1.8-2 2-3.1 2.7-19.8 11.6-37.9 25.5-53.1 42.7-25.1 28.4-42.5 61-48.4 98.9-10.4 66.9 10.5 123.7 57.8 171.1 8.4 8.5 9.5 15.1 2.8 26.5-8.1 13.7-20.4 23-33.5 31.5-1.4.8-2.8 1.8-4.2 2.7-2.1 1.8-.8 2.7 1 3.5.4.9.9 1.7 1.5 2.5 11.5 10.2 22.4 21.1 33.7 31.5 5.3 4.9 10.6 10 15.7 15.1 2.1 1.9 5.6 2.5 6.1 6.1z" />
-                                                <path class="st2"
-                                                    d="M139.5 436.2c-.5-3.5-4-4.1-6.1-6.2-5.1-5.2-10.4-10.2-15.7-15.1-11.3-10.4-22.2-21.3-33.7-31.5-.6-.8-1.1-1.6-1.5-2.5 25.5 5 50.4 1.6 74.9-5.9 8.3-2.5 16.6-5 25-7.1 5.7-1.5 11.7-1.2 17.2.8 63.4 21.8 126 19.8 187.6-7.2 25.1-11.1 48-26.7 67.4-46.2 1-1 1.7-2.5 3.5-2.6.9 1.4.4 2.9.4 4.4v58.5c.2 33.4-26.6 60.6-60 60.9h-.5c-36 .2-72 0-108 0H145.5c-2-.2-4-.3-6-.3z" />
-                                                <path class="st1"
-                                                    d="M155.1 212.4c15.1 0 29.3-.1 43.4 0 7.9.1 12.2 3.4 13 9.7.9 7.9-3.7 13.2-12.3 13.3-16.2.2-32.3.1-48.5.1-4.7 0-9.3.2-14-.1-5.8-.3-11.5-1.5-14.3-7.5s-.8-11.4 3-16.3c15.4-19.6 30.9-39.3 46.4-58.9.9-1.2 1.8-2.4 2.7-3.5-1-1.7-2.4-.9-3.6-1-10.8-.1-21.7 0-32.5-.1-2.5 0-5-.3-7.4-.8-5.7-1.3-9.2-7-7.9-12.6.9-3.8 3.9-6.9 7.7-7.8 2.4-.6 4.9-.9 7.4-.9 17.8-.1 35.7-.1 53.5 0 3.2-.1 6.3.3 9.4 1.1 6.8 2.3 9.7 8.6 7 15.2-2.4 5.7-6.2 10.6-10 15.5-13.1 16.7-26.2 33.3-39.3 49.8-1.1 1.3-2.1 2.6-3.7 4.8z" />
-                                                <path class="st1"
-                                                    d="M271.1 159.8c2.4-3.1 4.9-6 9-6.8 7.9-1.6 15.3 3.5 15.4 11.5.3 20 .2 40 0 60 0 5.2-3.4 9.8-8.3 11.3-5 1.9-10.7.4-14-3.9-1.7-2.1-2.4-2.5-4.8-.6-9.1 7.4-19.4 8.7-30.5 5.1-17.8-5.8-25.1-19.7-27.1-36.6-2.1-18.3 4-33.9 20.4-43.5 13.6-8.1 27.4-7.4 39.9 3.5zm-35.4 36.5c.2 4.4 1.6 8.6 4.2 12.1 5.4 7.2 15.7 8.7 23 3.3 1.2-.9 2.3-2 3.3-3.3 5.6-7.6 5.6-20.1 0-27.7-2.8-3.9-7.2-6.2-11.9-6.3-11-.7-18.7 7.8-18.6 21.9zM340.4 196.9c-.8-25.7 16.1-44.9 40.1-45.6 25.5-.8 44.1 16.3 44.9 41.3.8 25.3-14.7 43.2-38.6 45.6-26.1 2.6-46.8-16.3-46.4-41.3zm25.1-2.4c-.2 5 1.3 9.9 4.3 14 5.5 7.2 15.8 8.6 23 3 1.1-.8 2-1.8 2.9-2.8 5.8-7.6 5.8-20.4.1-28-2.8-3.8-7.2-6.2-11.9-6.3-10.8-.6-18.4 7.6-18.4 20.1zM331.6 177c0 15.5.1 31 0 46.5.1 7.1-5.5 13-12.6 13.2-1.2 0-2.5-.1-3.7-.4-5-1.3-8.8-6.6-8.8-12.9v-79.5c0-4.7-.1-9.3 0-14 .1-7.7 5-12.7 12.4-12.7 7.6-.1 12.7 4.9 12.7 12.9.1 15.6 0 31.3 0 46.9z" />
-                                                <path class="st0"
-                                                    d="M235.7 196.3c-.1-14.1 7.6-22.6 18.5-22 4.7.2 9.1 2.5 11.9 6.4 5.6 7.5 5.6 20.1 0 27.7-5.4 7.2-15.7 8.7-23 3.3-1.2-.9-2.3-2-3.3-3.3-2.5-3.5-3.9-7.7-4.1-12.1zM365.5 194.5c0-12.4 7.6-20.7 18.4-20.1 4.7.1 9.1 2.5 11.9 6.3 5.7 7.6 5.7 20.5-.1 28-5.6 7.1-16 8.3-23.1 2.7-1.1-.8-2-1.8-2.8-2.9-3-4.1-4.4-9-4.3-14z" />
-                                                <path class="st3"
-                                                    d="M66 1h328.1c35.9 0 65 29.1 65 65v303c0 35.9-29.1 65-65 65H66c-35.9 0-65-29.1-65-65V66C1 30.1 30.1 1 66 1z" />
-                                            </svg>
-                                        </div>
-                                        <div id="copy-message"><i class="fa-solid fa-copy"
-                                                style="margin-right: 10px;"></i>Đã sao chép!</div>
-                                    </i>
+							<div class="info-wrap">
+								<div class="info-item d-flex" data-aos="fade-up" data-aos-delay="200">
+									<div>
+										<h3><i class="bi bi-geo-alt flex-shrink-0"></i> Địa Chỉ</h3>
+										<p>12 Đường D16, Tây Thạnh, Tân Phú, TP.HCM</p>
+									</div>
+								</div>
 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container copyright text-center mt-4">
-                        <p>© <span>Copyright</span> <strong class="px-1 sitename">Group5</strong> <span>All Rights
-                                Reserved</span>
-                        </p>
-                    </div>
-            </footer>
-        </div>
+								<div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
+
+									<div>
+										<h3><i class="bi bi-telephone flex-shrink-0"></i>Hotline (Zalo)</h3>
+										<p>+84 909804696</p>
+									</div>
+								</div>
+
+								<div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
+
+									<div>
+										<h3><i class="bi bi-envelope flex-shrink-0"></i> Email</h3>
+										<p>sanbongthanhthien@gmail.com</p>
+									</div>
+								</div>
+								<iframe
+									src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.9635044161764!2d106.62437977451766!3d10.814104858498686!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752b48faf541bb%3A0x17aa5680ca3b33f7!2zU8OibiBiw7NuZyBUaGFuaCBUaGnhu4du!5e0!3m2!1svi!2s!4v1714919232979!5m2!1svi!2s"
+									width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"
+									referrerpolicy="no-referrer-when-downgrade"></iframe>
+							</div>
+						</div>
+
+						<div class="col-lg-4">
+							<form action="forms" method="post" id="form-cmt" class="email-form" data-aos="fade-up"
+								data-aos-delay="100">
+								<div class="row gy-4">
+									<div class="col-md-6 text" data-aos="fade-up" data-aos-delay="200">
+										<label for="name-field" class="pb-2">Họ Tên Của Bạn</label>
+										<input type="text" name="name" id="name-field" class="form-control" required="">
+									</div>
+
+									<div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
+										<label for="email-field" class="pb-2">Email Của Bạn</label>
+										<input type="tel" class="form-control" name="email" id="email-field" required="">
+									</div>
+
+									<div class="col-md-12" data-aos="fade-up" data-aos-delay="400">
+										<label for="subject-field" class="pb-2">Vấn Đề Của Bạn</label>
+										<input type="text" class="form-control" name="subject" id="subject-field" required="">
+									</div>
+
+									<div class="col-md-12" data-aos="fade-up" data-aos-delay="400">
+										<label for="message-field" class="pb-2">Mô Tả Chi Tiết</label>
+										<textarea class="form-control" name="message" rows="10" style="height: 200px;" id="message-field"
+											required=""></textarea>
+									</div>
+
+								</div>
+								<div class="row">
+									<div class="col-lg-12">
+										<button type="submit" id="btn_submit">Gửi Bình Luận</button>
+									</div>
+								</div>
+
+							</form>
+
+						</div>
+
+						<div class="col-lg-4">
+							<div class="messages">
+
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+			</section>
+		</div>
+		<div class="col-lg-12">
+			<footer id="footer" class="footer">
+				<div class="container-footer ">
+					<div class="row gy-4">
+						<div class="col-lg-3 footer-about">
+							<a href="index.html" class="d-flex align-items-center">
+								<img id="footer_logo" class="logo" src="Resources/img/Logo/logo_tt.png" alt="footer_logo">
+							</a>
+							<div class="footer-contact pt-3">
+								<p>12 Đường D16, Tây Thạnh, Tân Phú, TP. HCM</p>
+								<p class="mt-3"><strong>Hotline:</strong> <span> +84 909804696</span></p>
+								<p><strong>Email:</strong> <span>sanbongthanhthien@gmail.com</span></p>
+							</div>
+						</div>
+						<div class="col-lg-9">
+							<div class="col-lg-8 footer-links">
+								<div class="col-lg-6">
+									<div class="inf_link">
+										<h2>Thông Tin</h2>
+										<ul>
+											<li><i class="bi bi-chevron-right"></i> <a href="#home">Trang Chủ</a></li>
+											<li><i class="bi bi-chevron-right"></i> <a href="#about">Về Chúng Tôi</a>
+											</li>
+											<li><i class="bi bi-chevron-right"></i> <a href="#service">Dịch Vụ</a></li>
+											<li><i class="bi bi-chevron-right"></i> <a href="#contact">Liên Hệ</a></li>
+										</ul>
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="service_link">
+										<h2>Dịch Vụ</h2>
+										<ul>
+											<li><i class="bi bi-chevron-right"></i> <a href="Resources/html/service/field_list.html">Đặt
+													Sân</a></li>
+											<li><i class="bi bi-chevron-right"></i> <a href="Resources/html/service/rent_pitch.html">Thuê
+													Áo</a></li>
+											<li><i class="bi bi-chevron-right"></i> <a href="Resources/html/service/food.html">Đồ Ăn/ Thức
+													Uống</a></li>
+										</ul>
+									</div>
+								</div>
 
 
-    </div>
+							</div>
+							<div class="col-lg-4 follow_us">
+								<h2>Theo Dõi Thanh Thiện</h2>
+								<p>Theo dõi Thanh Thiện để có thể biết được các khuyến mãi của sân một cách nhanh chóng
+									nhé!
+								</p>
+								<div class="social-links d-flex">
+									<a
+										href="https://www.facebook.com/pages/S%C3%A2n%20B%C3%B3ng%20%C4%90%C3%A1%20Thanh%20Thi%E1%BB%87n/1897967037088401">
+										<i class="bi bi-facebook"></i>
+									</a>
+
+									<i>
+										<div class="svg-container" id="svg-container">
+											<svg id="Layer_1" viewBox="0 0 460.1 436.6" width="38px"
+												style="background-color: #ffffffff; border-radius: 5px; margin-top: 10px"
+												xmlns="http://www.w3.org/2000/svg">
+												<style>
+													.st0 {
+														fill: #fdfefe
+													}
+
+													.st1 {
+														fill: #0180c7
+													}
+
+													.st2 {
+														fill: #0172b1
+													}
+
+													.st3 {
+														fill: none;
+														stroke: #0180c7;
+														stroke-width: 2;
+														stroke-miterlimit: 10
+													}
+
+													.svg-container {
+														cursor: pointer;
+													}
+												</style>
+												<title />
+												<path class="st0"
+													d="M82.6 380.9c-1.8-.8-3.1-1.7-1-3.5 1.3-1 2.7-1.9 4.1-2.8 13.1-8.5 25.4-17.8 33.5-31.5 6.8-11.4 5.7-18.1-2.8-26.5C69 269.2 48.2 212.5 58.6 145.5 64.5 107.7 81.8 75 107 46.6c15.2-17.2 33.3-31.1 53.1-42.7 1.2-.7 2.9-.9 3.1-2.7-.4-1-1.1-.7-1.7-.7-33.7 0-67.4-.7-101 .2C28.3 1.7.5 26.6.6 62.3c.2 104.3 0 208.6 0 313 0 32.4 24.7 59.5 57 60.7 27.3 1.1 54.6.2 82 .1 2 .1 4 .2 6 .2H290c36 0 72 .2 108 0 33.4 0 60.5-27 60.5-60.3v-.6-58.5c0-1.4.5-2.9-.4-4.4-1.8.1-2.5 1.6-3.5 2.6-19.4 19.5-42.3 35.2-67.4 46.3-61.5 27.1-124.1 29-187.6 7.2-5.5-2-11.5-2.2-17.2-.8-8.4 2.1-16.7 4.6-25 7.1-24.4 7.6-49.3 11-74.8 6zm72.5-168.5c1.7-2.2 2.6-3.5 3.6-4.8 13.1-16.6 26.2-33.2 39.3-49.9 3.8-4.8 7.6-9.7 10-15.5 2.8-6.6-.2-12.8-7-15.2-3-.9-6.2-1.3-9.4-1.1-17.8-.1-35.7-.1-53.5 0-2.5 0-5 .3-7.4.9-5.6 1.4-9 7.1-7.6 12.8 1 3.8 4 6.8 7.8 7.7 2.4.6 4.9.9 7.4.8 10.8.1 21.7 0 32.5.1 1.2 0 2.7-.8 3.6 1-.9 1.2-1.8 2.4-2.7 3.5-15.5 19.6-30.9 39.3-46.4 58.9-3.8 4.9-5.8 10.3-3 16.3s8.5 7.1 14.3 7.5c4.6.3 9.3.1 14 .1 16.2 0 32.3.1 48.5-.1 8.6-.1 13.2-5.3 12.3-13.3-.7-6.3-5-9.6-13-9.7-14.1-.1-28.2 0-43.3 0zm116-52.6c-12.5-10.9-26.3-11.6-39.8-3.6-16.4 9.6-22.4 25.3-20.4 43.5 1.9 17 9.3 30.9 27.1 36.6 11.1 3.6 21.4 2.3 30.5-5.1 2.4-1.9 3.1-1.5 4.8.6 3.3 4.2 9 5.8 14 3.9 5-1.5 8.3-6.1 8.3-11.3.1-20 .2-40 0-60-.1-8-7.6-13.1-15.4-11.5-4.3.9-6.7 3.8-9.1 6.9zm69.3 37.1c-.4 25 20.3 43.9 46.3 41.3 23.9-2.4 39.4-20.3 38.6-45.6-.8-25-19.4-42.1-44.9-41.3-23.9.7-40.8 19.9-40 45.6zm-8.8-19.9c0-15.7.1-31.3 0-47 0-8-5.1-13-12.7-12.9-7.4.1-12.3 5.1-12.4 12.8-.1 4.7 0 9.3 0 14v79.5c0 6.2 3.8 11.6 8.8 12.9 6.9 1.9 14-2.2 15.8-9.1.3-1.2.5-2.4.4-3.7.2-15.5.1-31 .1-46.5z" />
+												<path class="st1"
+													d="M139.5 436.2c-27.3 0-54.7.9-82-.1-32.3-1.3-57-28.4-57-60.7 0-104.3.2-208.6 0-313C.5 26.7 28.4 1.8 60.5.9c33.6-.9 67.3-.2 101-.2.6 0 1.4-.3 1.7.7-.2 1.8-2 2-3.1 2.7-19.8 11.6-37.9 25.5-53.1 42.7-25.1 28.4-42.5 61-48.4 98.9-10.4 66.9 10.5 123.7 57.8 171.1 8.4 8.5 9.5 15.1 2.8 26.5-8.1 13.7-20.4 23-33.5 31.5-1.4.8-2.8 1.8-4.2 2.7-2.1 1.8-.8 2.7 1 3.5.4.9.9 1.7 1.5 2.5 11.5 10.2 22.4 21.1 33.7 31.5 5.3 4.9 10.6 10 15.7 15.1 2.1 1.9 5.6 2.5 6.1 6.1z" />
+												<path class="st2"
+													d="M139.5 436.2c-.5-3.5-4-4.1-6.1-6.2-5.1-5.2-10.4-10.2-15.7-15.1-11.3-10.4-22.2-21.3-33.7-31.5-.6-.8-1.1-1.6-1.5-2.5 25.5 5 50.4 1.6 74.9-5.9 8.3-2.5 16.6-5 25-7.1 5.7-1.5 11.7-1.2 17.2.8 63.4 21.8 126 19.8 187.6-7.2 25.1-11.1 48-26.7 67.4-46.2 1-1 1.7-2.5 3.5-2.6.9 1.4.4 2.9.4 4.4v58.5c.2 33.4-26.6 60.6-60 60.9h-.5c-36 .2-72 0-108 0H145.5c-2-.2-4-.3-6-.3z" />
+												<path class="st1"
+													d="M155.1 212.4c15.1 0 29.3-.1 43.4 0 7.9.1 12.2 3.4 13 9.7.9 7.9-3.7 13.2-12.3 13.3-16.2.2-32.3.1-48.5.1-4.7 0-9.3.2-14-.1-5.8-.3-11.5-1.5-14.3-7.5s-.8-11.4 3-16.3c15.4-19.6 30.9-39.3 46.4-58.9.9-1.2 1.8-2.4 2.7-3.5-1-1.7-2.4-.9-3.6-1-10.8-.1-21.7 0-32.5-.1-2.5 0-5-.3-7.4-.8-5.7-1.3-9.2-7-7.9-12.6.9-3.8 3.9-6.9 7.7-7.8 2.4-.6 4.9-.9 7.4-.9 17.8-.1 35.7-.1 53.5 0 3.2-.1 6.3.3 9.4 1.1 6.8 2.3 9.7 8.6 7 15.2-2.4 5.7-6.2 10.6-10 15.5-13.1 16.7-26.2 33.3-39.3 49.8-1.1 1.3-2.1 2.6-3.7 4.8z" />
+												<path class="st1"
+													d="M271.1 159.8c2.4-3.1 4.9-6 9-6.8 7.9-1.6 15.3 3.5 15.4 11.5.3 20 .2 40 0 60 0 5.2-3.4 9.8-8.3 11.3-5 1.9-10.7.4-14-3.9-1.7-2.1-2.4-2.5-4.8-.6-9.1 7.4-19.4 8.7-30.5 5.1-17.8-5.8-25.1-19.7-27.1-36.6-2.1-18.3 4-33.9 20.4-43.5 13.6-8.1 27.4-7.4 39.9 3.5zm-35.4 36.5c.2 4.4 1.6 8.6 4.2 12.1 5.4 7.2 15.7 8.7 23 3.3 1.2-.9 2.3-2 3.3-3.3 5.6-7.6 5.6-20.1 0-27.7-2.8-3.9-7.2-6.2-11.9-6.3-11-.7-18.7 7.8-18.6 21.9zM340.4 196.9c-.8-25.7 16.1-44.9 40.1-45.6 25.5-.8 44.1 16.3 44.9 41.3.8 25.3-14.7 43.2-38.6 45.6-26.1 2.6-46.8-16.3-46.4-41.3zm25.1-2.4c-.2 5 1.3 9.9 4.3 14 5.5 7.2 15.8 8.6 23 3 1.1-.8 2-1.8 2.9-2.8 5.8-7.6 5.8-20.4.1-28-2.8-3.8-7.2-6.2-11.9-6.3-10.8-.6-18.4 7.6-18.4 20.1zM331.6 177c0 15.5.1 31 0 46.5.1 7.1-5.5 13-12.6 13.2-1.2 0-2.5-.1-3.7-.4-5-1.3-8.8-6.6-8.8-12.9v-79.5c0-4.7-.1-9.3 0-14 .1-7.7 5-12.7 12.4-12.7 7.6-.1 12.7 4.9 12.7 12.9.1 15.6 0 31.3 0 46.9z" />
+												<path class="st0"
+													d="M235.7 196.3c-.1-14.1 7.6-22.6 18.5-22 4.7.2 9.1 2.5 11.9 6.4 5.6 7.5 5.6 20.1 0 27.7-5.4 7.2-15.7 8.7-23 3.3-1.2-.9-2.3-2-3.3-3.3-2.5-3.5-3.9-7.7-4.1-12.1zM365.5 194.5c0-12.4 7.6-20.7 18.4-20.1 4.7.1 9.1 2.5 11.9 6.3 5.7 7.6 5.7 20.5-.1 28-5.6 7.1-16 8.3-23.1 2.7-1.1-.8-2-1.8-2.8-2.9-3-4.1-4.4-9-4.3-14z" />
+												<path class="st3"
+													d="M66 1h328.1c35.9 0 65 29.1 65 65v303c0 35.9-29.1 65-65 65H66c-35.9 0-65-29.1-65-65V66C1 30.1 30.1 1 66 1z" />
+											</svg>
+										</div>
+										<div id="copy-message"><i class="fa-solid fa-copy" style="margin-right: 10px;"></i>Đã sao chép!
+										</div>
+									</i>
+
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="container copyright text-center mt-4">
+						<p>© <span>Copyright</span> <strong class="px-1 sitename">Group5</strong> <span>All Rights
+								Reserved</span>
+						</p>
+					</div>
+			</footer>
+		</div>
+
+
+	</div>
 
 </body>
 
 <script>
-    AOS.init();
+	AOS.init();
 </script>
 
+<script>
+	document.getElementById("btn_log_out").addEventListener("click", function () {
+  Swal.fire({
+    title: "Bạn có muốn đăng xuất không?",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonText: "Đăng xuất",
+    cancelButtonText: "Hủy",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // Thực hiện hành động đăng xuất
+      window.location.href = "../index.html"; // Thay bằng đường dẫn đăng xuất của bạn
+    }
+  });
+});
+</script>
 <!-- add cmt -->
 <script src="Resources/js/addCmt.js"></script>
 <!-- coppy zalo -->

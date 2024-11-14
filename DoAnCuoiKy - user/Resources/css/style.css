@@ -189,6 +189,7 @@ img{
     display: block;
     border-radius: 5px;
     margin: 10px auto;
+    padding: 10px 20px;
 }
 
 .user button:hover{

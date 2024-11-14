@@ -25,6 +25,8 @@
   <!-- jquery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
+  	<!-- sweet alert -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <style>
     /* set up */
     * {
@@ -51,19 +53,18 @@
       <div class="sidebar">
         <div class="avata">
           <img src="../../img/avata/con_meo.jpg" alt="avata">
-          <p class="welcomback">Chào Mừng Trở Lại <strong>Huyền Trân</strong></p>
+					<p class="welcomback">Chào Mừng Trở Lại <strong id="userName"></strong></p>
         </div>
         <div class="menu">
           <ul>
-            <li><a href="../../../index.html"><button>Tổng Quan</button></a></li>
-            <li><a href="../manage_booking/field_booking_management.html"><button>Quản Lý Đặt Sân</button></a></li>
-            <li><a href="manage_service.html"><button>Quản Lý Dịch Vụ Đi Kèm</button></a></li>
-            <li><a id="index" href="../manage_inventory/inventory_drinks_management.html"><button id="index">Quản Lý
-                  Kho</button></a></li>
-            <li><a href="../manage_membership/membership_management.html"><button>Quản Lý Nhân Viên</button></a>
+            <li><a href="../../../index.html"><button id="dashbroad">Tổng Quan</button></a></li>
+            <li><a href="../manage_booking/field_booking_management.html"><button id="manage_booking">Quản Lý Đặt Sân</button></a></li>
+            <li><a href="../manage_service/manage_service.html"><button id="manage_service">Quản Lý Dịch Vụ Đi Kèm</button></a></li>
+            <li><a href="../manage_inventory/inventory_drinks_management.html"><button class="index" id= "manage_inventory">Quản Lý Kho</button></a></li>
+            <li><a href="../manage_membership/membership_management.html"><button id="manage_membership">Quản Lý Nhân Viên</button></a>
             </li>
-            <li><a href="../manage_money/money_management.html"><button>Quản Lý Thu Chi</button></a></li>
-            <li><a href="../client_list/client_list.html"><button>Danh Sách Khách Hàng</button></a></li>
+            <li><a href="../manage_money/money_management.html"><button id="manage_money">Quản Lý Thu Chi</button></a></li>
+            <li><a href="../client_list/client_list.html"><button id="manage_client_list">Danh Sách Khách Hàng</button></a></li>
           </ul>
         </div>
         <div class="logo">
@@ -109,13 +110,13 @@
               <div class="col-lg-4">
                 <div class="distributors-name input">
                   <p>Tên Nhà Phân Phối</p>
-                  <input type="text" id="tenNPP">
+                  <input type="text" id="tenNPP" placeholder="Nhập tên nhà phân phối">
                 </div>
               </div>
               <div class="col-lg-4">
                 <div class="distributors-Email input">
                   <p>Email</p>
-                  <input type="email" id="email_npp">
+                  <input type="email" id="email_npp" placeholder="Nhập email nhà phân phối">
                 </div>
               </div>
             </div>
@@ -123,13 +124,13 @@
               <div class="col-lg-4">
                 <div class="distributors-Address input">
                   <p>Địa Chỉ</p>
-                  <input type="text" id="diaChi">
+                  <input type="text" id="diaChi" placeholder="Nhập địa chỉ nhà phân phối">
                 </div>
               </div>
               <div class="col-lg-4">
                 <div class="distributors-PhoneNum input">
                   <p>Số Điện Thoại</p>
-                  <input type="text" id="soDienThoai">
+                  <input type="text" id="soDienThoai" placeholder="Nhập số điện thoại nhà phân phối">
                 </div>
               </div>
 
@@ -167,21 +168,33 @@
 
       // Kiểm tra ràng buộc các trường
       if (!tenNPP || !maNV || !diaChi || !soDienThoai || !email) {
-        alert("Vui lòng điền đầy đủ thông tin các trường.");
+        Swal.fire({
+          icon: 'warning',
+          title: 'Cảnh báo',
+          text: 'Vui lòng điền đầy đủ thông tin các trường.'
+        });
         return;
       }
 
       // Kiểm tra số điện thoại (phải có 10 số)
       let phoneRegex = /^[0-9]{10}$/;
       if (!phoneRegex.test(soDienThoai)) {
-        alert("Số điện thoại phải là 10 chữ số.");
+        Swal.fire({
+          icon: 'warning',
+          title: 'Cảnh báo',
+          text: 'Số điện thoại phải là 10 chữ số.'
+        });
         return;
       }
 
       // Kiểm tra định dạng email
       let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(email)) {
-        alert("Vui lòng nhập đúng định dạng email.");
+        Swal.fire({
+          icon: 'warning',
+          title: 'Cảnh báo',
+          text: 'Vui lòng nhập đúng định dạng email.'
+        });
         return;
       }
 
@@ -199,6 +212,31 @@
     });
   });
 
+  document.addEventListener('DOMContentLoaded', function() {
+    // Lấy chức vụ từ sessionStorage
+    const userRole = sessionStorage.getItem('chuc_vu');
+    const userCode = sessionStorage.getItem('ma_nv');
+    
+    // Tham chiếu tới input mã nhân viên
+    const maNVInput = document.getElementById('maNV');
+
+    if (!userRole) {
+        console.error('User role not found in sessionStorage.');
+        return;
+    }
+
+    if (userRole === 'admin') {
+        maNVInput.disabled = false; // Cho phép nhập mã
+        maNVInput.placeholder = 'Nhập mã nhân viên'; // Placeholder cho admin
+    } else if (userRole === 'nhap-hang') {
+        maNVInput.value = userCode; // Mã nhân viên cố định
+        maNVInput.disabled = true; // Vô hiệu hóa input
+        maNVInput.title = 'Mã nhân viên cố định cho nhân viên nhập hàng'; // Tooltip
+    } else {
+        console.warn(`Chức vụ ${userRole} không có hành động đặc biệt.`);
+    }
+  });
+
   function createDistributor(data) {
     var option = {
       method: 'POST',
@@ -213,21 +251,28 @@
         return response.json();
       })
       .then(function(response) {
-        if(response.ma_npp)
-        {
-          alert("Đăng ký thành công!");
-          window.location.reload();
+        if(response.ma_npp) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Đăng ký thành công',
+            text: 'Thông tin nhà phân phối đã được đăng ký.'
+          }).then(() => {
+            window.location.reload();
+          });
         }
       })
       .catch(function (error) {
         console.error('Error:', error);
-        alert("Đã xảy ra lỗi. Vui lòng thử lại.");
+        Swal.fire({
+          icon: 'error',
+          title: 'Có lỗi xảy ra',
+          text: 'Đã xảy ra lỗi. Vui lòng thử lại.'
+        });
       });
   }
-
-
 </script>
 
+<script src="../../js/rolePermissions.js"></script>
 
 
 </html>

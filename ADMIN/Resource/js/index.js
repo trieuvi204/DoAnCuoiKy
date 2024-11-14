@@ -223,5 +223,17 @@
     displayBestSellerList();
 // displayBestSellerList
 
-
+document.addEventListener('DOMContentLoaded', function() {
+  // Lấy tên người dùng từ sessionStorage
+  const userName = sessionStorage.getItem('ten_nv');
+  
+  // Gán tên người dùng vào phần tử có id 'userName'
+  if (userName) {
+    document.getElementById('userName').textContent = userName;
+  } else {
+    document.getElementById('userName').textContent = "Khách"; // Tên mặc định nếu không có userName
+  }
+});
 // display functions
+
+

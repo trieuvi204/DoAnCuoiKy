@@ -18,14 +18,20 @@ function handleUserLogin() {
 
     // Ràng buộc: Kiểm tra xem email và mật khẩu có trống không
     if (!email || !password) {
-      alert("Vui lòng nhập đầy đủ email và mật khẩu."); // Hiển thị thông báo nếu thiếu thông tin
+      Swal.fire({
+        icon: "error",
+        text: "Vui lòng nhập đầy đủ email và mật khẩu.",
+      });
       return; // Ngừng thực hiện nếu không có thông tin
     }
 
     // Ràng buộc: Kiểm tra định dạng email
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Biểu thức chính quy cho định dạng email
     if (!emailPattern.test(email)) {
-      alert("Vui lòng nhập địa chỉ email hợp lệ."); // Hiển thị thông báo nếu email không hợp lệ
+      Swal.fire({
+        icon: "error",
+        text: "Vui lòng nhập địa chỉ email hợp lệ.",
+      });
       return; // Ngừng thực hiện nếu email không hợp lệ
     }
 
@@ -33,7 +39,10 @@ function handleUserLogin() {
     const passwordMinLength = 8; // Độ dài tối thiểu
 
     if (password.length < passwordMinLength) {
-      alert("Mật khẩu phải có ít nhất " + passwordMinLength + " ký tự."); // Kiểm tra độ dài
+      Swal.fire({
+        icon: "error",
+        text: "Mật khẩu phải có ít nhất " + passwordMinLength + " ký tự.",
+      });
       return; // Ngừng thực hiện nếu mật khẩu quá ngắn
     }
 
@@ -64,20 +73,39 @@ function loginUser(formDataUser) {
     .then(function (response) {
       if (response.ok) {
         return response.json(); // Chuyển đổi phản hồi JSON nếu đăng nhập thành công
-      } else {
-        throw new Error('Đăng nhập thất bại'); // Thông báo lỗi nếu phản hồi không thành công
-      }
+      } 
+      if (!response.ok) {
+				return response.json().then(errorData => {
+					// Trả về lỗi chi tiết nếu có
+					throw new Error(errorData.detail || 'Lỗi khi tải dữ liệu từ máy chủ');
+				});
+			}
     })
     .then(function (data) {
       // Xử lý dữ liệu sau khi đăng nhập thành công
-      alert('Đăng nhập thành công');
-      window.location.href = '../../../DoAnCuoiKy - user/index.html'; // Điều hướng đến trang người dùng
+      Swal.fire({
+        text: "Đăng nhập thành công",
+        icon: "success"
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          window.location.href = '../../../DoAnCuoiKy - user/index.html'; // Điều hướng đến trang người dùng
+        }
+      });
     })
     .catch(function (error) {
-      // Xử lý lỗi
-      alert(error.message);
-      window.location.reload(); // Tải lại trang nếu đăng nhập thất bại
+      // Xử lý lỗi  
+      Swal.fire({
+        icon: "error",
+        text: error.message,
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          window.location.reload(); // Tải lại trang sau khi nhấn OK
+        }
+      });
     });
+    
 }
 
 
