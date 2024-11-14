@@ -267,6 +267,8 @@ img{
 
 .card-title .field_name {
     text-align: center;
+    font-size: 20px;
+
 }
 
 .card-title .col-lg-6{
@@ -330,9 +332,10 @@ img{
 .btn a{
     background-color: #37517e;
     color: #ffffff;
-    padding: 8px;
+    padding: 10px 50px;
     border-radius: 10px;
     height: 100%;
+    font-size: 20px;
 }
 
 .btn a:hover{

@@ -155,15 +155,22 @@ const displayItemsList = (user) => {
 									</div>
 							</div>
 							<div class="btn">
-									<a href="./field-list/${user.ma_san}.html">Đặt nhanh kẻo muộn</a>
+									<a id = "${user.ma_san}" href="./field-list/${user.ma_san}.html">Đặt Sân</a>
 							</div>
 					</div>
 			</div>
 	</div>
 `;
 	items.insertAdjacentHTML('beforeend', output);
+
+	document.getElementById(`${user.ma_san}`).addEventListener('click', function() {
+		// Lưu thông tin vào sessionStorage
+		sessionStorage.setItem('ma_san', `${user.ma_san}`);
+	});
+
 	}
 	</script>
+
 	<script>
 		AOS.init();
 	</script>

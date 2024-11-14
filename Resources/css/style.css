@@ -112,6 +112,20 @@ img{
     width: 100% !important;
 }
 
+.navmenu .dropdown ul li a{
+    width: 100% !important;
+    padding: 10px ;
+    font-size: 18px;
+    /* display: flex; */
+    text-transform: none;
+    color: #37517E;
+    border: none;
+}
+
+.navmenu .dropdown ul a i{
+    font-size: 12px;
+}
+
 
 .navmenu .dropdown ul li button {
     width: 100% !important;

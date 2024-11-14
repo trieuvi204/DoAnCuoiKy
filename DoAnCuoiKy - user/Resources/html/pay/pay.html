@@ -20,6 +20,13 @@
 	<link href="../../../Vendors/aos-master/dist/aos.css" rel="stylesheet">
 	<script src="../../../Vendors/aos-master/dist/aos.js"></script>
 
+
+	<!-- thư viện crypto-js -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
+
+	<!-- sweet alert -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<style>
 		/* set up */
 		* {
@@ -107,7 +114,7 @@
 					</div>
 				</div>
 				<div class="row" data-aos="fade-up" data-aos-delay="100">
-					<div class="user-inf">Nguyễn Văn An | (+84) 9123456788 | nvA2004@gmail.com</div>
+					<div class="user-inf"></div>
 
 				</div>
 				<div class="row" data-aos="fade-up" data-aos-delay="100">
@@ -117,35 +124,14 @@
 								<div class="row row-cols-2">
 									<div class="row field">
 										<div class="col-lg-6 "><img class="field-img"
-												src="../../img/field_list/san1.jpg" alt="san1"></div>
+												src="" alt="san1"></div>
 										<div class="col-lg-6 ">
-											<div class="title">SÂN A - SÂN 5</div>
+											<div class="title" id="title"></div>
 											<div class="inf">
-												<p>Khung giờ: 17:30 - 19:00</p>
-												<p>Giá sân: 300.000 đ</p>
+												<p>Khung Giờ: <span class="khung_gio"></span></p>
+												<p>Giá Sân: <span class="gia_san"></span></p>
 											</div>
 										</div>
-									</div>
-									<div class="row food">
-										<div class="col-lg-6"><img class="food-img" src="../../img/do_uong/revive.jpg"
-												alt="revive"></div>
-										<div class="col-lg-6">
-											<div class="title">REVIVE</div>
-											<div class="inf">
-												<p>Giá: 15.000 đ</p>
-												<p>Số lượng: 12</p>
-											</div>
-										</div>
-									</div>
-								</div>
-
-
-							</div>
-							<div class="row" data-aos="fade-up" data-aos-delay="200">
-								<div class="discount">
-									<div class="row">
-										<p class="text"><i class="fa-solid fa-ticket"></i> Khuyến mãi</p>
-										<p class="percent">10%</p>
 									</div>
 								</div>
 							</div>
@@ -160,6 +146,7 @@
 												</div>
 												<div class="select_method">
 													<select name="payment-method" id="payment-method">
+														<option value="Chọn phương thức thanh toán" selected disabled>Phương Thức TT</option>
 														<option value="Thẻ Ngân Hàng">Thẻ Ngân Hàng</option>
 														<option value="Thanh Toán Tại Sân">Thanh Toán Tại Sân</option>
 													</select>
@@ -173,7 +160,7 @@
 													</p>
 												</div>
 												<div class="select_method">
-													<select name="payment-limit" id="payment-limit">
+													<select name="payment-limit" id="payment-limit" disabled>
 														<option value="Thanh toán 100%">Thanh toán 100%</option>
 														<option value="Cọc 30% sân">Cọc 30% sân</option>
 													</select>
@@ -192,25 +179,13 @@
 										<div class="row">
 											<div>
 												<p class="title-service">Tổng tiền sân</p>
-												<p class="title-price">300.000 đ</p>
-											</div>
-										</div>
-										<div class="row">
-											<div>
-												<p class="title-service">Tổng tiền dịch vụ</p>
-												<p class="title-price">180.000 đ</p>
-											</div>
-										</div>
-										<div class="row">
-											<div>
-												<p class="title-service">Tổng voucher giảm giá</p>
-												<p class="title-price">48.000 đ</p>
+												<p class="title-price"></p>
 											</div>
 										</div>
 										<div class="row">
 											<div>
 												<p class="total-title">Tổng thanh toán</p>
-												<p class="total-price">432.000 đ</p>
+												<p class="total-price"></p>
 											</div>
 										</div>
 									</div>
@@ -221,10 +196,10 @@
 									<div class="row">
 										<div class="col-lg-8">
 											<p class="total-pay">Tổng thanh toán</p>
-											<p class="total-pay-price">432.000 đ</p>
+											<p class="total-pay-price"></p>
 										</div>
 										<div class="col-lg-4">
-											<a href="../bill/bill.html"><button>Thanh Toán</button></a>
+											<button id="pay_btn">Thanh Toán</button>
 										</div>
 									</div>
 								</div>
@@ -240,4 +215,159 @@
 	AOS.init();
 </script>
 
+
+<script>
+
+var payment_limit_total = 0 
+
+  // Lấy thông tin từ sessionStorage
+  let ten_kh = sessionStorage.getItem("ten_kh");
+  let sdt_kh = decryptDES( sessionStorage.getItem("sdt_kh"), "Thats my Kung Fu");
+  let email_kh = decryptCaesarMult(sessionStorage.getItem("email_kh"), 7);
+	let ten_san = sessionStorage.getItem("ten_san");
+	let khung_gio = sessionStorage.getItem("khung gio");
+	let gia_san = sessionStorage.getItem("gia");
+	let ma_san = sessionStorage.getItem("ma_san");
+
+// Hiển thị thông tin vào div
+document.querySelector(".user-inf").innerHTML = `${ten_kh} | ${sdt_kh} | ${email_kh}`;
+document.querySelector("#title").innerHTML = ten_san;
+document.querySelector(".khung_gio").innerHTML = `${khung_gio}`;
+document.querySelector(".gia_san").innerHTML = `${gia_san}`;
+document.querySelector(".title-price").innerHTML = `${gia_san}đ`;
+document.querySelector(".total-pay-price").innerHTML = `${gia_san}đ`;
+
+
+let imgElement = document.querySelector(".field-img");
+imgElement.src = `../../img/field_list/${ma_san}.jpg`
+
+document.addEventListener('DOMContentLoaded', function() {
+	var payment_method = document.querySelector('#payment-method');
+	var payment_limit = document.querySelector('#payment-limit');
+
+	payment_method.addEventListener('change', function() {
+			if(payment_method.value === "Thanh Toán Tại Sân") {
+					payment_limit.selectedIndex = 1;
+					payment_limit_total = 30/100;
+			}
+			if(payment_method.value === "Thẻ Ngân Hàng") {
+					payment_limit.selectedIndex = 0;
+					payment_limit_total = 1;
+
+			}
+			document.querySelector(".total-price").innerHTML = `${gia_san * payment_limit_total}đ`;
+			document.querySelector(".total-pay-price").innerHTML = `${gia_san * payment_limit_total}đ`;
+	});
+});
+
+
+var pay_btn = document.getElementById('pay_btn');
+
+if (pay_btn) { // Kiểm tra pay_btn tồn tại
+  pay_btn.addEventListener('click', function(e) {
+		e.preventDefault();
+		var total = document.querySelector(".total-pay-price").innerHTML 
+	sessionStorage.setItem('total-pay-price', total);
+
+    var payment_limit = document.querySelector('#payment-limit');
+
+    if (payment_limit && !payment_limit.value) { // Kiểm tra payment_limit tồn tại và không có giá trị
+      Swal.fire({
+        icon: 'error',
+        title: 'Chưa chọn phương thức thanh toán',
+        text: `Bạn hãy chọn một phương thức thanh toán`,
+      });
+    }
+		else{
+			window.location.href = '../bill/bill.html'
+		}
+  });
+} else {
+  console.error('Phần tử với ID "pay_btn" không tồn tại.');
+}
+
+
+
+
+
+
+
+	// Hàm tìm nghịch đảo modulo
+function findMultInverse(a, m) {
+	let t1 = 0, t2 = 1, r1 = m, r2 = a, q, t, r;
+
+	while (r2 > 0) {
+		q = Math.floor(r1 / r2);
+		r = r1 - q * r2;
+		r1 = r2;
+		r2 = r;
+
+		t = t1 - q * t2;
+		t1 = t2;
+		t2 = t;
+	}
+
+	if (t1 < 0) {
+		t1 += m;
+	}
+
+	return t1;
+}
+
+// Hàm giải mã ký tự theo Caesar Multiplicative
+function divideChar(c, key, modulus) {
+	let ascii_val = c.charCodeAt(0);
+	let new_val;
+
+	if (ascii_val >= 32 && ascii_val <= 126) {
+		new_val = ((ascii_val - 32) * key) % modulus + 32;
+		return String.fromCharCode(new_val);
+	} else {
+		return c;
+	}
+}
+
+// Hàm giải mã toàn bộ chuỗi
+function decryptCaesarMult(enc, k) {
+	const modulus = 95; // ASCII 32-126, phạm vi 95 ký tự có thể in được
+	let k_inverse = findMultInverse(k, modulus); // Tìm nghịch đảo của key
+	let decrypted = '';
+
+	for (let i = 0; i < enc.length; i++) {
+		decrypted += divideChar(enc[i], k_inverse, modulus);
+	}
+
+	return decrypted;
+}
+
+// Hàm giải mã DES
+function decryptDES(encryptedHex, key) {
+	// Chuyển đổi chuỗi hex thành byte array
+	var encryptedBytes = CryptoJS.enc.Hex.parse(encryptedHex);
+
+	// Chuyển khóa sang dạng byte array
+	var keyBytes = CryptoJS.enc.Utf8.parse(key);
+
+	// IV - sử dụng cùng giá trị với mã C# của bạn
+	var iv = CryptoJS.enc.Hex.parse('0000000000000000'); // Đặt IV thành 0x0 cho mỗi byte
+
+	// Giải mã DES với chế độ CBC và padding PKCS7
+	var decrypted = CryptoJS.DES.decrypt(
+		{
+			ciphertext: encryptedBytes
+		},
+		keyBytes,
+		{
+			mode: CryptoJS.mode.CBC,
+			padding: CryptoJS.pad.Pkcs7,
+			iv: iv
+		}
+	);
+
+	// Chuyển đổi kết quả giải mã sang chuỗi UTF-8
+	return decrypted.toString(CryptoJS.enc.Utf8);
+}
+
+
+</script>
 </html>

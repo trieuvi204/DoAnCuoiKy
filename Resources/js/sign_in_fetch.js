@@ -82,6 +82,10 @@ function loginUser(formDataUser) {
 			}
     })
     .then(function (data) {
+      sessionStorage.setItem("ma_kh", data.ma_kh);
+      sessionStorage.setItem("ten_kh", data.ten_kh);
+      sessionStorage.setItem("email_kh", data.email_kh);
+      sessionStorage.setItem("sdt_kh", data.sdt_kh);
       // Xử lý dữ liệu sau khi đăng nhập thành công
       Swal.fire({
         text: "Đăng nhập thành công",

@@ -352,7 +352,7 @@ i{
 #payment-method{
     border-radius: 5px;
     padding: 8px 12px;
-    width:  70%;
+    width:  100%;
 }
 
 #payment-limit{
@@ -371,9 +371,16 @@ i{
 
 .payment-details i{
     margin-right: 10px;
+    font-size: 20px;
+}
+
+.payment-details p{
+    font-size: 20px;
+
 }
 
 .title-service{
+    font-size: 20px;
     float: left;
 }
 
@@ -381,6 +388,8 @@ i{
     float: right;
     text-align: right;
     margin-right: 28px;
+    font-size: 20px;
+
 }
 
 .payment-details .col-lg-6{

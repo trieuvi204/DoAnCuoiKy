@@ -432,3 +432,18 @@ i{
     margin-right: 28px;
 }
 
+.stepBack{
+    margin-left: 25%;
+    background-color: #FFF;
+    padding: 20px;
+    width: 50%;
+}
+
+.stepBack a{
+    font-size: 20px;
+    color: #37517E;
+}
+
+.stepBack a:hover{
+    text-decoration: none;
+}

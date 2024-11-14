@@ -113,8 +113,7 @@
 																<div class="total-price">0đ</div>
 															</div>
 															<div class="clearfix"></div>
-															<a href="../../pay/pay.html"><button class="pay-btn" type="button">Thanh Toán
-																	Ngay</button></a>
+															<button class="pay-btn" type="button">Thanh Toán Ngay</button>
 														</div>
 														<i class="fa-regular fa-circle-xmark" id="close-cart"></i>
 													</div>
@@ -163,9 +162,15 @@
 														<div class="row row-col-3">
 															<div class="row">
 																<div class="left">
-																	<p>Giờ mở cửa :</p>
+																	<p>Kích thước sân: </p>
 																</div>
-																<div class="right">6h-23h</div>
+																<div class="right kichthuocsan"></div>
+															</div>
+															<div class="row">
+																<div class="left ">
+																	<p>Loại mặt cỏ: </p>
+																</div>
+																<div class="right loaimatco"></div>
 															</div>
 															<div class="row">
 																<div class=" left">
@@ -186,7 +191,6 @@
 																	<p><i class="fa-solid fa-utensils"></i>Ăn Uống</p>
 																</div>
 																<div class="col-lg-4">
-																	<p><i class="fa-solid fa-glass-water"></i>Trà đá</p>
 																</div>
 																<div class="col-lg-4">
 																	<p><i class="fa-solid fa-bottle-water"></i>Nước ngọt
@@ -228,19 +232,19 @@
 															</td>
 														</div>
 														<div>
-															<label for="start">Giờ bắt đầu</label>
+															<label for="startMatch">Giờ bắt đầu</label>
 														</div>
 														<div>
 															<td >
-																<input class="select-time start" type="time" id="start" value="00:00:00">
+																<input class="select-time startMatch" type="time" id="start" value="00:00:00">
 															</td>
 														</div>
 														<div>
-															<label for="end">Giờ kết thúc</label>
+															<label for="endMatch">Giờ kết thúc</label>
 														</div>
 														<div>
 															<td >
-																<input class="select-time end" type="time" id="end" value="00:00:00">
+																<input class="select-time endMatch" type="time" id="end" value="00:00:00">
 															</td>
 														</div>
 													</table>
@@ -249,7 +253,7 @@
 													<div class="note_inf">
 														<textarea name="note" class="note" id="note" rows="8" cols="17" style="width: 100%;"
 															placeholder="    Chú thích"></textarea>
-														<button class="add-cart">Thêm Vào Giỏ Hàng</button>
+														<button class="add-cart" id="add_cart">Thêm Vào Giỏ Hàng</button>
 													</div>
 												</div>
 											</div>
@@ -269,9 +273,7 @@
 	AOS.init();
 </script>
 <script src="../../../js/field_cart.js"></script>
-<script>
-	sessionStorage.setItem("ma_san", "MS001");
-</script>
+
 
 
 

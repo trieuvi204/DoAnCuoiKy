@@ -2,237 +2,316 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HÓA ĐƠN</title>
-    <link rel="stylesheet" href="../../css/bill/bill.css">
-    <link rel="icon" href="../../img/Logo/logo_tt.png" type="image/png" sizes="48x48">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>HÓA ĐƠN</title>
+	<link rel="stylesheet" href="../../css/bill/bill.css">
+	<link rel="icon" href="../../img/Logo/logo_tt.png" type="image/png" sizes="48x48">
 
-    <!-- bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+	<!-- bootstrap -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-    <!-- icon -->
-    <script src="https://kit.fontawesome.com/d5d4311ae6.js" crossorigin="anonymous"></script>
+	<!-- icon -->
+	<script src="https://kit.fontawesome.com/d5d4311ae6.js" crossorigin="anonymous"></script>
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inder&display=swap" rel="stylesheet">
-    <!-- AOS Libary -->
-    <link href="../../../Vendors/aos-master/dist/aos.css" rel="stylesheet">
-    <script src="../../../Vendors/aos-master/dist/aos.js"></script>
+	<!-- Fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inder&display=swap" rel="stylesheet">
+	<!-- AOS Libary -->
+	<link href="../../../Vendors/aos-master/dist/aos.css" rel="stylesheet">
+	<script src="../../../Vendors/aos-master/dist/aos.js"></script>
 
-    <style>
-        /* set up */
-        * {
-            padding: 0px;
-            margin: 0px;
-            box-sizing: border-box;
-        }
+	<!-- thư viện crypto-js -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 
-        /* Body */
-        body {
-            font-family: "Inder", sans-serif;
-            font-weight: 400;
-            font-style: normal;
-            background-color: #F5F5F5;
-        }
-    </style>
+
+	<!-- sweet alert -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<style>
+		/* set up */
+		* {
+			padding: 0px;
+			margin: 0px;
+			box-sizing: border-box;
+		}
+
+		/* Body */
+		body {
+			font-family: "Inder", sans-serif;
+			font-weight: 400;
+			font-style: normal;
+			background-color: #F5F5F5;
+		}
+	</style>
 </head>
 
 <body id="bill" class="bill-page">
-    <header id="header" class="header d-flex align-items-center fixed-top">
-        <div class="container-fluid container-xl position-relative d-flex align-items-center">
-            <div class="container">
-                <div class="row">
-                    <div class="fixed_header">
-                        <div class="logo col-lg-2">
-                            <a href="../../../index.html" class="logo d-flex align-items-center me-auto ">
-                                <img src="../../img/Logo/logo_tt.png" alt="logo">
-                            </a>
-                        </div>
-                        <div class="navmenu col-lg-10">
-                            <div class="row">
-                                <nav id="navmenu">
-                                    <ul>
-                                        <li class="col-lg-2"><a href="../../../index.html#home"><span>Trang Chủ</span></a></li>
-                                        <li class="col-lg-2"><a href="../../../index.html#about"><span>Về Chúng Tôi</span></a>
-                                        </li>
-                                        <li class="dropdown col-lg-2"><a href="../../../index.html#service"><span>Dịch
-                                                    Vụ</span></a>
-                                            <ul>
-                                                <li><a href="../service/field_list.html">Đặt Sân</a></li>
-                                                <li><a href="../service/rent_pitch.html">Thuê Áo Pitch</a>
-                                                </li>
-                                                <li><a href="../service/food.html">Đồ Ăn \ Thức Uống</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="col-lg-2"><a href="../../../index.html#contact"><span>Liên Hệ</span></a></li>
-                                        <li class="dropdown col-lg-2"><a href="#"><span>Tài Khoản</span></a>
-                                            <ul>
-                                              <li class="dropdown user">
-                                                <div class="user-container">
-                                                  <div class="user-img">
-                                                    <img src="../../img/avata/con_meo.jpg" alt="avata">
-                                                  </div>
-                                                  <h3>Nguyễn Văn An</h3>
-                                                  <a class="title" href="../manage-account/account.html">Quản lý tài khoản</a>
-                                                  <a class="inf-account" href="../manage-account/account.html#basic-inf">Thông tin tài khoản</a>
-                                                  <a class="inf-account" href="../manage-account/account.html#list">Danh sách đặt sân</a>
-                                                  <a class="title" href="../membership-card/membership-card.html">Thẻ thành viên</a>
-                                                  <button><a href="../../../../index.html">Đăng Xuất</a></button>
-                                                </div>
-                                              </li>
-                                            </ul>
-                                          </li>
-                                        <li class="col-lg-2">
-                                            <a class="btn-getstarted" href="../../../index.html#about"><span>Bắt Đầu</span></a>
-                                        </li>
-                                    </ul>
-                                </nav>
+	<header id="header" class="header d-flex align-items-center fixed-top">
+		<div class="container-fluid container-xl position-relative d-flex align-items-center">
+			<div class="container">
+				<div class="row">
+					<div class="fixed_header">
+						<div class="logo col-lg-2">
+							<a href="../../../index.html" class="logo d-flex align-items-center me-auto ">
+								<img src="../../img/Logo/logo_tt.png" alt="logo">
+							</a>
+						</div>
+						<div class="navmenu col-lg-10">
+							<div class="row">
+								<nav id="navmenu">
+									<ul>
+										<li class="col-lg-2"><a href="../../../index.html#home"><span>Trang Chủ</span></a></li>
+										<li class="col-lg-2"><a href="../../../index.html#about"><span>Về Chúng Tôi</span></a>
+										</li>
+										<li class="dropdown col-lg-2"><a href="../../../index.html#service"><span>Dịch
+													Vụ</span></a>
+											<ul>
+												<li><a href="../service/field_list.html">Đặt Sân</a></li>
+												<li><a href="../service/rent_pitch.html">Thuê Áo Pitch</a>
+												</li>
+												<li><a href="../service/food.html">Đồ Ăn \ Thức Uống</a>
+												</li>
+											</ul>
+										</li>
+										<li class="col-lg-2"><a href="../../../index.html#contact"><span>Liên Hệ</span></a></li>
+										<li class="dropdown col-lg-2"><a href="#"><span>Tài Khoản</span></a>
+											<ul>
+												<li class="dropdown user">
+													<div class="user-container">
+														<div class="user-img">
+															<img src="../../img/avata/con_meo.jpg" alt="avata">
+														</div>
+														<h3>Nguyễn Văn An</h3>
+														<a class="title" href="../manage-account/account.html">Quản lý tài khoản</a>
+														<a class="inf-account" href="../manage-account/account.html#basic-inf">Thông tin tài
+															khoản</a>
+														<a class="inf-account" href="../manage-account/account.html#list">Danh sách đặt sân</a>
+														<a class="title" href="../membership-card/membership-card.html">Thẻ thành viên</a>
+														<button><a href="../../../../index.html">Đăng Xuất</a></button>
+													</div>
+												</li>
+											</ul>
+										</li>
+										<li class="col-lg-2">
+											<a class="btn-getstarted" href="../../../index.html#about"><span>Bắt Đầu</span></a>
+										</li>
+									</ul>
+								</nav>
 
-                            </div>
-                        </div>
+							</div>
+						</div>
 
-                    </div>
-                </div>
-            </div>
+					</div>
+				</div>
+			</div>
 
-        </div>
-    </header>
-    <div class="container">
-        <div class="pay">
-            <div class="row row-cols-3">
-                <div class="row">
-                    <div class="title-pay title" data-aos="fade-up">
-                        <h2 data-aos="fade-up">HÓA ĐƠN</h2>
-                    </div>
-                </div>
-                <div class="row" data-aos="fade-up" data-aos-delay="100">
-                    <div class="user-inf">Nguyễn Văn An | (+84) 9123456788 | nvA2004@gmail.com</div>
+		</div>
+	</header>
+	<div class="container">
+		<div class="pay">
+			<div class="row row-cols-3">
+				<div class="row">
+					<div class="title-pay title" data-aos="fade-up">
+						<h2 data-aos="fade-up">HÓA ĐƠN</h2>
+					</div>
+				</div>
+				<div class="row" data-aos="fade-up" data-aos-delay="100">
+					<div class="user-inf"></div>
+				</div>
+				<div class="row" data-aos="fade-up" data-aos-delay="100">
+					<div class="products">
+						<div class="row row-cols-6">
+							<div class="row service-inf" data-aos="fade-up" data-aos-delay="200">
+								<div class="row row-cols-2">
+									<div class="row field">
+										<div class="col-lg-6 ">
+											<img class="field-img" id="field-img"	src="" alt="san1">
+										</div>
+										<div class="col-lg-6 ">
+											<div class="title" id="title"></div>
+											<div class="inf">
+												<p>Giá Sân: <span class="gia_san"></span></p>
+												
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row" data-aos="fade-up" data-aos-delay="200">
+								<div class="payment-details">
+									<div class="tittle">
+										<p><i class="fa-solid fa-file-invoice-dollar"></i>Chi tiết thanh toán</p>
+									</div>
+									<div class="details">
+										<div class="row">
+											<div>
+												<p class="title-service">Tổng tiền sân</p>
+												<p class="title-price"></p>
+											</div>
+										</div>
+										<div class="row">
+											<div>
+												<p class="total-title">Tổng thanh toán</p>
+												<p class="total-price"></p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
 
-                </div>
-                <div class="row" data-aos="fade-up" data-aos-delay="100">
-                    <div class="products">
-                        <div class="row row-cols-6">
-                            <div class="row service-inf" data-aos="fade-up" data-aos-delay="200">
-                                <div class="row row-cols-2">
-                                    <div class="row field">
-                                        <div class="col-lg-6 "><img class="field-img"
-                                                src="../../img/field_list/san1.jpg" alt="san1"></div>
-                                        <div class="col-lg-6 ">
-                                            <div class="title">SÂN A - SÂN 5</div>
-                                            <div class="inf">
-                                                <p>Khung giờ: 17:30 - 19:00</p>
-                                                <p>Giá sân: 300.000 đ</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row food">
-                                        <div class="col-lg-6"><img class="food-img" src="../../img/do_uong/revive.jpg"
-                                                alt="revive"></div>
-                                        <div class="col-lg-6">
-                                            <div class="title">REVIVE</div>
-                                            <div class="inf">
-                                                <p>Giá: 15.000 đ</p>
-                                                <p>Số lượng: 12</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row" data-aos="fade-up" data-aos-delay="200">
-                                <div class="payment-details">
-                                    <div class="tittle text">
-                                        <p><i class="fa-solid fa-file-invoice-dollar"></i>Chi tiết thanh toán</p>
-                                    </div>
-                                    <div class="details">
-                                        <div class="row">
-                                            <div>
-                                                <p class="title-service">Tổng tiền sân</p>
-                                                <p class="title-price">300.000 đ</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div>
-                                                <p class="title-service">Tổng tiền dịch vụ</p>
-                                                <p class="title-price">180.000 đ</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div>
-                                                <p class="title-service">Tổng voucher giảm giá</p>
-                                                <p class="title-price">48.000 đ</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div>
-                                                <p class="total-title">Thành Tiền</p>
-                                                <p class="total-price">432.000 đ</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row" data-aos="fade-up" data-aos-delay="200">
-                                <div class="discount">
-                                    <div class="row">
-                                        <p class="text"><i class="fa-solid fa-ticket"></i> Khuyến mãi</p>
-                                        <p class="percent">10%</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row payment-method" data-aos="fade-up" data-aos-delay="200">
-                                <div class="text">
-                                    <p><i class="fa-solid fa-money-check-dollar"></i></i> Phương thức thanh
-                                        toán</p>
-                                </div>
-                                <div class="select_method">
-                                    <p>Bạn đã chọn thanh toán qua thẻ ngân hàng</p>
-                                </div>
-                            </div>
-                            <div class="row payment-limit" data-aos="fade-up" data-aos-delay="200">
-                                <div class="text">
-                                    <p><i class="fa-solid fa-money-check-dollar"></i> Hạn mức thanh toán</p>
-                                </div>
-                                <div class="select_method">
-                                    <p>Bạn đã chọn thanh toán 100%</p>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="bill-inf">
-                                    <div class="row">
-                                        <div>
-                                            <p class="bill-code-title text">Mã hóa đơn</p>
-                                            <p class="bill-code inf">HD0001</p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="time-book">
-                                            <p class="text">Thời gian đặt sân</p>
-                                            <p class="time inf">14:00 05-05-2004</p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="time-paid">
-                                            <p class="text">Thời gian thanh toán</p>
-                                            <p class="time inf">14:05 05-05-2004</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+							<div class="row">
+								<div class="bill-inf">
+									<div class="row">
+										<div>
+											<p class="bill-code-title text">Mã hóa đơn</p>
+											<p class="bill-code inf"></p>
+										</div>
+									</div>
+									<div class="row">
+										<div class="time-book">
+											<p class="text">Khung Giờ: </p>
+											<p class="time inf"></p>
+										</div>
+									</div>
+									<div class="row">
+										<div class="time-paid">
+											<p class="text">Ngày đặt Sân</p>
+											<p class="day inf"></p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="stepBack">
+			<a href="../service/field_list.html">Quay lại</a>
+		</div>
+	</div>
 </body>
 <script>
-    AOS.init();
+	AOS.init();
+</script>
+
+<script>
+	var payment_limit_total = 0 
+
+// Lấy thông tin từ sessionStorage
+let ten_kh = sessionStorage.getItem("ten_kh");
+let sdt_kh = decryptDES( sessionStorage.getItem("sdt_kh"), "Thats my Kung Fu");
+let email_kh = decryptCaesarMult(sessionStorage.getItem("email_kh"), 7);
+let ten_san = sessionStorage.getItem("ten_san");
+let khung_gio = sessionStorage.getItem("khung gio");
+let gia_san = sessionStorage.getItem("gia");
+let ma_san = sessionStorage.getItem("ma_san");
+let total_price = sessionStorage.getItem("total-pay-price");
+let ngay_dat_san_tmp = new Date(sessionStorage.getItem("ngay_dat_san")) ;
+
+// Lấy ngày, tháng và năm
+let day = ngay_dat_san_tmp.getDate();
+let month = ngay_dat_san_tmp.getMonth() + 1; // getMonth() trả về giá trị tháng từ 0 đến 11, nên cộng thêm 1
+let year = ngay_dat_san_tmp.getFullYear();
+
+let ngay_dat_san =  `${day < 10 ? '0' + day : day}/${month < 10 ? '0' + month : month}/${year}`
+// Hiển thị thông tin vào div
+document.querySelector(".user-inf").innerHTML = `${ten_kh} | ${sdt_kh} | ${email_kh}`;
+document.querySelector("#title").innerHTML = ten_san;
+document.querySelector(".time").innerHTML = `${khung_gio}`;
+document.querySelector(".gia_san").innerHTML = `${gia_san}`;
+document.querySelector(".title-price").innerHTML = `${gia_san}đ`;
+document.querySelector(".total-price").innerHTML = `${total_price}đ`;
+document.querySelector(".bill-code").innerHTML = `HD001`;
+document.querySelector(".day").innerHTML = `${ngay_dat_san}`;
+
+
+let imgElement = document.querySelector(".field-img");
+imgElement.src = `../../img/field_list/${ma_san}.jpg`
+
+
+
+
+
+	// Hàm tìm nghịch đảo modulo
+	function findMultInverse(a, m) {
+	let t1 = 0, t2 = 1, r1 = m, r2 = a, q, t, r;
+
+	while (r2 > 0) {
+		q = Math.floor(r1 / r2);
+		r = r1 - q * r2;
+		r1 = r2;
+		r2 = r;
+
+		t = t1 - q * t2;
+		t1 = t2;
+		t2 = t;
+	}
+
+	if (t1 < 0) {
+		t1 += m;
+	}
+
+	return t1;
+}
+
+// Hàm giải mã ký tự theo Caesar Multiplicative
+function divideChar(c, key, modulus) {
+	let ascii_val = c.charCodeAt(0);
+	let new_val;
+
+	if (ascii_val >= 32 && ascii_val <= 126) {
+		new_val = ((ascii_val - 32) * key) % modulus + 32;
+		return String.fromCharCode(new_val);
+	} else {
+		return c;
+	}
+}
+
+// Hàm giải mã toàn bộ chuỗi
+function decryptCaesarMult(enc, k) {
+	const modulus = 95; // ASCII 32-126, phạm vi 95 ký tự có thể in được
+	let k_inverse = findMultInverse(k, modulus); // Tìm nghịch đảo của key
+	let decrypted = '';
+
+	for (let i = 0; i < enc.length; i++) {
+		decrypted += divideChar(enc[i], k_inverse, modulus);
+	}
+
+	return decrypted;
+}
+
+// Hàm giải mã DES
+function decryptDES(encryptedHex, key) {
+	// Chuyển đổi chuỗi hex thành byte array
+	var encryptedBytes = CryptoJS.enc.Hex.parse(encryptedHex);
+
+	// Chuyển khóa sang dạng byte array
+	var keyBytes = CryptoJS.enc.Utf8.parse(key);
+
+	// IV - sử dụng cùng giá trị với mã C# của bạn
+	var iv = CryptoJS.enc.Hex.parse('0000000000000000'); // Đặt IV thành 0x0 cho mỗi byte
+
+	// Giải mã DES với chế độ CBC và padding PKCS7
+	var decrypted = CryptoJS.DES.decrypt(
+		{
+			ciphertext: encryptedBytes
+		},
+		keyBytes,
+		{
+			mode: CryptoJS.mode.CBC,
+			padding: CryptoJS.pad.Pkcs7,
+			iv: iv
+		}
+	);
+
+	// Chuyển đổi kết quả giải mã sang chuỗi UTF-8
+	return decrypted.toString(CryptoJS.enc.Utf8);
+}
+
+
 </script>
 
 </html>

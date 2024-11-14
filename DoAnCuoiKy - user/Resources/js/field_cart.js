@@ -44,6 +44,7 @@ function ready() {
 	for (var i = 0; i < addCart.length; i++) {
 		var button = addCart[i];
 		button.addEventListener("click", addCartClicked);
+
 	}
 }
 //remove items from cart
@@ -64,23 +65,60 @@ function quantityChanged(event) {
 }
 
 // addCartClicked
-
+var ghi_chu = ''
+var date = ''
+var start = ''
+var end = ''
 function addCartClicked(event) {
 	var button = event.target
 	var shopProducts = button.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement
 	var title = shopProducts.getElementsByClassName('product-title')[0].innerText
-	var price = shopProducts.getElementsByClassName('product-price')[0].innerText
+	var priceText = shopProducts.getElementsByClassName('product-price')[0].innerText
 	var productImg = shopProducts.getElementsByClassName('product-Img')[0].src
-	var date = shopProducts.getElementsByClassName('select-date')[0].value
-	var time = shopProducts.getElementsByClassName('select-time')[0].value
-	var timeOption = shopProducts.getElementsByClassName('select_time-option')[0].value
+	var	date_tmp = shopProducts.getElementsByClassName('select-date')[0].value
+	var	start_tmp = shopProducts.getElementsByClassName('startMatch')[0].value
+	var	end_tmp = shopProducts.getElementsByClassName('endMatch')[0].value
 	var note = shopProducts.getElementsByClassName('note')[0].value
-	addProductToCart(title, price, productImg, date, time, timeOption, note)
+
+	var price = parseFloat(priceText.replace(/[^0-9.-]+/g, ""));
+
+	sessionStorage.setItem("khung gio", `${start_tmp} - ${end_tmp}`);
+
+
+	ghi_chu = note;
+	date = date_tmp;
+	start = start_tmp;
+	end = end_tmp;
+	// Chuyển start và end thành phút để tính toán
+function convertToMinutes(time) {
+	const [hours, minutes] = time.split(':').map(Number);  // Tách giờ và phút, chuyển sang số
+	return hours * 60 + minutes;  // Trả về tổng phút
+}
+
+var startInMinutes = convertToMinutes(start);
+var endInMinutes = convertToMinutes(end);
+
+var time = (endInMinutes - startInMinutes)/60;
+sessionStorage.setItem("gia", price * time);
+
+	// Chỉnh sửa để lấy đầy đủ giờ: phút:giây
+	if (start.length === 5) {
+		start = start + ":00"; // Thêm giây vào nếu không có giây
+	}
+	// Chỉnh sửa để lấy đầy đủ giờ: phút:giây
+	if (end.length === 5) {
+		end = end + ":00"; // Thêm giây vào nếu không có giây
+	}
+
+	addProductToCart(title, price, productImg, date, start, end, note, time)
 	updatetotal()
+
 }
 
 
-function addProductToCart(title, price, productImg, date, time, timeOption, note) {
+
+
+function addProductToCart(title, price, productImg, date, start, end, note, time) {
 	var cartShopBox = document.createElement('div');
 	cartShopBox.classList.add('cart-box')
 	var cartItems = document.getElementsByClassName('cart-content')[0];
@@ -91,6 +129,7 @@ function addProductToCart(title, price, productImg, date, time, timeOption, note
 			return;
 		}
 	}
+	
 	var cartBoxContent = `
                         <div class="row">
                             <div class = "col-lg-12 cart-inf-container">
@@ -100,24 +139,24 @@ function addProductToCart(title, price, productImg, date, time, timeOption, note
                             <div class="cart-inf">
                                 <div class="col-lg-6 left">
                                     <div class="row">
-                                        <div class = " cart-product-title ">${title}</div>
+                                        <div class = "cart-product-title" id="ten_san">${title}</div>
                                     </div>
                                     <div class="row">
-                                        <div class="cart-product-date ">Ngày: ${date}</div>
+                                        <div class="cart-product-date" id = "ngay_dat_san">Ngày: ${date}</div>
+                                    </div>
+																		<div class="row">
+                                        <div class="cart-product-time " id = "gio_bd">Bắt đầu: ${start}</div>
                                     </div>
                                     <div class="row">
-                                        <div class="cart-product-time ">Giờ: ${time}</div>
+                                        <div class="cart-product-timeOption " id = "gio_kt">Kết Thúc: ${end}</div>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 right">
                                     <div class="row">
-                                        <div class = "cart-product-price ">${price}</div>
+                                        <div class = "cart-product-price " id = "">${price * time}</div>
                                     </div>
                                     <div class="row">
-                                        <div class="cart-product-timeOption ">Thời gian: ${timeOption}</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="cart-product-note ">Ghi chú: ${note}</div>
+                                        <div class="cart-product-note " id = "ghi_chu">Ghi chú: ${note}</div>
                                     </div>
                                 </div>
                                 </div>
@@ -127,6 +166,7 @@ function addProductToCart(title, price, productImg, date, time, timeOption, note
                             </div>
                         </div>`;
 	cartShopBox.innerHTML = cartBoxContent;
+
 	cartItems.append(cartShopBox);
 	cartShopBox.getElementsByClassName('remove-cart')[0].addEventListener('click', removeCartItem);
 }
@@ -153,9 +193,8 @@ function updatetotal() {
 	document.getElementsByClassName("total-price")[0].innerText = total.toLocaleString('vi-vn') + "đ";
 }
 
-
 const url_getAll = 'http://localhost:8000/san/module/v1/san/all';
-const url_getOne = ''
+const url_getOne = 'http://localhost:8000/loaisan/module/v1/loaisan/all';
 const option = {
     method: 'GET',
     headers: {
@@ -164,42 +203,182 @@ const option = {
 };
 
 // Tên sân hoặc ID sân bạn muốn tìm
-const targetFieldCode = sessionStorage.getItem("ma_san"); // hoặc có thể dùng một ID cụ thể như `targetFieldId = 1;`
+const targetFieldCode = sessionStorage.getItem("ma_san");
+
 
 fetch(url_getAll, option)
-    .then(response => {
-        if (!response.ok) {
-            return response.json().then(errorData => {
-                throw new Error(errorData.detail || 'Lỗi khi tải dữ liệu từ máy chủ');
-            });
-        }
-        return response.json();
-    })
-    .then(data => {
-        // Lọc để tìm sân phù hợp
-        const selectedField = data.find(item => item.ma_san === targetFieldCode); 
-        console.log("🚀 ~ selectedField:", selectedField)
-        // Hoặc nếu lọc bằng ID thì: `item.id === targetFieldId`
+	.then(response => {
+		if (!response.ok) {
+				return response.json().then(errorData => {
+						throw new Error(errorData.detail || 'Lỗi khi tải dữ liệu từ máy chủ');
+				});
+		}
+		return response.json();
+	})
+	.then(data => {
+		const selectedField = data.find(item => item.ma_san === targetFieldCode);
 
-        if (selectedField) {
-            // Cập nhật dữ liệu vào giao diện cho sân được chọn
-            document.querySelector('.product-title').textContent = selectedField.ten_san ;
-            document.querySelector('.product-Img').src = `../../../img/field_list/${selectedField.ma_san}.jpg`;
-            document.querySelector('.product-price').textContent = `${selectedField.price}đ`;
-            document.querySelector('.right:nth-child(2)').textContent = selectedField.openTime;
+	sessionStorage.setItem("ten_san", selectedField.ten_san);
 
-        } else {
-            Swal.fire({
-                icon: 'warning',
-                title: 'Không tìm thấy sân',
-                text: `Không có sân nào phù hợp với tên: ${targetFieldName}`,
-            });
-        }
-    })
-    .catch(error => {
-        Swal.fire({
-            icon: 'error',
-            title: 'Đã xảy ra lỗi',
-            text: 'Lỗi: ' + error.message,
-        });
+		if (selectedField) {
+				// Cập nhật dữ liệu từ url_getAll
+				document.querySelector('.product-title').textContent = selectedField.ten_san;
+				document.querySelector('.product-Img').src = `../../../img/field_list/${selectedField.ma_san}.jpg`;
+				document.querySelector('.product-price').textContent = `${selectedField.price}đ`;
+				document.querySelector('.right:nth-child(2)').textContent = selectedField.openTime;
+
+				// Fetch thêm thông tin từ url_getOne
+				return fetch(url_getOne, option)
+						.then(response => {
+								if (!response.ok) {
+										return response.json().then(errorData => {
+												throw new Error(errorData.detail || 'Lỗi khi tải dữ liệu từ máy chủ');
+										});
+								}
+								return response.json();
+						})
+						.then(loaisanData => {
+								// Tìm thông tin loại sân tương ứng với ma_san
+								const fieldType = loaisanData.find(item => item.ma_san === targetFieldCode);
+
+								if (fieldType) {
+										// Hiển thị thông tin từ url_getOne
+										document.querySelector('.loaimatco').textContent += fieldType.loai_mat_co;
+										document.querySelector('.kichthuocsan').textContent = fieldType.kich_thuoc_san;
+										document.querySelector('.product-price').textContent = `${fieldType.gia_san}đ`;
+								} else {
+										Swal.fire({
+												icon: 'warning',
+												title: 'Không tìm thấy loại sân',
+												text: `Không có thông tin loại sân phù hợp với mã: ${targetFieldCode}`,
+										});
+								}
+						});
+		} else {
+				Swal.fire({
+						icon: 'warning',
+						title: 'Không tìm thấy sân',
+						text: `Không có sân nào phù hợp với mã: ${targetFieldCode}`,
+				});
+		}
+	})
+	.catch(error => {
+		Swal.fire({
+				icon: 'error',
+				title: 'Đã xảy ra lỗi',
+				text: 'Lỗi: ' + error.message,
+		});
+	});
+
+
+	handleCreatePDS();
+
+
+const url_orders = 'http://localhost:8000/orders/module/v1/orders/create';
+const url_orderItems = 'http://localhost:8000/order-items/module/v1/order-items/create';
+function createPDS (data) {
+  var option = {
+    method: 'POST',
+    headers: {
+      'content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  };
+
+
+  fetch(url_orders, option)
+  .then(function (response) {
+    // Kiểm tra xem response có thành công (status 200) không
+    if (!response.ok) {
+      return response.json().then(errorData => {
+        // Trả về lỗi chi tiết nếu có
+        throw new Error(errorData.detail || 'Lỗi khi tải dữ liệu từ máy chủ');
+      });
+    }
+    return response.json(); // Lấy dữ liệu JSON từ response nếu thành công
+  })
+	.then(function (response) {
+		const ma_pds = response.ma_pds; // Lấy mã phiếu đặt sân từ response
+
+		// Gọi hàm để tạo chi tiết phiếu đặt sân
+		createOrderItems(ma_pds, date, start, end, ghi_chu);
+	})
+  .catch(function (error) {
+    // Hiển thị lỗi cho người dùng
+    Swal.fire({
+      icon: "error",
+      text: "Registration failed	. Error: " + error.message,
     });
+  });
+}
+
+function handleCreatePDS() {
+  var createBtn = document.querySelector('button.pay-btn');
+  createBtn.onclick = function(event) {
+    event.preventDefault(); // Ngăn chặn hành động mặc định của nút
+
+    // Lấy giá trị từ các input
+    
+		const ma_kh = sessionStorage.getItem("ma_kh");
+      var formDataStaff = {
+				ma_kh: ma_kh,
+        ghi_chu: ghi_chu
+      };			
+      createPDS(formDataStaff);
+    }
+  }
+
+	
+	function createOrderItems(ma_pds, date, start, end, ghi_chu) {		
+  // Kết hợp ngày và giờ bắt đầu, giờ kết thúc
+  const ngayDatSan = new Date(date);  // Chuyển đổi ngày
+  const gioBd = new Date(date + 'T' + start);  // Kết hợp ngày và giờ bắt đầu
+  const gioKt = new Date(date + 'T' + end);  // Kết hợp ngày và giờ kết thúc
+
+	sessionStorage.setItem("ngay_dat_san", ngayDatSan)
+  // Chuyển đổi thành chuỗi ISO string
+  const orderItemsData = {
+    ma_san: sessionStorage.getItem("ma_san"), // Giả sử ma_san là string
+    ma_pds: ma_pds, // Giả sử ma_pds là string
+    ngay_dat_san: ngayDatSan.toISOString(),  // Chuyển đổi ngày thành chuỗi ISO string
+    gio_bd: gioBd.toISOString(),  // Chuyển đổi giờ bắt đầu thành chuỗi ISO string
+    gio_kt: gioKt.toISOString(),  // Chuyển đổi giờ kết thúc thành chuỗi ISO string
+    ghi_chu: ghi_chu  // Lấy ghi chú từ input (giả sử là chuỗi)
+  };
+	
+	
+		var option = {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(orderItemsData)
+		};
+	
+		fetch(url_orderItems, option)
+			.then(function (response) {
+				if (!response.ok) {
+					return response.json().then(errorData => {
+						throw new Error(errorData.detail || 'Lỗi khi tạo chi tiết phiếu đặt sân');
+					});
+				}
+				return response.json();
+			})
+			.then(function (response) {
+				window.location.href = '../../pay/pay.html';
+			})
+			.catch(function (error) {
+				Swal.fire({
+					icon: "error",
+					text: "Lỗi khi tạo chi tiết phiếu đặt sân: " + error.message,
+				});
+			});
+	}
+	
+
+document.getElementById('add_cart').addEventListener('click', function () {
+	Swal.fire({
+		text: "Thêm vào giỏ hàng thành công !!!",
+		icon: "success"
+	});
+	})
