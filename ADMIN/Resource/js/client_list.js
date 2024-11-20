@@ -180,7 +180,6 @@ btnDel.addEventListener('click', (e) => {
   });
 });
 
-
 	const btnEdit = document.querySelector(`[data-id = '${user.ma_kh}'] .btn_edit`);
 	btnEdit.addEventListener('click', (e) => {
 		e.preventDefault();
