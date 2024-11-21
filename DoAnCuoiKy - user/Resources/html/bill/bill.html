@@ -203,7 +203,7 @@
 // Lấy thông tin từ sessionStorage
 let ten_kh = sessionStorage.getItem("ten_kh");
 let sdt_kh = decryptDES( sessionStorage.getItem("sdt_kh"), "Thats my Kung Fu");
-let email_kh = decryptCaesarMult(sessionStorage.getItem("email_kh"), 7);
+let email_kh = sessionStorage.getItem("email_kh");
 let ten_san = sessionStorage.getItem("ten_san");
 let khung_gio = sessionStorage.getItem("khung gio");
 let gia_san = sessionStorage.getItem("gia");
@@ -223,7 +223,7 @@ document.querySelector("#title").innerHTML = ten_san;
 document.querySelector(".time").innerHTML = `${khung_gio}`;
 document.querySelector(".gia_san").innerHTML = `${gia_san}`;
 document.querySelector(".title-price").innerHTML = `${gia_san}đ`;
-document.querySelector(".total-price").innerHTML = `${total_price}đ`;
+document.querySelector(".total-price").innerHTML = `${total_price}`;
 document.querySelector(".bill-code").innerHTML = `HD001`;
 document.querySelector(".day").innerHTML = `${ngay_dat_san}`;
 
