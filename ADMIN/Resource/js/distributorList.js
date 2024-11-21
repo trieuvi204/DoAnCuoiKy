@@ -87,72 +87,114 @@ function decryptDES(encryptedHex, key) {
 	return decrypted.toString(CryptoJS.enc.Utf8);
 }
 
-
 // Hàm lấy dữ liệu nhà phân phối từ API
 function fetchDistributors() {
-	var option = {
-		method: 'GET',
-		headers: {
-			'Content-Type': 'application/json'
-		}
-	};
+    var option = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    };
 
-	fetch(distributorsDataApi, option)
-	.then(function (response) {
-			// Kiểm tra xem response có thành công (status 200) không
-			if (!response.ok) {
-					return response.json().then(errorData => {
-							// Trả về lỗi chi tiết nếu có
-							throw new Error(errorData.detail || 'Lỗi khi tải dữ liệu từ máy chủ');
-					});
-			}
-			return response.json(); // Lấy dữ liệu JSON từ response nếu thành công
-	})
-	.then(data => {
-			data.forEach(user => {
-					displayItemsList(user);
-			});
-	})
-	.catch(function (error) {
-			// Hiển thị lỗi cho người dùng với SweetAlert
-			Swal.fire({
-					icon: 'error',
-					title: 'Đã xảy ra lỗi',
-					text: 'Lỗi: ' + error.message, // Hiển thị chi tiết lỗi
-			});
-	});
-
+    fetch(distributorsDataApi, option)
+        .then(function (response) {
+            // Kiểm tra xem response có thành công (status 200) không
+            if (!response.ok) {
+                return response.json().then((errorData) => {
+                    // Trả về lỗi chi tiết nếu có
+                    throw new Error(errorData.detail || 'Lỗi khi tải dữ liệu từ máy chủ');
+                });
+            }
+            return response.json(); // Lấy dữ liệu JSON từ response nếu thành công
+        })
+        .then((data) => {
+            if (Array.isArray(data) && data.length > 0) {
+                // Xóa dữ liệu cũ trước khi thêm mới
+                items.innerHTML = `
+                <tr>
+                    <td>Mã Nhà PP</td>
+                    <td>Mã Nhân Viên</td>
+                    <td>Tên NPP</td>
+                    <td>Địa Chỉ</td>
+                    <td>Số Điện thoại</td>
+                    <td>Email</td>
+                    <td>Chức Năng</td>
+                </tr>`;
+                // Render từng user ra bảng
+                data.forEach((user) => {
+                    displayItemsList(user);
+                });
+            } else {
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Không có dữ liệu',
+                    text: 'Hiện không có dữ liệu nhà phân phối.',
+                });
+            }
+        })
+        .catch(function (error) {
+            // Hiển thị lỗi cho người dùng với SweetAlert
+            Swal.fire({
+                icon: 'error',
+                title: 'Đã xảy ra lỗi',
+                text: 'Lỗi: ' + error.message, // Hiển thị chi tiết lỗi
+            });
+        });
 }
 
 // Hàm hiển thị danh sách người dùng
 var items = document.querySelector('.table-list-items');
-items.innerHTML = `
-<tr>
-	<td>Mã Nhà PP</td>
-	<td>Mã Nhân Viên</td>
-	<td>Tên NPP</td>
-	<td>Địa Chỉ</td>
-	<td>Số Điện thoại</td>
-	<td>Email</td>
-	<td>Chức Năng</td>
-</tr>
-`;
+
 const displayItemsList = (user) => {
-	const output = `
-			<tr data-id='${user.ma_npp}'>
-				<td>${user.ma_npp}</td>
-				<td>${user.ma_nv}</td>
-				<td>${user.ten_npp}</td>
-				<td>${decryptDES(user.dc_npp,'Thats my Kung Fu')}</td>
-				<td>${decryptExtCaesarMult(user.sdt_npp,7)}</td>
-				<td>${decryptExtCaesarMult(user.email_npp,7)}</td>
-				<td>
-					<i class="fa-solid fa-trash-can delete btn_del"></i>
-					<i class="fa-solid fa-pen-to-square update btn_edit"></i>
-				</td>
-			</tr>
-	`;
-	items.insertAdjacentHTML('beforeend', output);
+    try {
+        // Kiểm tra dữ liệu và giải mã
+        const ma_npp = user.ma_npp || 'N/A';
+        const ma_nv = user.ma_nv || 'N/A';
+        const ten_npp = user.ten_npp || 'N/A';
+
+        // Xử lý giải mã địa chỉ
+        let dc_npp;
+        try {
+			console.log('dc_npp (mã hóa):', user.dc_npp);
+            dc_npp = decryptDES(user.dc_npp, 'Thats my Kung Fu') ;
+			console.log('dc_npp (giải mã):', dc_npp);
+        } catch (err) {
+            console.error(`Lỗi giải mã địa chỉ: ${err}`);
+            dc_npp = 'Không xác định';
+        }
+
+        // Xử lý giải mã số điện thoại
+        let sdt_npp;
+        try {
+            sdt_npp = decryptExtCaesarMult(user.sdt_npp, 7) || 'Không xác định';
+        } catch (err) {
+            console.error(`Lỗi giải mã số điện thoại: ${err}`);
+            sdt_npp = 'Không xác định';
+        }
+
+        const email_npp = user.email_npp || 'Không xác định';
+
+        // Tạo hàng mới cho bảng
+        const output = `
+            <tr data-id='${ma_npp}'>
+                <td>${ma_npp}</td>
+                <td>${ma_nv}</td>
+                <td>${ten_npp}</td>
+                <td>${dc_npp}</td>
+                <td>${sdt_npp}</td>
+                <td>${email_npp}</td>
+                <td>
+                    <i class="fa-solid fa-trash-can delete btn_del"></i>
+                    <i class="fa-solid fa-pen-to-square update btn_edit"></i>
+                </td>
+            </tr>
+        `;
+        items.insertAdjacentHTML('beforeend', output);
+    } catch (error) {
+        console.error('Lỗi khi hiển thị user:', error);
+    }
+
+
 
 // Kiểm tra sự tồn tại của phần tử .btn_del
 const btnDel = document.querySelector(`[data-id='${user.ma_npp}'] .btn_del`);
@@ -218,7 +260,6 @@ else {
 			// Cập nhật các trường trong form sửa thông tin
 			editModalForm.fullname.value = user.ten_npp;
 			editModalForm.phone.value = decryptExtCaesarMult(user.sdt_npp, 7);
-			editModalForm.email.value = decryptExtCaesarMult(user.email_npp,7);
 			editModalForm.address.value = decryptDES(user.dc_npp, 'Thats my Kung Fu');
 		});
 	} else {
@@ -324,6 +365,3 @@ fetch(`${url}/edit/${id}`, {
 	editModalForm.email.value = '';
 	editModalForm.address.value = '';
 });
-
-
-

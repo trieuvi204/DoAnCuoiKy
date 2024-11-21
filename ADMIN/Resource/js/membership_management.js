@@ -1,7 +1,7 @@
 // arr
 var distributorsDataApi = 'http://localhost:8000/staffs/module/v1/staffs/all';
 const url = 'http://localhost:8000/staffs/module/v1/staffs';
-const editModalForm = document.querySelector('#editModal .form-user')
+const editModalForm = document.querySelector('#editModal .form-staff')
 
 // Hàm khởi động
 function start() {
@@ -107,8 +107,8 @@ function fetchStaffs() {
 			return response.json(); // Lấy dữ liệu JSON từ response nếu thành công
 		})
 		.then(data => {
-			data.forEach(user => {
-				displayItemsList(user)
+			data.forEach(staff => {
+				displayItemsList(staff)
 			});
 		})
 		.catch(function (error) {
@@ -134,29 +134,41 @@ items.innerHTML = `
 
 </tr>
 `;
-const displayItemsList = (user) => {
-	const output = `
-			<tr data-id='${user.ma_nv}'>
-					<td>${user.ma_nv}</td>
-					<td>${user.ten_nv}</td>
-					<td>${user.sdt_nv}</td>
-					<td>${decryptCaesarMult(user.email_nv, 7)}</td>
-					<td>${decryptDES(user.dia_chi, 'Thats my Kung Fu')}</td>
-					<td>${user.chuc_vu}</td>
-					<td>
-							<i class="fa-solid fa-trash-can delete btn_del"></i>
-							<i class="fa-solid fa-pen-to-square update btn_edit"></i>
-					</td>
-			</tr>
-	`;
-	items.insertAdjacentHTML('beforeend', output);
+const displayItemsList = (staff) => {
+	try {
+        // Giải mã số điện thoại và email
+        const ma_nv = staff.ma_nv || 'N/A';
+        const ten_nv = staff.ten_nv || 'N/A';
+        const sdt_nv = staff.sdt_nv || 'N/A';
+        const email_nv = staff.email_nv|| 'Không xác định';
+        const dia_chi = decryptDES(staff.dia_chi, 'Thats my Kung Fu') || 'Không xác định';
+        const chuc_vu = staff.chuc_vu || 'Không xác định';
+
+        // Tạo hàng mới cho bảng
+        const output = `
+        <tr data-id='${ma_nv}'>
+            <td>${ma_nv}</td>
+            <td>${ten_nv}</td>
+            <td>${sdt_nv}</td>
+            <td>${email_nv}</td>
+            <td>${dia_chi}</td>
+            <td>${chuc_vu}</td>
+            <td>
+                <i class="fa-solid fa-trash-can delete btn_del"></i>
+                <i class="fa-solid fa-pen-to-square update btn_edit"></i>
+            </td>
+        </tr>`;
+        items.insertAdjacentHTML('beforeend', output);
+    } catch (error) {
+        console.error('Lỗi khi hiển thị nhân viên:', error);
+    }
 
 	// Kiểm tra sự tồn tại của phần tử .btn_del
-	const btnDel = document.querySelector(`[data-id='${user.ma_nv}'] .btn_del`);
+	const btnDel = document.querySelector(`[data-id='${staff.ma_nv}'] .btn_del`);
 	if (btnDel) {
 		btnDel.addEventListener('click', (e) => {
 			Swal.fire({
-				title: `Bạn có chắc chắn muốn xóa khách hàng ${user.ten_nv} không?`,
+				title: `Bạn có chắc chắn muốn xóa khách hàng ${staff.ten_nv} không?`,
 				icon: "warning",
 				showCancelButton: true,
 				confirmButtonText: "Xóa",
@@ -164,7 +176,7 @@ const displayItemsList = (user) => {
 			}).then((result) => {
 				if (result.isConfirmed) {
 					// Gửi yêu cầu xóa
-					fetch(`${url}/delete/${user.ma_nv}`, {
+					fetch(`${url}/delete/${staff.ma_nv}`, {
 						method: 'DELETE'
 					})
 						.then(res => res.json())
@@ -198,20 +210,20 @@ const displayItemsList = (user) => {
 	}
 
 	// Kiểm tra sự tồn tại của phần tử .btn_edit
-	const btnEdit = document.querySelector(`[data-id='${user.ma_nv}'] .btn_edit`);
+	const btnEdit = document.querySelector(`[data-id='${staff.ma_nv}'] .btn_edit`);
 	if (btnEdit) {
 		btnEdit.addEventListener('click', (e) => {
 			e.preventDefault();
 
-			id = user.ma_nv;  // Sử dụng mã nhân viên để chỉnh sửa
+			id = staff.ma_nv;  // Sử dụng mã nhân viên để chỉnh sửa
 			$("#editModal").modal('show');
 
 			// Cập nhật các trường trong form sửa thông tin
-			editModalForm.fullname.value = user.ten_nv;
-			editModalForm.phone.value = user.sdt_nv;
-			editModalForm.email.value = decryptCaesarMult(user.email_nv, 7);
-			editModalForm.address.value = decryptDES(user.dia_chi, 'Thats my Kung Fu');
-			editModalForm.position.value = user.chuc_vu;
+			editModalForm.fullname.value = staff.ten_nv;
+			editModalForm.phone.value = staff.sdt_nv;
+			editModalForm.email.value = decryptCaesarMult(staff.email_nv, 7);
+			editModalForm.address.value = decryptDES(staff.dia_chi, 'Thats my Kung Fu');
+			editModalForm.position.value = staff.chuc_vu;
 			editModalForm.password.value = '';  // Để trống mật khẩu trong form
 		});
 	} else {

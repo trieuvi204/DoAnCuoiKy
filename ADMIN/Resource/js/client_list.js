@@ -72,67 +72,84 @@ function decryptDES(encryptedHex, key) {
 	return decrypted.toString(CryptoJS.enc.Utf8);
 }
 
-
-
-
-
 // Hàm lấy dữ liệu người dùng từ API
 function fetchUsers() {
-	var option = {
-		method: 'GET',
-		headers: {
-			'Content-Type': 'application/json'
-		}
-	};
+    var option = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    };
 
-	fetch(usersDataApi, option)
-		.then(function (response) {
-			// Kiểm tra xem response có thành công (status 200) không
-			if (!response.ok) {
-				return response.json().then(errorData => {
-					// Trả về lỗi chi tiết nếu có
-					throw new Error(errorData.detail || 'Lỗi khi tải dữ liệu từ máy chủ');
-				});
-			}
-			return response.json();
-		})
-		.then(data => {
-			data.forEach(user => {
-				displayItemsList(user)
-			});
-		})
-		.catch(function (error) {
-			Swal.fire({
-				icon: 'error',
-				title: 'Đã xảy ra lỗi',
-				text: error.message,
-			});
-		});
-
+    fetch(usersDataApi, option)
+        .then(function (response) {
+            // Kiểm tra xem response có thành công (status 200) không
+            if (!response.ok) {
+                return response.json().then((errorData) => {
+                    throw new Error(errorData.detail || 'Lỗi khi tải dữ liệu từ máy chủ');
+                });
+            }
+            return response.json(); // Lấy dữ liệu JSON từ response nếu thành công
+        })
+        .then((data) => {
+            if (Array.isArray(data) && data.length > 0) {
+                // Xóa danh sách cũ và hiển thị tiêu đề bảng
+                items.innerHTML = `
+                <tr>
+                    <th>Mã Người Dùng</th>
+                    <th>Tên Người Dùng</th>
+                    <th>Số Điện Thoại</th>
+                    <th>Email</th>
+                    <th>Chức Năng</th>
+                </tr>`;
+                
+                // Render từng người dùng ra bảng
+                data.forEach((user) => displayItemsList(user));
+            } else {
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Không có dữ liệu',
+                    text: 'Hiện không có người dùng nào.',
+                });
+            }
+        })
+        .catch(function (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Đã xảy ra lỗi',
+                text: error.message,
+            });
+        });
 }
 
-// Hàm hiển thị danh sách người dùng
+// DOM phần danh sách bảng
 var items = document.querySelector('.table-list-items');
-items.innerHTML = `
-<tr>
-  <th>Mã Người Dùng</th>
-  <th>Tên Người Dùng</th>
-  <th>Số Điện Thoại</th>
-  <th>Email</th>
-  <th>Chức Năng</th>
-</tr>
-`;
+
+// Hàm hiển thị danh sách người dùng
 const displayItemsList = (user) => {
-	const output = `
-    <tr data-id = '${user.ma_kh}'>
-        <td>${user.ma_kh}</td>
-        <td>${user.ten_kh}</td>
-        <td>${decryptDES(user.sdt_kh, 'Thats my Kung Fu')}</td>
-        <td>${decryptExtCaesarMult(user.email_kh, 7)}</td>
-        <td><i class="fa-solid fa-trash-can delete btn_del"></i> <i class="fa-solid fa-pen-to-square update btn_edit"></i></td>
-    </tr>
-    `;
-	items.insertAdjacentHTML('beforeend', output);
+    try {
+        // Giải mã số điện thoại và email
+        const ma_kh = user.ma_kh || 'N/A';
+        const ten_kh = user.ten_kh || 'N/A';
+        const sdt_kh = decryptDES(user.sdt_kh, 'Thats my Kung Fu') || 'Không xác định';
+        const email_kh = user.email_kh|| 'Không xác định';
+
+        // Tạo hàng mới trong bảng
+        const output = `
+        <tr data-id='${ma_kh}'>
+            <td>${ma_kh}</td>
+            <td>${ten_kh}</td>
+            <td>${sdt_kh}</td>
+            <td>${email_kh}</td>
+            <td>
+                <i class="fa-solid fa-trash-can delete btn_del"></i>
+                <i class="fa-solid fa-pen-to-square update btn_edit"></i>
+            </td>
+        </tr>`;
+        items.insertAdjacentHTML('beforeend', output);
+    } catch (error) {
+        console.error('Lỗi khi hiển thị người dùng:', error);
+    }
 
 	// delete
 const btnDel = document.querySelector(`[data-id = '${user.ma_kh}'] .btn_del`);
