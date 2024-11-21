@@ -223,7 +223,7 @@ var payment_limit_total = 0
   // Lấy thông tin từ sessionStorage
   let ten_kh = sessionStorage.getItem("ten_kh");
   let sdt_kh = decryptDES( sessionStorage.getItem("sdt_kh"), "Thats my Kung Fu");
-  let email_kh = decryptCaesarMult(sessionStorage.getItem("email_kh"), 7);
+  let email_kh = sessionStorage.getItem("email_kh");
 	let ten_san = sessionStorage.getItem("ten_san");
 	let khung_gio = sessionStorage.getItem("khung gio");
 	let gia_san = sessionStorage.getItem("gia");

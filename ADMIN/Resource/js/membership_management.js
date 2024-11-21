@@ -140,7 +140,7 @@ const displayItemsList = (user) => {
 					<td>${user.ma_nv}</td>
 					<td>${user.ten_nv}</td>
 					<td>${user.sdt_nv}</td>
-					<td>${decryptCaesarMult(user.email_nv, 7)}</td>
+					<td>${user.email_nv}</td>
 					<td>${decryptDES(user.dia_chi, 'Thats my Kung Fu')}</td>
 					<td>${user.chuc_vu}</td>
 					<td>
