@@ -1,205 +1,129 @@
-//<!-- display and search -->
- 	arrItemsList = [
 
-		{
-			invoiceDate : '22/12/2023',
-			billCode : 'HD0001',
-			userCode : 'KH0001',
-			employeeCode : 'NV001',
-			fieldReservationCode : 'PDS001',
-			payment : '30% Trực Tuyến',
-			startTime : '08H',
-			endTime : '9H30',
-			fieldPrice : '300.000đ',
-			typeService : 'TU',
-			nameSevice : 'Revive',
-			quantity : '10',
-			total : '450.000',
-		},
-		{
-			invoiceDate : '28/05/2024',
-			billCode : 'HD0002',
-			userCode : 'KH0002',
-			employeeCode : 'NV001',
-			fieldReservationCode : 'PDS002',
-			payment : '100% Trực Tuyến',
-			startTime : '16h',
-			endTime : '17H30',
-			fieldPrice : '300.000đ',
-			typeService : 'TU',
-			nameSevice : 'Revive',
-			quantity : '10',
-			total : '450.000',
-		},
-		{
-			invoiceDate : '18/05/2024',
-			billCode : 'HD0003',
-			userCode : 'KH0003',
-			employeeCode : 'NV001',
-			fieldReservationCode : 'PDS003',
-			payment : '30% Trực Tuyến',
-			startTime : '19H30',
-			endTime : '21H',
-			fieldPrice : '900.000đ',
-			typeService : 'TU',
-			nameSevice : 'Revive CM',
-			quantity : '10',
-			total : '1.050.000',
-		},
-		{
-			invoiceDate : '25/08/2024',
-			billCode : 'HD0004',
-			userCode : 'KH0004',
-			employeeCode : 'NV002',
-			fieldReservationCode : 'PDS005',
-			payment : '30% Trực Tuyến',
-			startTime : '20H',
-			endTime : '21H30',
-			fieldPrice : '300.000đ',
-			typeService : 'TU',
-			nameSevice : 'Revive',
-			quantity : '10',
-			total : '450.000',
-		},
+
+	const urtGetBill = 'http://localhost:8000/bill/module/v1/bill/all'
+	const urlPDS = 'http://localhost:8000/orders/module/v1/orders/detail?ma_pds='
+	const urlChi_Tiet_PDS = 'http://localhost:8000/order-items/module/v1/order-items/detail?ma_pds='
+
+	const option = {
+		method: 'GET',
+		headers: {
+				'Content-Type': 'application/json'
+		}
+	};
+	
+
+	fetch(urtGetBill, option)
+	.then (response =>{
+		if (!response.ok) {
+			return response.json().then(errorData => {
+					throw new Error(errorData.detail || 'Lỗi khi tải dữ liệu từ máy chủ');
+			});
+		}
+		return response.json();
+	})
+	.then (bills =>{
+		// console.log("🚀 ~ data:", data)
+		bills.forEach(bill => {
+			fetch(`${urlPDS}${bill.ma_pds}`, option)
+			.then(response => {
+				if (!response.ok) {
+						return response.json().then(errorData => {
+								throw new Error(errorData.detail || 'Lỗi khi tải dữ liệu từ máy chủ');
+						});
+				}
+				return response.json();
+			})
+			.then(order => {
+				// console.log("🚀 ~ data:", data)
+					fetch(`${urlChi_Tiet_PDS}${order.ma_pds}`, option)
+					.then(response => {
+						if (!response.ok) {
+								return response.json().then(errorData => {
+										throw new Error(errorData.detail || 'Lỗi khi tải dữ liệu từ máy chủ');
+								});
+						}
+						return response.json();
+					})
+					.then(orderItem => {
+						displayItemsList(bill, order, orderItem);
+					})
+					.catch(error => {
+						Swal.fire({
+								icon: 'error',
+								title: 'Đã xảy ra lỗi',
+								text: 'Lỗi: ' + error.message,
+						});
+					});
+			})
+			.catch(error => {
+				Swal.fire({
+						icon: 'error',
+						title: 'Đã xảy ra lỗi',
+						text: 'Lỗi: ' + error.message,
+				});
+			});
+		})
 		
-		{
-			invoiceDate : '43/03/2024',
-			billCode : 'HD0005',
-			userCode : 'KH0008',
-			employeeCode : 'NV002',
-			fieldReservationCode : 'PDS008',
-			payment : '100% Trực Tuyến',
-			startTime : '18H',
-			endTime : '18H30',
-			fieldPrice : '300.000đ',
-			typeService : 'TU',
-			nameSevice : 'Revive',
-			quantity : '10',
-			total : '450.000',
-		},
-		{
-			invoiceDate : '26/05/2024',
-			billCode : 'HD0006',
-			userCode : 'KH0009',
-			employeeCode : 'NV002',
-			fieldReservationCode : 'PDS010',
-			payment : '100% Trực Tuyến',
-			startTime : '15h30',
-			endTime : '17H',
-			fieldPrice : '300.000đ',
-			typeService : 'TU',
-			nameSevice : 'Revive',
-			quantity : '10',
-			total : '450.000',
-		},
-	]
+	})
+	.catch(error => {
+		Swal.fire({
+				icon: 'error',
+				title: 'Đã xảy ra lỗi',
+				text: 'Lỗi: ' + error.message,
+		});
+	});
+
+		
+	
 
 
-
-	function displayItemList(code_selected_arr = []) {
-		var items = document.getElementsByClassName('table-list-items')[0]
-		items.innerHTML =
-			`
+	var items = document.getElementsByClassName('table-list-items')[0]
+	items.innerHTML =
+		`
+		<tr>
+			<th>Mã Hóa Đơn</th>
+			<th>Mã Phiếu Đặt Sân</th>
+			<th>Mã Nhân Viên</th>
+			<th>Mã Khách Hàng</th>
+			<th>Ngày Lập</th>
+			<th>Ngày Đặt Sân</th>
+			<th>Giờ Bắt Đầu</th>
+			<th>Giờ Kết Thúc</th>
+			<th>Ghi Chú</th>
+			<th>Hình Thức Thanh Toán</th>
+			<th>Hạn Mức Thanh Toán</th>
+			<th>Tiền Sân</th>
+			<th>Tổng Tiền Hóa Đơn</th>
+		</tr>
+		`;
+		function displayItemsList(bill, order, orderItem) {
+			console.log("🚀 ~ displayItemsList ~ bill:", bill)
+			console.log("🚀 ~ displayItemsList ~ order:", order)
+			console.log("🚀 ~ displayItemsList ~ orderItem:", orderItem)
+			const output  =
+				`
 			<tr>
-				<td>Ngày Lập Hóa Đơn</td>
-				<td>Mã Hóa Đơn</td>
-				<td>Mã Khách Hàng</td>
-				<td>Mã Nhân Viên</td>
-				<td>Mã Phiếu Đặt Sân</td>
-				<td>Thanh Toán</td>
-				<td>Giờ Bắt Đầu</td>
-				<td>Giờ Kết Thúc</td>
-				<td>Tiền Sân</td>
-				<td>Loại Dịch Vụ</td>
-				<td>Tên Dịch Vụ</td>
-				<td>Số Lượng</td>
-				<td>Tổng Tiền</td>
+				<td class = "billCode">${bill.ma_hd}</td>
+				<td>${order.ma_pds}</td>
+				<td>${bill.ma_nv}</td>
+				<td>${order.ma_kh}</td>
+				<td>${new Date(bill.ngay_lap).toLocaleDateString('vi-VN', {day: '2-digit', month: '2-digit', year: 'numeric'})}</td>
+				<td>${new Date(orderItem.ngay_dat_san).toLocaleDateString('vi-VN', {day: '2-digit', month: '2-digit', year: 'numeric'})}</td>
+        <td>${new Date(orderItem.gio_bd).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</td>
+        <td>${new Date(orderItem.gio_kt).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</td>
+				<td>${orderItem.ghi_chu}</td>
+				<td>${bill.hinh_thuc_thanh_toan}</td>
+        <td>${bill.han_muc_thanh_toan}</td>
+        <td>${bill.tong_tien_hd}</td>
+        <td>${bill.tong_tien_hd}</td>
 			</tr>
 			`;
-		for (var i = 0; i < arrItemsList.length; i++) {
-			invoiceDate = arrItemsList[i].invoiceDate;
-			billCode = arrItemsList[i].billCode;
-			userCode = arrItemsList[i].userCode;
-			employeeCode = arrItemsList[i].employeeCode;
-			fieldReservationCode = arrItemsList[i].fieldReservationCode;
-			payment = arrItemsList[i].payment;
-			startTime = arrItemsList[i].startTime;
-			endTime = arrItemsList[i].endTime;
-			fieldPrice = arrItemsList[i].fieldPrice;
-			typeService = arrItemsList[i].typeService;
-			nameSevice = arrItemsList[i].nameSevice;
-			quantity = arrItemsList[i].quantity;
-			total = arrItemsList[i].total;
-
-			if (code_selected_arr.length > 0) {
-				console.log(billCode)
-				console.log(code_selected_arr)
-				if (!code_selected_arr.includes(billCode)) {
-					continue;
-				}
-			}
-
-			items.innerHTML +=
-			`
-			<tr>
-				<tr>
-				<td>${invoiceDate}</td>
-				<td class = "billCode">${billCode}</td>
-				<td>${userCode}</td>
-				<td>${employeeCode}</td>
-				<td>${fieldReservationCode}</td>
-				<td>${payment}</td>
-				<td>${startTime}</td>
-				<td>${endTime}</td>
-				<td>${fieldPrice}</td>
-				<td>${typeService}</td>
-				<td>${nameSevice}</td>
-				<td>${quantity}</td>
-				<td>${total}</td>
-			</tr>
-			</tr>
-			`;
-
-		}
-	}
-	displayItemList();
-
-
-
-	function selectResult() {
-		var elements = document.getElementsByClassName('billCode');
-		var selectedValue = document.getElementById('search').value;
-		var code_selected_arr = [];
-
-		// Duyệt qua các phần tử và lấy textContent
-		for (var i = 0; i < elements.length; i++) {
-				var itemCodeInf = elements[i].textContent.trim();
-				console.log(itemCodeInf, selectedValue)
-				if (itemCodeInf === selectedValue) {
-						code_selected_arr.push(itemCodeInf);
-						console.log(code_selected_arr[i])
-				}
-		}
-		displayItemList(code_selected_arr);
+		items.insertAdjacentHTML('beforeend', output);
 	}
 
-	function deleteValue() {
-		document.getElementById('search').value = '' ;
-		displayItemList()
-	}
-
-//<!-- autobox -->
 
 
 
-	let recommendList = [
-			'HD0001',
-			'HD0002',
-			'HD0003',
-			'HD0004',
-			'HD0005',
-			'HD0006',
-	]
 
 
 

@@ -147,6 +147,19 @@ img{
     width: 250px;
 }
 
+.item img{
+    width: 70%;
+    height: 110px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+}
+
+.item .img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
 
 .user .title{
     color: #47B2E4 !important;
@@ -392,6 +405,10 @@ i{
 
 }
 
+.titleItem{
+    margin: 20px 0px;
+}
+
 .payment-details .col-lg-6{
     padding-left: 0px;
 }
@@ -435,6 +452,24 @@ i{
 .pay-btn button:hover{
     background-color: #fff;
     color: #47b2e4;
+}
+
+.step_back{
+    background-color: #fff;
+    padding: 10px 10px 10px 43px !important;
+    border-radius: 5px;
+    font-size: 22px;
+    margin-bottom: 20px;
+    text-align: right;
+}
+.step_back a button{
+    background-color: #47b2e4;
+    color: #fff;
+    border: 1px solid #47b2e4;
+    padding: 4px 6px;
+    margin:10px auto;
+    border-radius: 5px;
+    margin-right: 20px;
 }
 
 .pay-btn p{

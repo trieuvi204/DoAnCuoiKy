@@ -82,7 +82,7 @@
                                                             <img src="../../img/avata/con_meo.jpg"
                                                                 alt="avata">
                                                         </div>
-                                                        <h3>Nguyễn Văn An</h3>
+                                                        <h3 class="userName">Nguyễn Văn An</h3>
                                                         <a class="title" href="account.html">Quản lý tài khoản</a>
                                                         <a class="inf-account" href="account.html#basic-inf">Thông tin tài khoản</a>
                                                         <a class="inf-account" href="account.html#list">Danh sách đặt sân</a>
@@ -115,7 +115,7 @@
                         <h3>Thông tin cơ bản</h3>
                         <div class="col-lg-6">
                             <div class="user-inf">
-                                <p class="black">Tên: Nguyễn Văn An</p>
+                                <p class="black">Tên: <span class="userName"> Nguyễn Văn An</span></p>
                                 <p>Ngày Sinh: 25/08/2004</p>
                             </div>
                             <div class="user-sex">
@@ -186,6 +186,20 @@
 
 <script>
     AOS.init();
+</script>
+
+<script>
+
+	// Lấy dữ liệu từ sessionStorage và thay đổi nội dung khi trang tải
+	const storedName = sessionStorage.getItem('ten_kh');
+
+if (storedName) {
+		// Gán dữ liệu từ sessionStorage vào thẻ HTML
+		const userNameElement = document.querySelector('.userName');
+		userNameElement.textContent = storedName;
+} else {
+		console.log('Không tìm thấy dữ liệu trong sessionStorage!');
+}
 </script>
 
 </html>

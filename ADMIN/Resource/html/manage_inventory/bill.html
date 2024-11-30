@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>THANH TOÁN</title>
+	<link rel="stylesheet" href="../../../../DoAnCuoiKy - user/Resources/css/pay/pay.css">
+	<link rel="icon" href="../../img/Logo/logo_tt.png" type="image/png" sizes="48x48">
+	<link rel="icon" href="Resources/img/Logo/logo_tt.png" type="image/png" sizes="48x48">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<!-- icon -->
+	<script src="https://kit.fontawesome.com/d5d4311ae6.js" crossorigin="anonymous"></script>
+
+	<!-- Fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inder&display=swap" rel="stylesheet">
+	<!-- AOS Libary -->
+	<link href="../../../../Vendors/aos-master/dist/aos.css" rel="stylesheet">
+	<script src="../../../../Vendors/aos-master/dist/aos.js"></script>
+
+
+	<!-- thư viện crypto-js -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
+
+	<!-- sweet alert -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<style>
+		/* set up */
+		* {
+			padding: 0px;
+			margin: 0px;
+			box-sizing: border-box;
+		}
+
+		/* Body */
+		body {
+			font-family: "Inder", sans-serif;
+			font-weight: 400;
+			font-style: normal;
+		}
+	</style>
+</head>
+
+<body id="pay-page" class="pay-page">
+
+	<div class="container">
+		<div class="pay">
+			<div class="row row-cols-3">
+				<div class="row">
+					<div class="title-pay title" data-aos="fade-up">
+						<h2 data-aos="fade-up">HÓA ĐƠN</h2>
+					</div>
+				</div>
+				<div class="row" data-aos="fade-up" data-aos-delay="100">
+					<div class="products">
+						<div class="row row-cols-5">
+							<div class="row service-inf" data-aos="fade-up" data-aos-delay="200">
+								<div class="row row-cols-2">
+									<div class="row items">
+										
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="payment-details">
+									<div class="tittle">
+										<p><i class="fa-solid fa-file-invoice-dollar"></i>Chi tiết thanh toán</p>
+									</div>
+									<div class="details">
+										<div class="row priceItemsList">
+											<p class="title-service">Aquarius</p>
+											<p class="title-price">1 x 137.000</p>
+										</div>
+										<div class="row">
+											<div>
+												<p class="total-title">Tổng thanh toán</p>
+												<p class="total-price"></p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="pay-btn">
+									<div class="row">
+										<div class="col-lg-8">
+											<p class="total-pay">Tổng thanh toán</p>
+											<p class="total-pay-price"></p>
+										</div>
+										<div class="col-lg-4">
+											<a href="inventory_drinks_management.html"><button id="step_back">Quay Lại</button></a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script>
+	AOS.init();
+</script>
+
+
+<script>
+
+
+function displayItems() {
+  const data = JSON.parse(sessionStorage.getItem('cart')); // Chuyển chuỗi JSON thành mảng
+  const itemsContainer = document.querySelector(".row.items"); // Lấy phần tử container để hiển thị các mục sản phẩm
+  const priceItemsList = document.querySelector(".priceItemsList"); // Lấy phần tử để hiển thị thông tin thanh toán
+  const totalPriceElement = document.querySelector(".total-price"); // Lấy phần tử để hiển thị tổng giá
+  const totalPayPriceElement = document.querySelector(".total-pay-price"); // Lấy phần tử để hiển thị tổng giá trị thanh toán
+	var ma_mh = ''
+	var so_luong = ''
+  if (Array.isArray(data)) {
+    itemsContainer.innerHTML = ''; // Xóa nội dung cũ trong container nếu cần
+    priceItemsList.innerHTML = ''; // Xóa nội dung cũ trong danh sách giá
+
+    let totalPrice = 0; // Khởi tạo biến tổng tiền
+
+    data.forEach((item) => {
+      // Giữ nguyên giá trị gốc của item.price để hiển thị
+      const priceStr = item.price; // Giá trị gốc dưới dạng chuỗi
+      const price = Number(priceStr.replace(/[^0-9]+/g, '')); // Loại bỏ ký tự không phải số để tính toán
+      const quantity = parseInt(item.quantity, 10); // Chuyển đổi chuỗi sang số nguyên
+			so_luong = quantity;
+			ma_mh = item.ma_mh
+
+      // Tạo phần tử HTML cho mỗi mục
+      const itemDiv = document.createElement('div');
+      itemDiv.classList.add('item'); // Thêm lớp CSS cho mỗi mục
+
+      // Thêm thông tin sản phẩm vào phần tử itemsContainer
+      itemDiv.innerHTML = `
+        <div class="row">
+          <div class="col-lg-6">
+            <img class="img" src="${item.imgSrc}" alt="${item.name}">
+          </div>
+          <div class="col-lg-6">
+            <div class="titleItem" id="title">${item.name}</div>
+            <div class="inf">
+              <p>Giá Nhập: <span class="gia">${priceStr}</span></p>
+              <p>Số Lượng: <span class="soluong">${item.quantity}</span></p>
+            </div>
+          </div>
+        </div>
+      `;
+
+      // Thêm phần tử itemDiv vào container
+      itemsContainer.appendChild(itemDiv);
+
+      // Tạo phần tử thông tin thanh toán cho mỗi mục và thêm vào priceItemsList
+      const priceItemDiv = document.createElement('div');
+      priceItemDiv.classList.add('row');
+      priceItemDiv.innerHTML = `
+        <div class="col-6">
+          <p class="title-service">${item.name}</p>
+        </div>
+        <div class="col-6">
+          <p class="title-price">${item.quantity} x ${priceStr}</p>
+        </div>
+      `;
+
+      // Thêm phần tử priceItemDiv vào danh sách giá
+      priceItemsList.appendChild(priceItemDiv);
+
+      // Tính tổng tiền (sử dụng giá trị số để tính toán)
+      if (!isNaN(price) && !isNaN(quantity)) {
+        totalPrice += price * quantity;
+      }
+    });
+
+    // Cập nhật phần tử tổng thanh toán
+    if (totalPriceElement) {
+      totalPriceElement.textContent = totalPrice.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+    }
+
+    // Cập nhật phần tử hiển thị tổng giá trị thanh toán
+    if (totalPayPriceElement) {
+      totalPayPriceElement.textContent = totalPrice.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+    }
+
+
+// fetch
+const url_orders_comodities = 'http://localhost:8000/order_commodity/module/v1/order_commodity/create';
+
+		const pay_btn = document.getElementById('pay_btn');
+		pay_btn.addEventListener('click', (e) => {
+			e.preventDefault();
+			handleCreatePN();
+		});
+
+
+	
+	function handleCreatePN() {
+		
+			// Lấy giá trị từ các input
+			
+			const ma_nv = sessionStorage.getItem("ma_nv");
+			var formDataStaff = {
+				ma_nv: ma_nv, // Đảm bảo ma_nv là chuỗi
+				ten_pn: 'Phiếu Nhập', // Giữ nguyên chuỗi
+				tong_tien_pn: totalPrice // Giữ nguyên giá trị là số
+			};
+			
+      createPN(formDataStaff);
+  }
+	
+	function createPN (data) {
+		var option = {
+			method: 'POST',
+			headers: {
+				'content-Type': 'application/json'
+			},
+			body: JSON.stringify(data)
+		};
+	
+	
+		fetch(url_orders_comodities, option)
+		.then(function (response) {
+			// Kiểm tra xem response có thành công (status 200) không
+			if (!response.ok) {
+				return response.json().then(errorData => {
+					// Trả về lỗi chi tiết nếu có
+					throw new Error(errorData.detail || 'Lỗi khi tải dữ liệu từ máy chủ');
+				});
+			}
+			return response.json(); // Lấy dữ liệu JSON từ response nếu thành công
+		})
+		.then(function (response) {
+			const ma_pn = response.ma_pn; // Lấy mã phiếu đặt sân từ response
+
+			var data = sessionStorage.getItem('cart');
+
+			// Chuyển đổi chuỗi JSON thành mảng
+			try {
+					data = JSON.parse(data);
+
+					// Kiểm tra nếu data là mảng
+					if (Array.isArray(data)) {
+						// Lặp qua toàn bộ mảng data
+						data.forEach(item => {
+							const ma_mh = item.ma_mh; // Lấy mã mặt hàng
+							const so_luong = item.quantity; // Lấy số lượng
+
+							// Gọi hàm cho từng object trong data
+							create_orders_comodities_detail(ma_pn, ma_mh, so_luong);
+							});
+					} else {
+							console.error("🚨 ~ Dữ liệu không phải là mảng:", data);
+					}
+			} catch (error) {
+						console.error("🚨 ~ Lỗi khi phân tích JSON:", error);
+			}
+		})
+
+		.catch(function (error) {
+			// Hiển thị lỗi cho người dùng
+			Swal.fire({
+				icon: "error",
+				text: "Registration failed	. Error: " + error.message,
+			});
+		});
+	}
+	
+
+// fetch
+
+
+  } else {
+    console.log("No data found or data is not an array");
+  }
+}
+
+
+function create_orders_comodities_detail(ma_pn, ma_mh, so_luong) {		
+
+	const url_orders_comodities_detail = 'http://localhost:8000/order_commodity_detail/module/v1/order_commodity_detail/create';
+
+	// Chuyển đổi thành chuỗi ISO string
+	const orderItemsData = {
+		ma_pn: ma_pn,
+		ma_mh: ma_mh, // Giả sử ma_pds là string
+		so_luong: so_luong 
+	};
+
+
+	var option = {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(orderItemsData)
+	};
+
+	fetch(url_orders_comodities_detail, option)
+		.then(function (response) {
+			if (!response.ok) {
+				return response.json().then(errorData => {
+					throw new Error(errorData.detail || 'Lỗi khi tạo chi tiết phiếu nhập');
+				});
+			}
+			return response.json();
+		})
+		.catch(function (error) {
+			Swal.fire({
+				icon: "error",
+				text: "Lỗi khi tạo chi tiết phiếu nhập: " + error.message,
+			});
+		});
+}
+
+
+
+
+
+
+displayItems();
+
+var payment_limit_total = 0 
+
+
+
+
+// let imgElement = document.querySelector(".field-img");
+// imgElement.src = `../../img/field_list/${ma_san}.jpg`
+
+// document.addEventListener('DOMContentLoaded', function() {
+// 	var payment_method = document.querySelector('#payment-method');
+// 	var payment_limit = document.querySelector('#payment-limit');
+
+// 	payment_method.addEventListener('change', function() {
+// 			if(payment_method.value === "Thanh Toán Tại Sân") {
+// 					payment_limit.selectedIndex = 1;
+// 					payment_limit_total = 30/100;
+// 			}
+// 			if(payment_method.value === "Thẻ Ngân Hàng") {
+// 					payment_limit.selectedIndex = 0;
+// 					payment_limit_total = 1;
+
+// 			}
+// 			document.querySelector(".total-price").innerHTML = `${gia_san * payment_limit_total}đ`;
+// 			document.querySelector(".total-pay-price").innerHTML = `${gia_san * payment_limit_total}đ`;
+// 	});
+// });
+
+
+var pay_btn = document.getElementById('pay_btn');
+
+if (pay_btn) { // Kiểm tra pay_btn tồn tại
+  pay_btn.addEventListener('click', function(e) {
+		e.preventDefault();
+		var total = document.querySelector(".total-pay-price").innerHTML 
+	sessionStorage.setItem('total-pay-price', total);
+
+
+  });
+} else {
+  console.error('Phần tử với ID "pay_btn" không tồn tại.');
+}
+
+
+
+
+
+
+
+// 	// Hàm tìm nghịch đảo modulo
+// function findMultInverse(a, m) {
+// 	let t1 = 0, t2 = 1, r1 = m, r2 = a, q, t, r;
+
+// 	while (r2 > 0) {
+// 		q = Math.floor(r1 / r2);
+// 		r = r1 - q * r2;
+// 		r1 = r2;
+// 		r2 = r;
+
+// 		t = t1 - q * t2;
+// 		t1 = t2;
+// 		t2 = t;
+// 	}
+
+// 	if (t1 < 0) {
+// 		t1 += m;
+// 	}
+
+// 	return t1;
+// }
+
+// // Hàm giải mã ký tự theo Caesar Multiplicative
+// function divideChar(c, key, modulus) {
+// 	let ascii_val = c.charCodeAt(0);
+// 	let new_val;
+
+// 	if (ascii_val >= 32 && ascii_val <= 126) {
+// 		new_val = ((ascii_val - 32) * key) % modulus + 32;
+// 		return String.fromCharCode(new_val);
+// 	} else {
+// 		return c;
+// 	}
+// }
+
+// // Hàm giải mã toàn bộ chuỗi
+// function decryptCaesarMult(enc, k) {
+// 	const modulus = 95; // ASCII 32-126, phạm vi 95 ký tự có thể in được
+// 	let k_inverse = findMultInverse(k, modulus); // Tìm nghịch đảo của key
+// 	let decrypted = '';
+
+// 	for (let i = 0; i < enc.length; i++) {
+// 		decrypted += divideChar(enc[i], k_inverse, modulus);
+// 	}
+
+// 	return decrypted;
+// }
+
+// // Hàm giải mã DES
+// function decryptDES(encryptedHex, key) {
+// 	// Chuyển đổi chuỗi hex thành byte array
+// 	var encryptedBytes = CryptoJS.enc.Hex.parse(encryptedHex);
+
+// 	// Chuyển khóa sang dạng byte array
+// 	var keyBytes = CryptoJS.enc.Utf8.parse(key);
+
+// 	// IV - sử dụng cùng giá trị với mã C# của bạn
+// 	var iv = CryptoJS.enc.Hex.parse('0000000000000000'); // Đặt IV thành 0x0 cho mỗi byte
+
+// 	// Giải mã DES với chế độ CBC và padding PKCS7
+// 	var decrypted = CryptoJS.DES.decrypt(
+// 		{
+// 			ciphertext: encryptedBytes
+// 		},
+// 		keyBytes,
+// 		{
+// 			mode: CryptoJS.mode.CBC,
+// 			padding: CryptoJS.pad.Pkcs7,
+// 			iv: iv
+// 		}
+// 	);
+
+// 	// Chuyển đổi kết quả giải mã sang chuỗi UTF-8
+// 	return decrypted.toString(CryptoJS.enc.Utf8);
+// }
+
+
+</script>
+</html>

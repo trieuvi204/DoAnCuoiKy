@@ -146,9 +146,8 @@
 												</div>
 												<div class="select_method">
 													<select name="payment-method" id="payment-method">
-														<option value="Chọn phương thức thanh toán" selected disabled>Phương Thức TT</option>
-														<option value="Thẻ Ngân Hàng">Thẻ Ngân Hàng</option>
-														<option value="Thanh Toán Tại Sân">Thanh Toán Tại Sân</option>
+														<option value="bank card">Thẻ Ngân Hàng</option>
+														<option value="direct payment">Thanh Toán Tại Sân</option>
 													</select>
 												</div>
 											</div>
@@ -161,8 +160,8 @@
 												</div>
 												<div class="select_method">
 													<select name="payment-limit" id="payment-limit" disabled>
-														<option value="Thanh toán 100%">Thanh toán 100%</option>
-														<option value="Cọc 30% sân">Cọc 30% sân</option>
+														<option value="100%">Thanh toán 100%</option>
+														<option value="30%">Cọc 30% sân</option>
 													</select>
 												</div>
 											</div>
@@ -246,11 +245,11 @@ document.addEventListener('DOMContentLoaded', function() {
 	var payment_limit = document.querySelector('#payment-limit');
 
 	payment_method.addEventListener('change', function() {
-			if(payment_method.value === "Thanh Toán Tại Sân") {
+			if(payment_method.value === "direct payment") {
 					payment_limit.selectedIndex = 1;
 					payment_limit_total = 30/100;
 			}
-			if(payment_method.value === "Thẻ Ngân Hàng") {
+			if(payment_method.value === "bank card") {
 					payment_limit.selectedIndex = 0;
 					payment_limit_total = 1;
 
@@ -260,6 +259,8 @@ document.addEventListener('DOMContentLoaded', function() {
 	});
 });
 
+const urlCreateBill ='http://localhost:8000/bill/module/v1/bill/create'
+const url_orderItems = 'http://localhost:8000/order-items/module/v1/order-items/create';
 
 var pay_btn = document.getElementById('pay_btn');
 
@@ -267,7 +268,7 @@ if (pay_btn) { // Kiểm tra pay_btn tồn tại
   pay_btn.addEventListener('click', function(e) {
 		e.preventDefault();
 		var total = document.querySelector(".total-pay-price").innerHTML 
-	sessionStorage.setItem('total-pay-price', total);
+		sessionStorage.setItem('total-pay-price', total);
 
     var payment_limit = document.querySelector('#payment-limit');
 
@@ -279,16 +280,118 @@ if (pay_btn) { // Kiểm tra pay_btn tồn tại
       });
     }
 		else{
-			window.location.href = '../bill/bill.html'
+			const ma_pds = sessionStorage.getItem('ma_pds');
+			const date = sessionStorage.getItem('NGAY_DAT_SAN');
+			const start = sessionStorage.getItem('GIO_BAT_DAU');
+			const end = sessionStorage.getItem('GIO_KET_THUC');
+			const ghi_chu = sessionStorage.getItem('GHI_CHU');
+
+			createOrderItems(ma_pds, date, start, end, ghi_chu, total);
 		}
   });
 } else {
   console.error('Phần tử với ID "pay_btn" không tồn tại.');
 }
 
+function createOrderItems(ma_pds, date, start, end, ghi_chu, total) {		
+	const fixedEnd = end.length === 5 ? end + ":00" : end; // Thêm ":00" nếu thiếu phần giây
+
+	// Kết hợp ngày và giờ bắt đầu, giờ kết thúc
+	const dateObj = new Date(date);
+if (isNaN(dateObj.getTime())) {
+    throw new Error("Ngày không hợp lệ");
+}
+
+const gioBd = new Date(Date.UTC(dateObj.getFullYear(), dateObj.getMonth(), dateObj.getDate(), start.split(':')[0], start.split(':')[1]));
+const gioKt = new Date(Date.UTC(dateObj.getFullYear(), dateObj.getMonth(), dateObj.getDate(), fixedEnd.split(':')[0], fixedEnd.split(':')[1]));
 
 
+	
+	sessionStorage.setItem("ngay_dat_san", dateObj)
+	// Chuyển đổi thành chuỗi ISO string
+	const orderItemsData = {
+		ma_san: sessionStorage.getItem("ma_san"), // Giả sử ma_san là string
+		ma_pds: ma_pds, // Giả sử ma_pds là string
+		ngay_dat_san: dateObj.toISOString(),  // Chuyển đổi ngày thành chuỗi ISO string
+		gio_bd: gioBd.toISOString(),  // Chuyển đổi giờ bắt đầu thành chuỗi ISO string
+		gio_kt: gioKt.toISOString(),  // Chuyển đổi giờ kết thúc thành chuỗi ISO string
+		ghi_chu: ghi_chu  // Lấy ghi chú từ input (giả sử là chuỗi)
+	};
+	
+	
+	var option = {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(orderItemsData)
+	};
 
+	fetch(url_orderItems, option)
+	.then(function (response) {
+		if (!response.ok) {
+			return response.json().then(errorData => {
+				throw new Error(errorData.detail || 'Lỗi khi tạo chi tiết phiếu đặt sân');
+			});
+		}
+		return response.json();
+	})
+	.then(function(response){
+
+		var hinh_thuc_thanh_toan = document.querySelector('#payment-method')
+		console.log("🚀 ~ .then ~ hinh_thuc_thanh_toan:", hinh_thuc_thanh_toan.value)
+		var han_muc_thanh_toan = document.querySelector('#payment-limit');
+		console.log("🚀 ~ .then ~ han_muc_thanh_toan:", han_muc_thanh_toan.value)
+
+		total = total.replace(/đ$/, ''); // Loại bỏ ký tự 'đ' ở cuối chuỗi
+		total = parseInt(total, 10);
+		console.log("🚀 ~ .then ~ total:", total)
+		
+		createBill(ma_pds, total, hinh_thuc_thanh_toan.value, han_muc_thanh_toan.value)
+		window.location.href = '../bill/bill.html'
+	})
+	.catch(function (error) {
+		Swal.fire({
+			icon: "error",
+			text: "Lỗi khi tạo chi tiết phiếu đặt sân: " + error.message,
+		});
+	});
+}
+
+function createBill(ma_pds, tong_tien_hd, hinh_thuc_thanh_toan, han_muc_thanh_toan) {
+
+	const billData = {
+		ma_pds : ma_pds,
+		tong_tien_hd: tong_tien_hd,
+		hinh_thuc_thanh_toan: hinh_thuc_thanh_toan,
+		han_muc_thanh_toan: han_muc_thanh_toan
+	}
+	console.log("🚀 ~ createBill ~ billData:", billData)
+
+	var option = {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(billData)
+	};
+
+	fetch(urlCreateBill, option)
+	.then(function (response) {
+		if (!response.ok) {
+			return response.json().then(errorData => {
+				throw new Error(errorData.detail || 'Lỗi khi tạo hóa đơn');
+			});
+		}
+		return response.json();
+	})
+	.catch(function (error) {
+		Swal.fire({
+			icon: "error",
+			text: "Lỗi khi tạo hóa đơn: " + error.message,
+		});
+	});
+}
 
 
 

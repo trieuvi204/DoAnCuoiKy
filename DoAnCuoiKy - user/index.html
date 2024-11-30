@@ -83,7 +83,7 @@
 																<div class="user-img">
 																	<img src="Resources/img/avata/con_meo.jpg" alt="avata">
 																</div>
-																<h3>Nguyễn Văn An</h3>
+																<h3 class="userName">Nguyễn Văn An</h3>
 																<a class="title" href="Resources/html/manage-account/account.html">Quản lý tài khoản</a>
 																<a class="inf-account" href="Resources/html/manage-account/account.html#basic-inf">Thông
 																	tin tài khoản</a>
@@ -498,5 +498,19 @@
 <script src="Resources/js/zalo.js"></script>
 <!-- slideShow -->
 <script src="Resources/js/slide_show_img.js"></script>
+
+<script>
+
+	// Lấy dữ liệu từ sessionStorage và thay đổi nội dung khi trang tải
+	const storedName = sessionStorage.getItem('ten_kh');
+
+if (storedName) {
+		// Gán dữ liệu từ sessionStorage vào thẻ HTML
+		const userNameElement = document.querySelector('.userName');
+		userNameElement.textContent = storedName;
+} else {
+		console.log('Không tìm thấy dữ liệu trong sessionStorage!');
+}
+</script>
 
 </html>

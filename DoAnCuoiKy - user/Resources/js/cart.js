@@ -75,6 +75,7 @@ function addCartClicked(event)
 {
     var button = event.target
     var shopProducts =  button.parentElement.parentElement.parentElement.parentElement.parentElement
+    console.log("🚀 ~ shopProducts:", shopProducts)
     var title = shopProducts.getElementsByClassName('product-title')[0].innerText
     var price = shopProducts.getElementsByClassName('product-price')[0].innerText
     var quantity = shopProducts.getElementsByClassName('card-quantity')[0].value

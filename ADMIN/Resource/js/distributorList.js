@@ -129,7 +129,6 @@ var items = document.querySelector('.table-list-items');
 items.innerHTML = `
 <tr>
 	<td>Mã Nhà PP</td>
-	<td>Mã Nhân Viên</td>
 	<td>Tên NPP</td>
 	<td>Địa Chỉ</td>
 	<td>Số Điện thoại</td>
@@ -141,7 +140,6 @@ const displayItemsList = (user) => {
 	const output = `
 			<tr data-id='${user.ma_npp}'>
 				<td>${user.ma_npp}</td>
-				<td>${user.ma_nv}</td>
 				<td>${user.ten_npp}</td>
 				<td>${decryptDES(user.dc_npp,'Thats my Kung Fu')}</td>
 				<td>${decryptExtCaesarMult(user.sdt_npp,7)}</td>

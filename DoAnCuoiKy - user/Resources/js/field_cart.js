@@ -70,49 +70,75 @@ var date = ''
 var start = ''
 var end = ''
 function addCartClicked(event) {
-	var button = event.target
-	var shopProducts = button.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement
-	var title = shopProducts.getElementsByClassName('product-title')[0].innerText
-	var priceText = shopProducts.getElementsByClassName('product-price')[0].innerText
-	var productImg = shopProducts.getElementsByClassName('product-Img')[0].src
-	var	date_tmp = shopProducts.getElementsByClassName('select-date')[0].value
-	var	start_tmp = shopProducts.getElementsByClassName('startMatch')[0].value
-	var	end_tmp = shopProducts.getElementsByClassName('endMatch')[0].value
-	var note = shopProducts.getElementsByClassName('note')[0].value
+	var button = event.target;
+	var shopProducts = button.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement;
+	console.log("🚀 ~ addCartClicked ~ shopProducts:", shopProducts)
+	var title = shopProducts.getElementsByClassName('product-title')[0].innerText;
+	var priceText = shopProducts.getElementsByClassName('product-price')[0].innerText;
+	var productImg = shopProducts.getElementsByClassName('product-Img')[0].src;
+	var date_tmp = shopProducts.getElementsByClassName('select-date')[0].value;
+	var start_tmp = shopProducts.getElementsByClassName('startMatch')[0].value;
+	var end_tmp = shopProducts.getElementsByClassName('endMatch')[0].value;
+	var note = shopProducts.getElementsByClassName('note')[0].value;
 
 	var price = parseFloat(priceText.replace(/[^0-9.-]+/g, ""));
 
+	// Lưu thông tin vào sessionStorage
 	sessionStorage.setItem("khung gio", `${start_tmp} - ${end_tmp}`);
-
+	sessionStorage.setItem("GHI_CHU", note);
+	sessionStorage.setItem("NGAY_DAT_SAN", date_tmp);
+	sessionStorage.setItem("GIO_BAT_DAU", start_tmp);
+	sessionStorage.setItem("GIO_KET_THUC", end_tmp);
 
 	ghi_chu = note;
 	date = date_tmp;
 	start = start_tmp;
 	end = end_tmp;
+
 	// Chuyển start và end thành phút để tính toán
-function convertToMinutes(time) {
-	const [hours, minutes] = time.split(':').map(Number);  // Tách giờ và phút, chuyển sang số
-	return hours * 60 + minutes;  // Trả về tổng phút
-}
+	function convertToMinutes(time) {
+			const [hours, minutes] = time.split(':').map(Number);  // Tách giờ và phút, chuyển sang số
+			return hours * 60 + minutes;  // Trả về tổng phút
+	}
 
-var startInMinutes = convertToMinutes(start);
-var endInMinutes = convertToMinutes(end);
-
-var time = (endInMinutes - startInMinutes)/60;
-sessionStorage.setItem("gia", price * time);
+	var startInMinutes = convertToMinutes(start);
+	var endInMinutes = convertToMinutes(end);
+	var time = (endInMinutes - startInMinutes) / 60;
+	sessionStorage.setItem("gia", price * time);
 
 	// Chỉnh sửa để lấy đầy đủ giờ: phút:giây
 	if (start.length === 5) {
-		start = start + ":00"; // Thêm giây vào nếu không có giây
+			start = start + ":00"; // Thêm giây vào nếu không có giây
 	}
-	// Chỉnh sửa để lấy đầy đủ giờ: phút:giây
 	if (end.length === 5) {
-		end = end + ":00"; // Thêm giây vào nếu không có giây
+			end = end + ":00"; // Thêm giây vào nếu không có giây
 	}
 
-	addProductToCart(title, price, productImg, date, start, end, note, time)
-	updatetotal()
+	// Kiểm tra điều kiện trước khi tiếp tục
+	if (new Date(date_tmp) <= new Date()) {
+			Swal.fire({
+					icon: 'error',
+					text: 'Ngày đặt phải lớn hơn ngày hiện tại.',
+			});
+			return;
+	}
 
+
+	if (startInMinutes >= endInMinutes) {
+			Swal.fire({
+					icon: 'error',
+					text: 'Giờ bắt đầu phải nhỏ hơn giờ kết thúc.',
+			});
+			return;
+	}
+
+	Swal.fire({
+		icon: 'success',
+		text: 'Thêm vào giỏ hàng thành công.',
+});
+	// Nếu điều kiện hợp lệ, tiếp tục thêm sản phẩm vào giỏ hàng
+	addProductToCart(title, price, productImg, date, start, end, note, time);
+	updatetotal();
 }
 
 
@@ -125,7 +151,10 @@ function addProductToCart(title, price, productImg, date, start, end, note, time
 	var cartItemsNames = cartItems.getElementsByClassName('cart-product-title');
 	for (var i = 0; i < cartItemsNames.length; i++) {
 		if (cartItemsNames[i].innerText === title) {
-			alert("Bạn đã thêm vật phẩm này vào giỏ hàng");
+			Swal.fire({
+				icon: 'error',
+				text: 'Bạn đã thêm vật phẩm này vào giỏ hàng !!!!',
+		});
 			return;
 		}
 	}
@@ -192,6 +221,8 @@ function updatetotal() {
 	}
 	document.getElementsByClassName("total-price")[0].innerText = total.toLocaleString('vi-vn') + "đ";
 }
+
+
 
 const url_getAll = 'http://localhost:8000/san/module/v1/san/all';
 const url_getOne = 'http://localhost:8000/loaisan/module/v1/loaisan/all';
@@ -271,55 +302,19 @@ fetch(url_getAll, option)
 	});
 
 
+	const url_orders = 'http://localhost:8000/orders/module/v1/orders/create';
 	handleCreatePDS();
 
 
-const url_orders = 'http://localhost:8000/orders/module/v1/orders/create';
-const url_orderItems = 'http://localhost:8000/order-items/module/v1/order-items/create';
-function createPDS (data) {
-  var option = {
-    method: 'POST',
-    headers: {
-      'content-Type': 'application/json'
-    },
-    body: JSON.stringify(data)
-  };
-
-
-  fetch(url_orders, option)
-  .then(function (response) {
-    // Kiểm tra xem response có thành công (status 200) không
-    if (!response.ok) {
-      return response.json().then(errorData => {
-        // Trả về lỗi chi tiết nếu có
-        throw new Error(errorData.detail || 'Lỗi khi tải dữ liệu từ máy chủ');
-      });
-    }
-    return response.json(); // Lấy dữ liệu JSON từ response nếu thành công
-  })
-	.then(function (response) {
-		const ma_pds = response.ma_pds; // Lấy mã phiếu đặt sân từ response
-
-		// Gọi hàm để tạo chi tiết phiếu đặt sân
-		createOrderItems(ma_pds, date, start, end, ghi_chu);
-	})
-  .catch(function (error) {
-    // Hiển thị lỗi cho người dùng
-    Swal.fire({
-      icon: "error",
-      text: "Registration failed	. Error: " + error.message,
-    });
-  });
-}
-
-function handleCreatePDS() {
-  var createBtn = document.querySelector('button.pay-btn');
-  createBtn.onclick = function(event) {
-    event.preventDefault(); // Ngăn chặn hành động mặc định của nút
-
-    // Lấy giá trị từ các input
-    
-		const ma_kh = sessionStorage.getItem("ma_kh");
+	
+	function handleCreatePDS() {
+		var createBtn = document.querySelector('button.pay-btn');
+		createBtn.onclick = function(event) {
+			event.preventDefault(); // Ngăn chặn hành động mặc định của nút
+			
+			// Lấy giá trị từ các input
+			
+			const ma_kh = sessionStorage.getItem("ma_kh");
       var formDataStaff = {
 				ma_kh: ma_kh,
         ghi_chu: ghi_chu
@@ -327,58 +322,41 @@ function handleCreatePDS() {
       createPDS(formDataStaff);
     }
   }
-
 	
-	function createOrderItems(ma_pds, date, start, end, ghi_chu) {		
-  // Kết hợp ngày và giờ bắt đầu, giờ kết thúc
-  const ngayDatSan = new Date(date);  // Chuyển đổi ngày
-  const gioBd = new Date(date + 'T' + start);  // Kết hợp ngày và giờ bắt đầu
-  const gioKt = new Date(date + 'T' + end);  // Kết hợp ngày và giờ kết thúc
-
-	sessionStorage.setItem("ngay_dat_san", ngayDatSan)
-  // Chuyển đổi thành chuỗi ISO string
-  const orderItemsData = {
-    ma_san: sessionStorage.getItem("ma_san"), // Giả sử ma_san là string
-    ma_pds: ma_pds, // Giả sử ma_pds là string
-    ngay_dat_san: ngayDatSan.toISOString(),  // Chuyển đổi ngày thành chuỗi ISO string
-    gio_bd: gioBd.toISOString(),  // Chuyển đổi giờ bắt đầu thành chuỗi ISO string
-    gio_kt: gioKt.toISOString(),  // Chuyển đổi giờ kết thúc thành chuỗi ISO string
-    ghi_chu: ghi_chu  // Lấy ghi chú từ input (giả sử là chuỗi)
-  };
-	
-	
+	function createPDS (data) {
 		var option = {
 			method: 'POST',
 			headers: {
-				'Content-Type': 'application/json'
+				'content-Type': 'application/json'
 			},
-			body: JSON.stringify(orderItemsData)
+			body: JSON.stringify(data)
 		};
 	
-		fetch(url_orderItems, option)
-			.then(function (response) {
-				if (!response.ok) {
-					return response.json().then(errorData => {
-						throw new Error(errorData.detail || 'Lỗi khi tạo chi tiết phiếu đặt sân');
-					});
-				}
-				return response.json();
-			})
-			.then(function (response) {
-				window.location.href = '../../pay/pay.html';
-			})
-			.catch(function (error) {
-				Swal.fire({
-					icon: "error",
-					text: "Lỗi khi tạo chi tiết phiếu đặt sân: " + error.message,
+	
+		fetch(url_orders, option)
+		.then(function (response) {
+			// Kiểm tra xem response có thành công (status 200) không
+			if (!response.ok) {
+				return response.json().then(errorData => {
+					// Trả về lỗi chi tiết nếu có
+					throw new Error(errorData.detail || 'Lỗi khi tải dữ liệu từ máy chủ');
 				});
+			}
+			return response.json(); // Lấy dữ liệu JSON từ response nếu thành công
+		})
+		.then(function (response) {
+			const ma_pds = response.ma_pds; // Lấy mã phiếu đặt sân từ response
+			sessionStorage.setItem('ma_pds', ma_pds);
+			window.location.href = '../../pay/pay.html'
+		})
+		.catch(function (error) {
+			// Hiển thị lỗi cho người dùng
+			Swal.fire({
+				icon: "error",
+				text: "Registration failed	. Error: " + error.message,
 			});
+		});
 	}
 	
-
-document.getElementById('add_cart').addEventListener('click', function () {
-	Swal.fire({
-		text: "Thêm vào giỏ hàng thành công !!!",
-		icon: "success"
-	});
-	})
+	
+	

@@ -1,202 +1,89 @@
 
-// arrs
-  arrItemsList = [
 
-    {
-      billCOde: 'HD001',
-      userCode: 'KH009',
-      paymentDate: '21/04/2024',
-      startTime: '16h00',
-      endTime: '17h30',
-      fieldPrice: '300.000 đ',
-      payments: 'TT Trực Tuyến',
-      paymentsLimit: '100%',
-      paid: '300.000 đ',
-      unpaid: '0 đ'
-    },
-    {
-      billCOde: 'HD002',
-      userCode: 'KH008',
-      paymentDate: '25/08/2024',
-      startTime: '15h00',
-      endTime: '16h30',
-      fieldPrice: '300.000 đ',
-      payments: 'TT Trực Tiếp',
-      paymentsLimit: '100%',
-      paid: '300.000 đ',
-      unpaid: '0 đ'
-    },
-    {
-      billCOde: 'HD003',
-      userCode: 'KH007',
-      paymentDate: '04/01/2024',
-      startTime: '19h00',
-      endTime: '20h30',
-      fieldPrice: '300.000 đ',
-      payments: 'TT Trực Tuyến',
-      paymentsLimit: '100%',
-      paid: '300.000 đ',
-      unpaid: '0 đ'
-    },
-    {
-      billCOde: 'HD004',
-      userCode: 'KH006',
-      paymentDate: '03/08/2024',
-      startTime: '21h00',
-      endTime: '22h30',
-      fieldPrice: '900.000 đ',
-      payments: 'TT Trực Tuyến',
-      paymentsLimit: '30%',
-      paid: '270.000 đ',
-      unpaid: '630.000 đ'
-    },
-    {
-      billCOde: 'HD005',
-      userCode: 'KH004',
-      paymentDate: '19/7/2024',
-      startTime: '16h00',
-      endTime: '17h30',
-      fieldPrice: '300.000 đ',
-      payments: 'TT Trực Tuyến',
-      paymentsLimit: '30%',
-      paid: '90.000 đ',
-      unpaid: '210.000 đ'
-    },
-    {
-      billCOde: 'HD006',
-      userCode: 'KH004',
-      paymentDate: '04/03/2024',
-      startTime: '16h00',
-      endTime: '17h30',
-      fieldPrice: '300.000 đ',
-      payments: 'TT Trực Tuyến',
-      paymentsLimit: '100%',
-      paid: '300.000 đ',
-      unpaid: '0 đ'
-    },
-    {
-      billCOde: 'HD007',
-      userCode: 'KH003',
-      paymentDate: '17/04/2024',
-      startTime: '21h00',
-      endTime: '22hh00',
-      fieldPrice: '200.000 đ',
-      payments: 'TT Trực Tuyến',
-      paymentsLimit: '100%',
-      paid: '200.000 đ',
-      unpaid: '0 đ'
-    },
-    {
-      billCOde: 'HD008',
-      userCode: 'KH002',
-      paymentDate: '21/04/2024',
-      startTime: '18h00',
-      endTime: '19h30',
-      fieldPrice: '300.000 đ',
-      payments: 'TT Trực Tuyến',
-      paymentsLimit: '30%',
-      paid: '90.000 đ',
-      unpaid: '210.000 đ'
-    },
-    {
-      billCOde: 'HD009',
-      userCode: 'KH001',
-      paymentDate: '13/6/2024',
-      startTime: '16h00',
-      endTime: '17h30',
-      fieldPrice: '300.000 đ',
-      payments: 'TT Trực Tuyến',
-      paymentsLimit: '30%%',
-      paid: '90.000 đ',
-      unpaid: '210.000 đ'
-    },
-    {
-      billCOde: 'HD010',
-      userCode: 'KH0012',
-      paymentDate: '14/05/2024',
-      startTime: '16h00',
-      endTime: '17h30',
-      fieldPrice: '300.000 đ',
-      payments: 'TT Trực Tuyến',
-      paymentsLimit: '100%',
-      paid: '300.000 đ',
-      unpaid: '0 đ'
-    },
-    {
-      billCOde: 'HD011',
-      userCode: 'KH011',
-      paymentDate: '26/07/2024',
-      startTime: '17h00',
-      endTime: '18h30',
-      fieldPrice: '300.000 đ',
-      payments: 'TT Trực Tuyến',
-      paymentsLimit: '30%',
-      paid: '90.000 đ',
-      unpaid: '210.000 đ'
-    },
-    {
-      billCOde: 'HD012',
-      userCode: 'KH012',
-      paymentDate: '25/08/2024',
-      startTime: '16h00',
-      endTime: '17h30',
-      fieldPrice: '300.000 đ',
-      payments: 'TT Trực Tuyến',
-      paymentsLimit: '30%%',
-      paid: '90.000 đ',
-      unpaid: '210.000 đ'
-    },
-    
-  ]
-// arrs
+const urlPDS = 'http://localhost:8000/orders/module/v1/orders/all'
+
+const option = {
+  method: 'GET',
+  headers: {
+      'Content-Type': 'application/json'
+  }
+};
+
+fetch(urlPDS, option)
+	.then(response => {
+		if (!response.ok) {
+				return response.json().then(errorData => {
+						throw new Error(errorData.detail || 'Lỗi khi tải dữ liệu từ máy chủ');
+				});
+		}
+		return response.json();
+	})
+  .then(data => {
+    data.forEach(user => {
+      const ma_san = sessionStorage.getItem('ma_san');
+      const urlChi_Tiet_PDS = `http://localhost:8000/order-items/module/v1/order-items/detail?ma_pds=${user.ma_pds}&ma_san=${ma_san}`
+
+      fetch(urlChi_Tiet_PDS, option)
+      .then(response => {
+        if (!response.ok) {
+            return response.json().then(errorData => {
+                throw new Error(errorData.detail || 'Lỗi khi tải dữ liệu từ máy chủ');
+            });
+        }
+        return response.json();
+      })
+      .then(detailData => {
+      console.log(detailData);
+
+        displayItemsList(user, detailData);
+      })
+    });
+  })
+
+
+	.catch(error => {
+		Swal.fire({
+				icon: 'error',
+				title: 'Đã xảy ra lỗi',
+				text: 'Lỗi: ' + error.message,
+		});
+	});
 
 // displayItemsList
-  function displayItemsList() {
-    var items = document.getElementsByClassName('table-list-items')[0]
-    items.innerHTML =
+var items = document.getElementsByClassName('table-list-items')[0]
+items.innerHTML =
+  `
+  <tr>
+    <th>Mã PDS</th>
+    <th>Mã KH</th>
+    <th>Mã Sân</th>
+    <th>Ngày Đặt Sân</th>
+    <th>Giờ BĐ</th>
+    <th>Giờ KT</th>
+    <th>Giá Sân</th>
+    <th>Hình Thức Thanh Toán </th>
+    <th>Hạn Mức Thanh Toán </th>
+    <th class = "note">Ghi Chú</th>
+  </tr>
+  `;
+  function displayItemsList(user, detailData) {
+    
+    const output  =
       `
       <tr>
-        <td>Mã HD</td>
-        <td>Mã KH</td>
-        <td>Ngày TT</td>
-        <td>Giờ BĐ</td>
-        <td>Giờ KT</td>
-        <td>Giá Sân</td>
-        <td>Hình Thức Thanh Toán </td>
-        <td>Hạn Mức Thanh Toán</td>
-        <td>Đã Thanh Toán</td>
-        <td>Chưa Thanh Toán</td>
+        <td>${user.ma_pds}</td>
+        <td>${user.ma_kh}</td>
+        <td>${detailData.ma_san}</td>
+        <td>${new Date(detailData.ngay_dat_san).toLocaleDateString('vi-VN', {day: '2-digit', month: '2-digit', year: 'numeric'})}</td>
+        <td>${new Date(detailData.gio_bd).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</td>
+        <td>${new Date(detailData.gio_kt).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</td>
+        <td>${detailData.gia_tong_san}</td>
+        <td>${detailData.hinh_thuc_thanh_toan}</td>
+        <td>${detailData.han_muc_thanh_toan}</td>
+        <td class = "note">${user.ghi_chu}</td>
       </tr>
       `;
-    for (var i = 0; i < arrItemsList.length; i++) {
-      billCOde = arrItemsList[i].billCOde;
-      userCode = arrItemsList[i].userCode;
-      paymentDate = arrItemsList[i].paymentDate;
-      startTime = arrItemsList[i].startTime;
-      endTime = arrItemsList[i].endTime;
-      fieldPrice = arrItemsList[i].fieldPrice;
-      payments = arrItemsList[i].payments;
-      paymentsLimit = arrItemsList[i].paymentsLimit;
-      paid = arrItemsList[i].paid;
-      unpaid = arrItemsList[i].unpaid;
+	items.insertAdjacentHTML('beforeend', output);
 
-      items.innerHTML +=
-      `
-      <tr>
-        <td>${billCOde}</td>
-        <td>${userCode}</td>
-        <td>${paymentDate}</td>
-        <td>${startTime}</td>
-        <td>${endTime}</td>
-        <td>${fieldPrice}</td>
-        <td>${payments}</td>
-        <td>${paymentsLimit}</td>
-        <td>${paid}</td>
-        <td>${unpaid}</td>
-      </tr>
-      `;
-
-    }
   }
-  displayItemsList();
 // displayItemsList

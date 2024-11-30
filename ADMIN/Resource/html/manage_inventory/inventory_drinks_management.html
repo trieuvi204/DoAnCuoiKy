@@ -22,7 +22,8 @@
 	<link href="../../../../Vendors/aos-master/dist/aos.css" rel="stylesheet">
 	<script src="../../../../Vendors/aos-master/dist/aos.js"></script>
 
-
+		<!-- sweet alert -->
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<style>
 		/* set up */
 		* {
@@ -45,6 +46,23 @@
 
 <body>
 	<div class="row">
+		<div class="cart-area">
+			<div class="cart ">
+				<h2 class="cart-title">Giỏ hàng của bạn</h2>
+				<div class="cart-content">
+
+				</div>
+				<div class="cart-total">
+					<div class="total">
+						<div class="total-title">Thành Tiền: </div>
+						<div class="total-price">0đ</div>
+					</div>
+					<div class="clearfix"></div>
+					<a href="pay.html"><button class="pay-btn" type="button">Thanh Toán Ngay</button></a>
+				</div>
+				<i class="fa-regular fa-circle-xmark" id="close-cart"></i>
+			</div>
+		</div>
 		<div class="col-lg-2">
 			<div class="sidebar">
 				<div class="avata">
@@ -90,10 +108,15 @@
 			<div class="import_items_function container-part">
 				<div class="taskbar-1" data-aos="fade-up"  data-aos-delay="100">
 					<div class="btn-option">
-						<button class="import-items index"><i class="fa-solid fa-box"></i><a
+						<div class="btn-area">
+							<button class="import-items index"><i class="fa-solid fa-box"></i><a
 								href="inventory_drinks_management.html">Nhập Hàng</a></button>
-						<button class="export-items "><i class="fa-solid fa-box-open"></i><a href="distributorList.html">Danh Sách Nhà Phân Phối</a></button>
-					</div>
+							<button class="export-items "><i class="fa-solid fa-box-open"></i><a href="distributorList.html">Danh Sách Nhà Phân Phối</a></button>
+						</div>
+						<div class="cart-icon">
+							<i id="cart-icon" class="fa-solid fa-bag-shopping"></i>
+						</div>
+						</div>
 					<div class="row">
 						<div class="taskbar-2" data-aos="fade-up"  data-aos-delay="200">
 							<div class="col-lg-6">
@@ -151,5 +174,4 @@
 <script src="../../js/rolePermissions.js"></script>
 
 <script src="../../js/inventory_drinks_managemant.js"></script>
-
 </html>

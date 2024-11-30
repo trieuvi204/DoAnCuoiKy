@@ -102,12 +102,6 @@
           <div class="inputs">
             <div class="row">
               <div class="col-lg-4">
-                <div class="staffs-name input">
-                  <p>Mã Nhân Viên</p>
-                  <input type="text" id="maNV">
-                </div>
-              </div>
-              <div class="col-lg-4">
                 <div class="distributors-name input">
                   <p>Tên Nhà Phân Phối</p>
                   <input type="text" id="tenNPP" placeholder="Nhập tên nhà phân phối">
@@ -119,14 +113,15 @@
                   <input type="email" id="email_npp" placeholder="Nhập email nhà phân phối">
                 </div>
               </div>
-            </div>
-            <div class="row">
               <div class="col-lg-4">
                 <div class="distributors-Address input">
                   <p>Địa Chỉ</p>
                   <input type="text" id="diaChi" placeholder="Nhập địa chỉ nhà phân phối">
                 </div>
               </div>
+            </div>
+            <div class="row">
+
               <div class="col-lg-4">
                 <div class="distributors-PhoneNum input">
                   <p>Số Điện Thoại</p>
@@ -161,13 +156,12 @@
 
       // Lấy giá trị các trường nhập liệu
       let tenNPP = document.querySelector('#tenNPP').value.trim();
-      let maNV = document.querySelector('#maNV').value.trim();
       let diaChi = document.querySelector('#diaChi').value.trim();
       let soDienThoai = document.querySelector('#soDienThoai').value.trim();
       let email = document.querySelector('#email_npp').value.trim();
 
       // Kiểm tra ràng buộc các trường
-      if (!tenNPP || !maNV || !diaChi || !soDienThoai || !email) {
+      if (!tenNPP || !diaChi || !soDienThoai || !email) {
         Swal.fire({
           icon: 'warning',
           title: 'Cảnh báo',
@@ -200,7 +194,6 @@
 
       // Tạo đối tượng dữ liệu
       var formDataDistributor = {
-        ma_nv: maNV,
         ten_npp: tenNPP,
         dc_npp: diaChi,
         sdt_npp: soDienThoai,
