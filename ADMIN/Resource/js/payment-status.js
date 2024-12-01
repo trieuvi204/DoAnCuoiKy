@@ -60,9 +60,6 @@ items.innerHTML =
     <th>Ngày Đặt Sân</th>
     <th>Giờ BĐ</th>
     <th>Giờ KT</th>
-    <th>Giá Sân</th>
-    <th>Hình Thức Thanh Toán </th>
-    <th>Hạn Mức Thanh Toán </th>
     <th class = "note">Ghi Chú</th>
   </tr>
   `;
@@ -77,9 +74,6 @@ items.innerHTML =
         <td>${new Date(detailData.ngay_dat_san).toLocaleDateString('vi-VN', {day: '2-digit', month: '2-digit', year: 'numeric'})}</td>
         <td>${new Date(detailData.gio_bd).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</td>
         <td>${new Date(detailData.gio_kt).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</td>
-        <td>${detailData.gia_tong_san}</td>
-        <td>${detailData.hinh_thuc_thanh_toan}</td>
-        <td>${detailData.han_muc_thanh_toan}</td>
         <td class = "note">${user.ghi_chu}</td>
       </tr>
       `;

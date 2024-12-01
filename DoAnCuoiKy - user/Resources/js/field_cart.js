@@ -358,5 +358,6 @@ fetch(url_getAll, option)
 		});
 	}
 	
-	
+	document.getElementById('select_date').value = new Date().toISOString().split('T')[0];
+
 	

@@ -73,7 +73,7 @@
           <ul>
             <li><a href="../../../index.html"><button id="dashbroad">Tổng Quan</button></a></li>
             <li><a href="../manage_booking/field_booking_management.html"><button id="manage_booking">Quản Lý Đặt Sân</button></a></li>
-            <li><a href="../manage_service/manage_service.html"><button id="manage_service">Quản Lý Dịch Vụ Đi Kèm</button></a></li>
+            <!-- <li><a href="../manage_service/manage_service.html"><button id="manage_service">Quản Lý Dịch Vụ Đi Kèm</button></a></li> -->
             <li><a href="../manage_inventory/inventory_drinks_management.html"><button class="index" id= "manage_inventory">Quản Lý Kho</button></a></li>
             <li><a href="../manage_membership/membership_management.html"><button id="manage_membership">Quản Lý Nhân Viên</button></a>
             </li>
@@ -90,8 +90,6 @@
 						</div>
 						<div class="col-lg-4">
 							<div class="some-function">
-								<div class="alert-icon"><i class="fa-regular fa-bell"></i></div>
-								<div class="setting-icon"><i class="fa-solid fa-gear"></i></div>
 								<div class="log-out-icon"><a href="../../../../index.html"><i
 											class="fa-solid fa-right-from-bracket"></i></a>
 								</div>
@@ -129,7 +127,7 @@
 								</div>
 							</div>
 							<div class="col-lg-6">
-								<form class="d-flex" role="search">
+								<!-- <form class="d-flex" role="search">
 									<div class="col-lg-6">
 										<input class="form-control me-2 search" type="search" id="search" placeholder="Tìm Tên Sản Phẩm" aria-label="Search">
 										<div class="autobox">
@@ -147,18 +145,57 @@
 											<li>Teppy</li>
 											<li>Trà Xanh Không Độ</li>
 										</div>
-									</div>
-									<div class="col-lg-6">
-										<input type="button" onclick="selectResult()" class="btn btn-outline-success submit" type="submit" id="submit-btn" value="Tìm" >
-											 <input type="button" class="btn btn-outline-success buys" value="Mua">
-											<input type="button" class="btn btn-outline-success delete" onclick="deleteValue() " value="Xóa">
+									</div> -->
+									<div class="col-lg-12">
+										<!-- <input type="button" onclick="selectResult()" class="btn btn-outline-success submit" type="submit" id="submit-btn" value="Tìm" >
+											<input type="button" class="btn btn-outline-success delete" onclick="deleteValue() " value="Xóa"> -->
+											<input type="button" class="btn btn-outline-success addItems" value="Thêm Mặt Hàng">
 									</div>
 								</form>
 							</div>
 						</div>
 						<div class="col-lg-12 items-list-container" data-aos="fade-up"  data-aos-delay="300">
+							<!-- Modal -->
+							<div id="addItemModal" class="modal">
+								<div class="modal-content">
+									<div class="headerModal">
+										<span class="close">&times;</span>
+										<h2>Thêm Mặt Hàng</h2>
+									</div>
+									<form id="addItemForm">
+										<div>
+											<label for="ma_npp">Tên Nhà PP:</label>
+											<select id="ma_npp" name="ma_npp" required>
+													<option value="" disabled selected>Chọn Nhà Phân Phối</option>
+											</select>
+									</div>
+										<div>
+											<label for="ten_mh">Tên Mặt Hàng:</label>
+											<input type="text" id="ten_mh" name="ten_mh" required>
+										</div>
+										<div>
+											<label for="don_gia_nhap">Đơn Giá Nhập:</label>
+											<input type="number" id="don_gia_nhap" name="don_gia_nhap" required>
+										</div>
+										<div>
+											<label for="don_gia_ban">Đơn Giá Bán:</label>
+											<input type="number" id="don_gia_ban" name="don_gia_ban" required>
+										</div>
+										<div>
+											<label for="hinh_anh_mh">Hình Ảnh Mặt Hàng:</label>
+										</div>
+										<div class="hinh_anh_mh_Container">
+											<input type="file" id="hinh_anh_mh" name="hinh_anh_mh" accept="image/*" required>
+											<img id="preview" src="" alt="Xem trước hình ảnh" style="max-width: 100%; margin-top: 10px; display: none;">
+										</div>																
+										<div class="saveBtnContainer">
+											<button type="button" id="saveItem">Thêm Mặt Hàng</button>
+										</div>			
+									</form>
+								</div>
+							</div>
 							<div class="items-list">
-
+								
 							</div>
 						</div>
 					</div>

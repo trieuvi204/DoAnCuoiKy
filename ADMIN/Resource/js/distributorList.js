@@ -216,7 +216,7 @@ else {
 			// Cập nhật các trường trong form sửa thông tin
 			editModalForm.fullname.value = user.ten_npp;
 			editModalForm.phone.value = decryptExtCaesarMult(user.sdt_npp, 7);
-			editModalForm.email.value = decryptExtCaesarMult(user.email_npp,7);
+			editModalForm.email.value = user.email_npp;
 			editModalForm.address.value = decryptDES(user.dc_npp, 'Thats my Kung Fu');
 		});
 	} else {

@@ -287,15 +287,21 @@ a#index{
 
 .submit{
     background-color: #B3F5B3;
+    border: 1px solid #B3F5B3;
+
+}
+
+.submit:hover{
+    background-color: #fff;
+    border: 1px solid #B3F5B3;
 }
 
 .buys{
     background-color: #F7F7BB;
 }
 
-.delete{
-    background-color: #D2D2F0;
-}
+
+
 
 /* drinks-items-list */
 
@@ -441,11 +447,23 @@ td i{
 
 .delete{
     background-color: #FFB3B3;
-    border: 2px solid #D8D6D6;
+    border: 1px solid #D8D6D6;
 }
 
 .delete:hover{
     background-color: #fff;
+    border: 1px solid #FFB3B3;
+}
+
+.addItems{
+    background-color: #D2D2F0;
+    border: 1px solid #D2D2F0;
+    float: right;
+}
+
+.addItems:hover{
+    background-color: #fff;
+    border: 1px solid #D2D2F0;
 }
 
 td .update{
@@ -675,3 +693,98 @@ th{
 
 
 
+/* Style cho modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000 !important;
+  }
+  
+  .modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%;
+    border-radius: 8px;
+  }
+  
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+  }
+  
+form#addItemForm div input{
+    float: right;
+    margin-top: 3px;
+    text-align:  center;
+}
+
+form#addItemForm div label{
+    font-weight: 300;
+    margin: 5px;
+}
+
+.headerModal{
+    margin-bottom: 20px;
+}
+
+.headerModal h2{
+    text-align: center;
+}
+.saveBtnContainer {
+    margin-top: 20px;
+    display: flex; /* Đổi thành flexbox */
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    width: 100%;
+}
+
+#saveItem {
+    padding: 8px 12px;
+    margin: 10px; /* Giữ khoảng cách đều xung quanh */
+    background-color: #47b2e4;
+    color: #fff;
+    border: 1px solid #47B2E4;
+    cursor: pointer; /* Thêm hiệu ứng trỏ chuột */
+}
+
+#saveItem:hover{
+    background-color: #fff;
+    color: #47B2E4;
+
+}
+
+#preview {
+    max-width: 100%; 
+    margin-top: 10px; 
+    display: none;
+}
+
+/* .hinh_anh_mh_Container{
+    margin: 1;
+} */
+ input#hinh_anh_mh{
+    width: 100%;
+ }
+
+ select#ma_npp{
+    float: right;
+    padding: 5px 12px;
+ }
