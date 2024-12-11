@@ -218,10 +218,7 @@
         return;
     }
 
-    if (userRole === 'admin') {
-        maNVInput.disabled = false; // Cho phép nhập mã
-        maNVInput.placeholder = 'Nhập mã nhân viên'; // Placeholder cho admin
-    } else if (userRole === 'nhap-hang') {
+    if (userRole === 'nhap-hang') {
         maNVInput.value = userCode; // Mã nhân viên cố định
         maNVInput.disabled = true; // Vô hiệu hóa input
         maNVInput.title = 'Mã nhân viên cố định cho nhân viên nhập hàng'; // Tooltip
