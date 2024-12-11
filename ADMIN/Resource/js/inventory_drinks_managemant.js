@@ -214,12 +214,15 @@ fetch(Item, option)
 		});
 
 		// Thêm sự kiện click cho các nút "Add to Cart"
-		var addCart = document.querySelectorAll(".add-cart");
-		addCart.forEach(function (button) {
-			button.addEventListener('click', function (event) {
+		// Lắng nghe sự kiện click trên phần tử cha (items)
+		items.addEventListener('click', function (event) {
+			// Kiểm tra nếu phần tử được nhấn có class 'add-cart'
+			if (event.target.classList.contains('add-cart')) {
+				// Thực hiện hành động khi nút "add-cart" được nhấn
 				addCartClicked(event, data);
-			});
+			}
 		});
+
 	})
 	.catch(function (error) {
 		Swal.fire({
@@ -389,7 +392,6 @@ const urlGetAllNpp = 'http://localhost:8000/distributors/module/v1/distributor/a
 	})
 	.then(distributors => {
 		const selectElement = document.getElementById('ma_npp');
-	console.log("🚀 ~ distributors:", distributors)
 		distributors.forEach(distributor => {
 				const option = document.createElement('option');
 				option.value = distributor.ma_npp; // Giả sử `ma_npp` là trường dữ liệu trong API
