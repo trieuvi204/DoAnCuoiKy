@@ -145,63 +145,63 @@ const displayItemsList = (user) => {
 				<td>${decryptExtCaesarMult(user.sdt_npp,7)}</td>
 				<td>${user.email_npp}</td>
 				<td>
-					<i class="fa-solid fa-trash-can delete btn_del"></i>
-					<i class="fa-solid fa-pen-to-square update btn_edit"></i>
+					<button class = "disableBtn delete btn_del"><i class="fa-solid fa-trash-can  "></i></button>
+					<button class = "disableBtn update btn_edit"><i class="fa-solid fa-pen-to-square  "></i></button>
 				</td>
 			</tr>
 	`;
 	items.insertAdjacentHTML('beforeend', output);
 
-// Kiểm tra sự tồn tại của phần tử .btn_del
-const btnDel = document.querySelector(`[data-id='${user.ma_npp}'] .btn_del`);
-if (btnDel) {
-	btnDel.addEventListener('click', (e) => {
-			// Hiển thị thông báo xác nhận
-			Swal.fire({
-					title: `Bạn có chắc chắn muốn xóa khách hàng ${user.ten_npp} không?`,
-					icon: 'warning',
-					showCancelButton: true,
-					confirmButtonText: 'Có',
-					cancelButtonText: 'Không',
-			}).then((result) => {
-					if (result.isConfirmed) {
-							fetch(`${url}/delete/${user.ma_npp}`, {
-									method: 'DELETE'
-							})
-							.then(res => {
-									if (!res.ok) {
-											return res.json().then(errorData => {
-													// Trả về lỗi chi tiết nếu có
-													throw new Error(errorData.detail || 'Lỗi khi xóa dữ liệu từ máy chủ');
-											});
-									}
-									return res.json();
-							})
-							.then(() => {
-									Swal.fire({
-											icon: 'success',
-											text: 'Xóa Thành Công',
-									}).then(() => {
-											location.reload(); // Làm mới trang sau khi xóa thành công
-									});
-							})
-							.catch((error) => {
-									// Hiển thị lỗi cho người dùng
-									Swal.fire({
-											icon: 'error',
-											title: 'Có lỗi xảy ra',
-											text: `Lỗi: ${error.message}`,
-									});
-							});
-					} else {
-							console.log('Xóa bị hủy');
-					}
-			});
-	});
-}
-else {
-    console.error('Không tìm thấy nút xóa');
-}
+	// Kiểm tra sự tồn tại của phần tử .btn_del
+	const btnDel = document.querySelector(`[data-id='${user.ma_npp}'] .btn_del`);
+	if (btnDel) {
+		btnDel.addEventListener('click', (e) => {
+				// Hiển thị thông báo xác nhận
+				Swal.fire({
+						title: `Bạn có chắc chắn muốn xóa khách hàng ${user.ten_npp} không?`,
+						icon: 'warning',
+						showCancelButton: true,
+						confirmButtonText: 'Có',
+						cancelButtonText: 'Không',
+				}).then((result) => {
+						if (result.isConfirmed) {
+								fetch(`${url}/delete/${user.ma_npp}`, {
+										method: 'DELETE'
+								})
+								.then(res => {
+										if (!res.ok) {
+												return res.json().then(errorData => {
+														// Trả về lỗi chi tiết nếu có
+														throw new Error(errorData.detail || 'Lỗi khi xóa dữ liệu từ máy chủ');
+												});
+										}
+										return res.json();
+								})
+								.then(() => {
+										Swal.fire({
+												icon: 'success',
+												text: 'Xóa Thành Công',
+										}).then(() => {
+												location.reload(); // Làm mới trang sau khi xóa thành công
+										});
+								})
+								.catch((error) => {
+										// Hiển thị lỗi cho người dùng
+										Swal.fire({
+												icon: 'error',
+												title: 'Có lỗi xảy ra',
+												text: `Lỗi: ${error.message}`,
+										});
+								});
+						} else {
+								console.log('Xóa bị hủy');
+						}
+				});
+		});
+	}
+	else {
+			console.error('Không tìm thấy nút xóa');
+	}
 
 
 	// // Kiểm tra sự tồn tại của phần tử .btn_edit
@@ -221,6 +221,25 @@ else {
 		});
 	} else {
 		console.error('Không tìm thấy nút chỉnh sửa');
+	}
+
+	var userRole = sessionStorage.getItem('chuc_vu')
+	if (userRole !== 'admin') {
+		const buttons = document.querySelectorAll('.disableBtn'); // Lấy tất cả nút có class disableBtn
+	
+		buttons.forEach(function (btn) {
+			// Vô hiệu hóa nút
+			btn.disabled = true;
+			btn.style.opacity = '0.3';
+			btn.style.cursor = 'not-allowed';
+	
+			// Ngăn chặn hành động khi nút được nhấn
+			btn.addEventListener('click', function (event) {
+				event.preventDefault(); // Ngăn hành động mặc định
+				event.stopImmediatePropagation(); // Ngăn các sự kiện khác
+				alert('Bạn không có quyền thực hiện hành động này!');
+			});
+		});
 	}
 };
 
