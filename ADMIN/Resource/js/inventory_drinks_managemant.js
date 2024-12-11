@@ -72,7 +72,7 @@ function addCartClicked(event, data) {
 	var shopProducts = button.parentElement.parentElement.parentElement;
 	var title = shopProducts.getElementsByClassName('title-drinks-items')[0].innerText;
 	var price = shopProducts.getElementsByClassName('price')[0].innerText;
-	var quantity = shopProducts.getElementsByClassName('quantity')[0].value;
+	var quantity = parseInt(shopProducts.getElementsByClassName('quantity')[0].value, 10);
 
 	// Tìm thông tin sản phẩm từ mảng `data`
 	var productImg = '';
@@ -95,22 +95,29 @@ function addCartClicked(event, data) {
 			ma_mh: ma_mh
 	};
 
-	// Lấy lại giỏ hàng từ sessionStorage (luôn là mảng rỗng do đã reset ở DOMContentLoaded)
-	var cart = JSON.parse(sessionStorage.getItem('cart'));
+	// Lấy lại giỏ hàng từ sessionStorage
+	var cart = JSON.parse(sessionStorage.getItem('cart')) || [];
 
-	// Thêm sản phẩm vào giỏ hàng
-	cart.push(product);
+	// Kiểm tra xem sản phẩm đã có trong giỏ hàng chưa
+	var existingProduct = cart.find(item => item.ma_mh === ma_mh);
+	if (existingProduct) {
+			// Nếu sản phẩm đã tồn tại, tăng số lượng sản phẩm trong giỏ hàng
+			existingProduct.quantity += quantity;
+	} else {
+			// Nếu chưa tồn tại, thêm sản phẩm vào giỏ hàng
+			cart.push(product);
+	}
 
 	// Lưu lại giỏ hàng vào sessionStorage
 	sessionStorage.setItem('cart', JSON.stringify(cart));
 
+	// Cập nhật giao diện
 	addProductToCart(title, price, productImg, quantity);
 
 	// Cập nhật tổng giá trị của giỏ hàng
 	updatetotal();
-
-
 }
+
 
 
 

@@ -158,7 +158,7 @@ const displayItemsList = (user) => {
 		btnDel.addEventListener('click', (e) => {
 				// Hiển thị thông báo xác nhận
 				Swal.fire({
-						title: `Bạn có chắc chắn muốn xóa khách hàng ${user.ten_npp} không?`,
+						title: `Bạn có chắc chắn muốn xóa nhà phân phối ${user.ten_npp} không?`,
 						icon: 'warning',
 						showCancelButton: true,
 						confirmButtonText: 'Có',
