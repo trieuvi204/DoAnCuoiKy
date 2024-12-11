@@ -209,7 +209,7 @@ const displayItemsList = (user) => {
 			// Cập nhật các trường trong form sửa thông tin
 			editModalForm.fullname.value = user.ten_nv;
 			editModalForm.phone.value = user.sdt_nv;
-			editModalForm.email.value = decryptCaesarMult(user.email_nv, 7);
+			editModalForm.email.value = user.email_nv;
 			editModalForm.address.value = decryptDES(user.dia_chi, 'Thats my Kung Fu');
 			editModalForm.position.value = user.chuc_vu;
 			editModalForm.password.value = '';  // Để trống mật khẩu trong form
