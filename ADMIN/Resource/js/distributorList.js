@@ -142,7 +142,7 @@ const displayItemsList = (user) => {
 				<td>${user.ma_npp}</td>
 				<td>${user.ten_npp}</td>
 				<td>${decryptDES(user.dc_npp,'Thats my Kung Fu')}</td>
-				<td>${decryptExtCaesarMult(user.sdt_npp,7)}</td>
+				<td>${user.sdt_npp}</td>
 				<td>${user.email_npp}</td>
 				<td>
 					<button class = "disableBtn delete btn_del"><i class="fa-solid fa-trash-can  "></i></button>
